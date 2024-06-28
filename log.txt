@@ -1,0 +1,197 @@
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Arithmetic_operation.c"
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@foo:%0:num	%1:num	%2:num	->num
+	@foo0:		
+		op-mul		[%1:num, 5.0]		->%4
+		op-div		[%2:num, %0:num]		->%5
+		op-mul		[%5:num, %1:num]		->%6
+		op-mul		[%6:num, -3.0]		->%7
+		op-div		[%4:num, %7:num]		->%8
+		ret			[%8:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[3.0, %2:num*]
+		store		[4.0, %3:num*]
+		store		[5.0, %4:num*]
+		load		[%2:num*]		->%6
+		load		[%3:num*]		->%7
+		load		[%4:num*]		->%8
+		call		[@foo:num, %6:num, %7:num, %8:num]		->%9
+		store		[%9:num, %5:num*]
+		load		[%5:num*]		->%10
+		call		[@print:void, %10:num]
+		ret			[0]
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 2048
+		set ra -2
+		op sub sp sp 6
+		set virtualReg28 s0
+		set virtualReg29 s1
+		set virtualReg30 s2
+		set virtualReg31 s3
+		set virtualReg32 s4
+		set virtualReg33 s5
+		set virtualReg34 s6
+		set virtualReg35 s7
+		set virtualReg36 s8
+		set virtualReg37 s9
+		set virtualReg38 s10
+		set virtualReg39 s11
+		set virtualReg40 ra
+		op add virtualReg41 sp 1
+		op add virtualReg42 sp 2
+		op add virtualReg43 sp 3
+		op add virtualReg44 sp 4
+		op add virtualReg45 sp 5
+		set virtualReg46 0
+		write virtualReg46 virtualReg41 0	
+		set virtualReg47 3.0
+		write virtualReg47 virtualReg42 0	
+		set virtualReg48 4.0
+		write virtualReg48 virtualReg43 0	
+		set virtualReg49 5.0
+		write virtualReg49 virtualReg44 0	
+		read virtualReg50 virtualReg42 0	
+		read virtualReg51 virtualReg43 0	
+		read virtualReg52 virtualReg44 0	
+		set a0 virtualReg50
+		set a1 virtualReg51
+		set a2 virtualReg52
+		call @foo0
+		set virtualReg53 a0
+		write virtualReg53 virtualReg45 0	
+		read virtualReg54 virtualReg45 0	
+		set a0 virtualReg54
+		call @print0
+		set a0 virtualReg46
+		set s0 virtualReg28
+		set s1 virtualReg29
+		set s2 virtualReg30
+		set s3 virtualReg31
+		set s4 virtualReg32
+		set s5 virtualReg33
+		set s6 virtualReg34
+		set s7 virtualReg35
+		set s8 virtualReg36
+		set s9 virtualReg37
+		set s10 virtualReg38
+		set s11 virtualReg39
+		set ra virtualReg40
+		op add sp sp 6
+		set pc ra
+#@foo:	virtualReg5	virtualReg6	virtualReg7	
+	@foo0:		
+		op sub sp sp 1
+		set virtualReg8 s0
+		set virtualReg9 s1
+		set virtualReg10 s2
+		set virtualReg11 s3
+		set virtualReg12 s4
+		set virtualReg13 s5
+		set virtualReg14 s6
+		set virtualReg15 s7
+		set virtualReg16 s8
+		set virtualReg17 s9
+		set virtualReg18 s10
+		set virtualReg19 s11
+		set virtualReg20 ra
+		set virtualReg5 a0
+		set virtualReg6 a1
+		set virtualReg7 a2
+		set virtualReg22 5.0
+		op mul virtualReg21 virtualReg6 virtualReg22
+		op div virtualReg23 virtualReg7 virtualReg5
+		op mul virtualReg24 virtualReg23 virtualReg6
+		set virtualReg26 -3.0
+		op mul virtualReg25 virtualReg24 virtualReg26
+		op div virtualReg27 virtualReg21 virtualReg25
+		set a0 virtualReg27
+		set s0 virtualReg8
+		set s1 virtualReg9
+		set s2 virtualReg10
+		set s3 virtualReg11
+		set s4 virtualReg12
+		set s5 virtualReg13
+		set s6 virtualReg14
+		set s7 virtualReg15
+		set s8 virtualReg16
+		set s9 virtualReg17
+		set s10 virtualReg18
+		set s11 virtualReg19
+		set ra virtualReg20
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @foo
+Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 2048
+		set ra -2
+		op sub sp sp 9
+		write s0 sp 7	
+		write s1 sp 6	
+		write ra sp 8	
+		op add t0 sp 1
+		op add t3 sp 2
+		op add t2 sp 3
+		op add t1 sp 4
+		op add s0 sp 5
+		set s1 0
+		write s1 t0 0	
+		set t0 3.0
+		write t0 t3 0	
+		set t0 4.0
+		write t0 t2 0	
+		set t0 5.0
+		write t0 t1 0	
+		read a0 t3 0	
+		read a1 t2 0	
+		set a2 t0
+		call @foo0
+		write a0 s0 0	
+		call @print0
+		set a0 s1
+		read s0 sp 7	
+		read s1 sp 6	
+		read ra sp 8	
+		op add sp sp 9
+		set pc ra
+#@foo:	a0	a1	a2	
+	@foo0:		
+		op sub sp sp 1
+		set t0 5.0
+		op mul t2 a1 t0
+		op div t0 a2 a0
+		op mul t1 t0 a1
+		set t0 -3.0
+		op mul t0 t1 t0
+		op div a0 t2 t0
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+

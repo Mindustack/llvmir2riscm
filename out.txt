@@ -1,0 +1,50 @@
+
+#@main:	
+	@main0:		
+		set sp 2048
+		set ra -2
+		op sub sp sp 9
+		write s0 sp 7	
+		write s1 sp 6	
+		write ra sp 8	
+		op add t0 sp 1
+		op add t3 sp 2
+		op add t2 sp 3
+		op add t1 sp 4
+		op add s0 sp 5
+		set s1 0
+		write s1 t0 0	
+		set t0 3.0
+		write t0 t3 0	
+		set t0 4.0
+		write t0 t2 0	
+		set t0 5.0
+		write t0 t1 0	
+		read a0 t3 0	
+		read a1 t2 0	
+		set a2 t0
+		call @foo0
+		write a0 s0 0	
+		call @print0
+		set a0 s1
+		read s0 sp 7	
+		read s1 sp 6	
+		read ra sp 8	
+		op add sp sp 9
+		set pc ra
+#@foo:	a0	a1	a2	
+	@foo0:		
+		op sub sp sp 1
+		set t0 5.0
+		op mul t2 a1 t0
+		op div t0 a2 a0
+		op mul t1 t0 a1
+		set t0 -3.0
+		op mul t0 t1 t0
+		op div a0 t2 t0
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
