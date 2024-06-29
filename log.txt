@@ -1,195 +1,205 @@
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
-INFO: source_filename="Arithmetic_operation.c"
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+Jun 29, 2024 5:35:48 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Array_operations.c"
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
 INFO: Build Module finish from .ll file.
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
 INFO: 
-@foo:%0:num	%1:num	%2:num	->num
-	@foo0:		
-		op-mul		[%1:num, 5.0]		->%4
-		op-div		[%2:num, %0:num]		->%5
-		op-mul		[%5:num, %1:num]		->%6
-		op-mul		[%6:num, -3.0]		->%7
-		op-div		[%4:num, %7:num]		->%8
-		ret			[%8:num]
 @main:->num
 	@main0:		
 		alloca		[%1:num*]		->%1
-		alloca		[%2:num*]		->%2
-		alloca		[%3:num*]		->%3
-		alloca		[%4:num*]		->%4
-		alloca		[%5:num*]		->%5
+		alloca		[%2:[2 x num]*]		->%2
+		alloca		[%3:[5 x num]*]		->%3
 		store		[0, %1:num*]
-		store		[3.0, %2:num*]
-		store		[4.0, %3:num*]
-		store		[5.0, %4:num*]
-		load		[%2:num*]		->%6
-		load		[%3:num*]		->%7
-		load		[%4:num*]		->%8
-		call		[@foo:num, %6:num, %7:num, %8:num]		->%9
-		store		[%9:num, %5:num*]
-		load		[%5:num*]		->%10
-		call		[@print:void, %10:num]
+		gep			[%2:[2 x num]*, 0, 0]		->%4
+		store		[1, %4:num*]
+		gep			[%3:[5 x num]*, 0, 1]		->%5
+		store		[4, %5:num*]
+		gep			[%3:[5 x num]*, 0, 2]		->%6
+		store		[2, %6:num*]
+		gep			[%3:[5 x num]*, 0, 3]		->%7
+		store		[98, %7:num*]
+		gep			[%2:[2 x num]*, 0, 1]		->%8
+		load		[%8:num*]		->%9
+		gep			[%3:[5 x num]*, 0, 1]		->%10
+		load		[%10:num*]		->%11
+		op-add		[%9:num, %11:num]		->%12
+		gep			[%3:[5 x num]*, 0, 2]		->%13
+		load		[%13:num*]		->%14
+		gep			[%3:[5 x num]*, 0, 3]		->%15
+		load		[%15:num*]		->%16
+		op-mul		[%14:num, %16:num]		->%17
+		op-sub		[%12:num, %17:num]		->%18
+		gep			[%3:[5 x num]*, 0, 4]		->%19
+		store		[%18:num, %19:num*]
 		ret			[0]
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
-INFO: 
-#@main:	
-	@main0:		
-		set sp 2048
-		set ra -2
-		op sub sp sp 6
-		set virtualReg28 s0
-		set virtualReg29 s1
-		set virtualReg30 s2
-		set virtualReg31 s3
-		set virtualReg32 s4
-		set virtualReg33 s5
-		set virtualReg34 s6
-		set virtualReg35 s7
-		set virtualReg36 s8
-		set virtualReg37 s9
-		set virtualReg38 s10
-		set virtualReg39 s11
-		set virtualReg40 ra
-		op add virtualReg41 sp 1
-		op add virtualReg42 sp 2
-		op add virtualReg43 sp 3
-		op add virtualReg44 sp 4
-		op add virtualReg45 sp 5
-		set virtualReg46 0
-		write virtualReg46 virtualReg41 0	
-		set virtualReg47 3.0
-		write virtualReg47 virtualReg42 0	
-		set virtualReg48 4.0
-		write virtualReg48 virtualReg43 0	
-		set virtualReg49 5.0
-		write virtualReg49 virtualReg44 0	
-		read virtualReg50 virtualReg42 0	
-		read virtualReg51 virtualReg43 0	
-		read virtualReg52 virtualReg44 0	
-		set a0 virtualReg50
-		set a1 virtualReg51
-		set a2 virtualReg52
-		call @foo0
-		set virtualReg53 a0
-		write virtualReg53 virtualReg45 0	
-		read virtualReg54 virtualReg45 0	
-		set a0 virtualReg54
-		call @print0
-		set a0 virtualReg46
-		set s0 virtualReg28
-		set s1 virtualReg29
-		set s2 virtualReg30
-		set s3 virtualReg31
-		set s4 virtualReg32
-		set s5 virtualReg33
-		set s6 virtualReg34
-		set s7 virtualReg35
-		set s8 virtualReg36
-		set s9 virtualReg37
-		set s10 virtualReg38
-		set s11 virtualReg39
-		set ra virtualReg40
-		op add sp sp 6
-		set pc ra
-#@foo:	virtualReg5	virtualReg6	virtualReg7	
-	@foo0:		
-		op sub sp sp 1
-		set virtualReg8 s0
-		set virtualReg9 s1
-		set virtualReg10 s2
-		set virtualReg11 s3
-		set virtualReg12 s4
-		set virtualReg13 s5
-		set virtualReg14 s6
-		set virtualReg15 s7
-		set virtualReg16 s8
-		set virtualReg17 s9
-		set virtualReg18 s10
-		set virtualReg19 s11
-		set virtualReg20 ra
-		set virtualReg5 a0
-		set virtualReg6 a1
-		set virtualReg7 a2
-		set virtualReg22 5.0
-		op mul virtualReg21 virtualReg6 virtualReg22
-		op div virtualReg23 virtualReg7 virtualReg5
-		op mul virtualReg24 virtualReg23 virtualReg6
-		set virtualReg26 -3.0
-		op mul virtualReg25 virtualReg24 virtualReg26
-		op div virtualReg27 virtualReg21 virtualReg25
-		set a0 virtualReg27
-		set s0 virtualReg8
-		set s1 virtualReg9
-		set s2 virtualReg10
-		set s3 virtualReg11
-		set s4 virtualReg12
-		set s5 virtualReg13
-		set s6 virtualReg14
-		set s7 virtualReg15
-		set s8 virtualReg16
-		set s9 virtualReg17
-		set s10 virtualReg18
-		set s11 virtualReg19
-		set ra virtualReg20
-		op add sp sp 1
-		set pc ra
-@print0:
-print a0 
-set pc ra
-
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
-INFO: K 31
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
-INFO: color func: @main
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
-INFO: color func: @foo
-Jun 28, 2024 1:12:35 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
 INFO: 
 #@main:	
 	@main0:		
 		set sp 2048
 		set ra -2
 		op sub sp sp 9
-		write s0 sp 7	
-		write s1 sp 6	
-		write ra sp 8	
-		op add t0 sp 1
-		op add t3 sp 2
-		op add t2 sp 3
-		op add t1 sp 4
-		op add s0 sp 5
-		set s1 0
-		write s1 t0 0	
-		set t0 3.0
-		write t0 t3 0	
-		set t0 4.0
-		write t0 t2 0	
-		set t0 5.0
-		write t0 t1 0	
-		read a0 t3 0	
-		read a1 t2 0	
-		set a2 t0
-		call @foo0
-		write a0 s0 0	
-		call @print0
-		set a0 s1
-		read s0 sp 7	
-		read s1 sp 6	
-		read ra sp 8	
+		set virtualReg4 s0
+		set virtualReg5 s1
+		set virtualReg6 s2
+		set virtualReg7 s3
+		set virtualReg8 s4
+		set virtualReg9 s5
+		set virtualReg10 s6
+		set virtualReg11 s7
+		set virtualReg12 s8
+		set virtualReg13 s9
+		set virtualReg14 s10
+		set virtualReg15 s11
+		set virtualReg16 ra
+		op add virtualReg17 sp 1
+		op add virtualReg18 sp 2
+		op add virtualReg19 sp 4
+		set virtualReg20 0
+		write virtualReg20 virtualReg17 0	
+		set virtualReg23 1
+		op mul virtualReg22 virtualReg20 virtualReg23
+		op add virtualReg21 virtualReg21 virtualReg22
+		op add virtualReg21 virtualReg21 virtualReg20
+		op add virtualReg21 virtualReg21 virtualReg18
+		write virtualReg23 virtualReg21 0	
+		op mul virtualReg25 virtualReg20 virtualReg23
+		op add virtualReg24 virtualReg24 virtualReg25
+		op add virtualReg24 virtualReg24 virtualReg23
+		op add virtualReg24 virtualReg24 virtualReg19
+		set virtualReg26 4
+		write virtualReg26 virtualReg24 0	
+		op mul virtualReg28 virtualReg20 virtualReg23
+		op add virtualReg27 virtualReg27 virtualReg28
+		set virtualReg29 2
+		op add virtualReg27 virtualReg27 virtualReg29
+		op add virtualReg27 virtualReg27 virtualReg19
+		write virtualReg29 virtualReg27 0	
+		op mul virtualReg31 virtualReg20 virtualReg23
+		op add virtualReg30 virtualReg30 virtualReg31
+		set virtualReg32 3
+		op add virtualReg30 virtualReg30 virtualReg32
+		op add virtualReg30 virtualReg30 virtualReg19
+		set virtualReg33 98
+		write virtualReg33 virtualReg30 0	
+		op mul virtualReg35 virtualReg20 virtualReg23
+		op add virtualReg34 virtualReg34 virtualReg35
+		op add virtualReg34 virtualReg34 virtualReg23
+		op add virtualReg34 virtualReg34 virtualReg18
+		read virtualReg36 virtualReg34 0	
+		op mul virtualReg38 virtualReg20 virtualReg23
+		op add virtualReg37 virtualReg37 virtualReg38
+		op add virtualReg37 virtualReg37 virtualReg23
+		op add virtualReg37 virtualReg37 virtualReg19
+		read virtualReg39 virtualReg37 0	
+		op add virtualReg40 virtualReg36 virtualReg39
+		op mul virtualReg42 virtualReg20 virtualReg23
+		op add virtualReg41 virtualReg41 virtualReg42
+		op add virtualReg41 virtualReg41 virtualReg29
+		op add virtualReg41 virtualReg41 virtualReg19
+		read virtualReg43 virtualReg41 0	
+		op mul virtualReg45 virtualReg20 virtualReg23
+		op add virtualReg44 virtualReg44 virtualReg45
+		op add virtualReg44 virtualReg44 virtualReg32
+		op add virtualReg44 virtualReg44 virtualReg19
+		read virtualReg46 virtualReg44 0	
+		op mul virtualReg47 virtualReg43 virtualReg46
+		op sub virtualReg48 virtualReg40 virtualReg47
+		op mul virtualReg50 virtualReg20 virtualReg23
+		op add virtualReg49 virtualReg49 virtualReg50
+		op add virtualReg49 virtualReg49 virtualReg26
+		op add virtualReg49 virtualReg49 virtualReg19
+		write virtualReg48 virtualReg49 0	
+		set a0 virtualReg20
+		set s0 virtualReg4
+		set s1 virtualReg5
+		set s2 virtualReg6
+		set s3 virtualReg7
+		set s4 virtualReg8
+		set s5 virtualReg9
+		set s6 virtualReg10
+		set s7 virtualReg11
+		set s8 virtualReg12
+		set s9 virtualReg13
+		set s10 virtualReg14
+		set s11 virtualReg15
+		set ra virtualReg16
 		op add sp sp 9
 		set pc ra
-#@foo:	a0	a1	a2	
-	@foo0:		
-		op sub sp sp 1
-		set t0 5.0
-		op mul t2 a1 t0
-		op div t0 a2 a0
-		op mul t1 t0 a1
-		set t0 -3.0
-		op mul t0 t1 t0
-		op div a0 t2 t0
-		op add sp sp 1
+@print0:
+print a0 
+set pc ra
+
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 29, 2024 5:35:49 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 2048
+		set ra -2
+		op sub sp sp 9
+		op add t3 sp 1
+		op add a4 sp 2
+		op add t1 sp 4
+		set a0 0
+		write a0 t3 0	
+		set t3 1
+		op mul a6 a0 t3
+		op add t2 t2 a6
+		op add t2 t2 a0
+		op add t2 t2 a4
+		write t3 t2 0	
+		op mul t2 a0 t3
+		op add a1 a1 t2
+		op add a1 a1 t3
+		op add a1 a1 t1
+		set t2 4
+		write t2 a1 0	
+		op mul a1 a0 t3
+		op add t6 t6 a1
+		set a1 2
+		op add t6 t6 a1
+		op add t6 t6 t1
+		write a1 t6 0	
+		op mul t6 a0 t3
+		op add a5 a5 t6
+		set t6 3
+		op add a5 a5 t6
+		op add a5 a5 t1
+		set a6 98
+		write a6 a5 0	
+		op mul a5 a0 t3
+		op add a3 a3 a5
+		op add a3 a3 t3
+		op add a3 a3 a4
+		read a4 a3 0	
+		op mul a3 a0 t3
+		op add a2 a2 a3
+		op add a2 a2 t3
+		op add a2 a2 t1
+		read a2 a2 0	
+		op add a3 a4 a2
+		op mul a2 a0 t3
+		op add t5 t5 a2
+		op add t5 t5 a1
+		op add t5 t5 t1
+		read a1 t5 0	
+		op mul t5 a0 t3
+		op add t4 t4 t5
+		op add t4 t4 t6
+		op add t4 t4 t1
+		read t4 t4 0	
+		op mul t4 a1 t4
+		op sub t4 a3 t4
+		op mul t3 a0 t3
+		op add t0 t0 t3
+		op add t0 t0 t2
+		op add t0 t0 t1
+		write t4 t0 0	
+		op add sp sp 9
 		set pc ra
 @print0:
 print a0 

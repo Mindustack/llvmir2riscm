@@ -11,10 +11,7 @@ import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRBlo
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRFunction;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRModule;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst.*;
-import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.ArrayType;
-import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.IRBaseType;
-import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.PointerType;
-import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.StructType;
+import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.*;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.Lang;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRBlockPass;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRFuncPass;
@@ -304,6 +301,10 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
                 newALUInst(Lang.MulOperation, virtualReg, operand, new NumConst(elementSize));
                 new AsmALUInst(Lang.AddOperation, instReg, instReg, virtualReg, CurrentBlock);
 
+            }
+            else if(type instanceof NumType){
+                new AsmALUInst(Lang.AddOperation,instReg,instReg,getReg(operand),CurrentBlock);
+//                break;
             }
         }
         new AsmALUInst(Lang.AddOperation, instReg, instReg, getReg(inst.operands.getFirst()), CurrentBlock);

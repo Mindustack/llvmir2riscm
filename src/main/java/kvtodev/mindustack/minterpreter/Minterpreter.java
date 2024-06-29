@@ -14,6 +14,12 @@ public class Minterpreter {
 
     public static void main(String[] args) {
         Minterpreter minterpreter = new Minterpreter();
+        try {
+            minterpreter.parse(new String(System.in.readAllBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         minterpreter.run();
     }
     public Minterpreter() {
@@ -22,12 +28,7 @@ public class Minterpreter {
 
         logger.info("minterpreter started");
 
-        try {
-            parse(new String(System.in.readAllBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+
     }
 
     /**
