@@ -16,7 +16,6 @@ public class ALUinst extends Instruction {
     switch (this.op) {
 
       case "add" -> {
-        // System.out.println(r1.value);
         ret.value = r1.value + r2.value;
       }
       case "sub" -> {
@@ -35,7 +34,7 @@ public class ALUinst extends Instruction {
       case "equal" -> {
         ret.value = (double) (r1.value == r2.value ? 1 : 0);
       }
-      case "notequal" -> {
+      case "notEqual" -> {
         ret.value = (double) (r1.value != r2.value ? 1 : 0);
       }
       case "lessThan" -> {

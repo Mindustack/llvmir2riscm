@@ -54,12 +54,11 @@ public class Lang {
     public static final String AddOperation = "add";
     public static final String SubOperation = "sub";
     public static final String MulOperation = "mul";
-
+    public static final String DivOperation = "div";
     public static final String OrOperation = "or";
     public static final String XorOperation = "xor";
     public static final String ShiftLeftOperation = "shl";// 移位
     public static final String ShiftRightOperation = "shr";// too
-    public static final String DivOperation = "div";
     public static final String ModOpertion = "mod";
     public static final String LessThanOperation = "lessThan";
     public static final String GreaterThanOperation = "greaterThan";

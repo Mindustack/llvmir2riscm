@@ -122,7 +122,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
         new AsmMoveInst(PhysicalReg.reg("ra"), raTemp, CurrentFunction.exitBlock);
         new AsmALUInst(Lang.AddOperation, PhysicalReg.reg("sp"), PhysicalReg.reg("sp"), new RawStackOffset(CurrentFunction.stackUse), CurrentFunction.exitBlock);
 
-        new AsmMoveInst(PhysicalReg.reg("pc"), PhysicalReg.reg("ra"), CurrentBlock);
+        new AsmMoveInst(PhysicalReg.reg("pc"), PhysicalReg.reg("ra"), CurrentFunction.exitBlock);
     }
 
     private RawMemOffset heapAlloca(int size) {

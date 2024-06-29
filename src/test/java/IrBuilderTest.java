@@ -10,8 +10,8 @@ public class IrBuilderTest {
 //        test("testcases/Array_operations.ll");
 //        test("testcases/Array_pointer.ll");
 //        test("testcases/Assignment_statement.ll");
-        test("testcases/Assign_values_to_arrays_through_loops.ll");
-//        test("testcases/Boolean_operation.ll");
+//        test("testcases/Assign_values_to_arrays_through_loops.ll");
+        test("testcases/Boolean_operation.ll");
 //        test("testcases/Branch_without_loop.ll");
 //        test("testcases/break_statement.ll");
 //        test("testcases/char.ll");
