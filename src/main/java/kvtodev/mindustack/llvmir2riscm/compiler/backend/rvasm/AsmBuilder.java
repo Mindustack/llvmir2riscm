@@ -80,7 +80,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
             }
             if (irFunc.name.equals("@main")) {
                 main = function;
-                new AsmLiInst(PhysicalReg.reg("sp"),new Immediate(2048),main.entryBlock);
+                new AsmLiInst(PhysicalReg.reg("sp"), new Immediate(Lang.defaultMemory - 1), main.entryBlock);
                 new AsmLiInst(PhysicalReg.reg("ra"), new Immediate(-2), main.entryBlock);
             } else module.functions.add(function);
 
@@ -201,30 +201,30 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
             switch (((IRICmpInst) inst.condition()).op) {
                 case "sgt":
                 case "ugt":
-                    op = Lang.LessSuffix;
+                    op = Lang.GreaterThanOperation;
                     hasSecond = true;
                     break;
                 case "sge":
                 case "uge":
-                    op = Lang.GreaterSuffix;
+                    op = Lang.GreaterThanOperation;
                     hasSecond = false;
                     break;
                 case "slt":
                 case "ult":
-                    op = Lang.LessSuffix;
+                    op = Lang.LessThanOperation;
                     hasSecond = false;
                     break;
                 case "sle":
                 case "ule":
-                    op = Lang.GreaterSuffix;
+                    op = Lang.GreaterThanEqOperation;
                     hasSecond = true;
                     break;
                 case "eq":
-                    op = Lang.EqualSuffix;
+                    op = Lang.EqualOperation;
                     hasSecond = true;
                     break;
                 case "ne":
-                    op = Lang.NotEqualSuffix;
+                    op = Lang.NotEqualOperation;
                     hasSecond = true;
                     break;
 
@@ -234,11 +234,11 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
                     break;
             }
             if (hasSecond)
-                new AsmBrInst(op, getReg(((IRICmpInst) inst.condition()).rhs()), getReg(((IRICmpInst) inst.condition()).lhs()), (AsmBlock) inst.ifTrueBlock().asmOperand, CurrentBlock);
+                new AsmBrInst(op, getReg(((IRICmpInst) inst.condition()).lhs()), getReg(((IRICmpInst) inst.condition()).rhs()), (AsmBlock) inst.ifTrueBlock().asmOperand, CurrentBlock);
             else
                 new AsmBrInst(op, getReg(((IRICmpInst) inst.condition()).lhs()), getReg(((IRICmpInst) inst.condition()).rhs()), (AsmBlock) inst.ifTrueBlock().asmOperand, CurrentBlock);
         } else {
-            new AsmBrInst(Lang.NotEqualSuffix, getReg(inst.condition()), getReg(new NumConst(0)), (AsmBlock) inst.ifTrueBlock().asmOperand, CurrentBlock);
+            new AsmBrInst(Lang.NotEqualOperation, getReg(inst.condition()), getReg(new NumConst(0)), (AsmBlock) inst.ifTrueBlock().asmOperand, CurrentBlock);
         }
 
         new AsmJmpInst((AsmBlock) inst.ifFalseBlock().asmOperand, CurrentBlock);
@@ -269,6 +269,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
         Register instReg = getReg(inst);
 
         VirtualReg virtualReg = new VirtualReg();
+        new AsmLiInst(instReg, new Immediate(0), CurrentBlock);
         Value operand;
         for (int i = 1; i < inst.operands.size(); ++i) {
 
@@ -301,9 +302,8 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
                 newALUInst(Lang.MulOperation, virtualReg, operand, new NumConst(elementSize));
                 new AsmALUInst(Lang.AddOperation, instReg, instReg, virtualReg, CurrentBlock);
 
-            }
-            else if(type instanceof NumType){
-                new AsmALUInst(Lang.AddOperation,instReg,instReg,getReg(operand),CurrentBlock);
+            } else if (type instanceof NumType) {
+                new AsmALUInst(Lang.AddOperation, instReg, instReg, getReg(operand), CurrentBlock);
 //                break;
             }
         }
@@ -323,8 +323,8 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
                 break;
 
             case "sgt":
-            case "":
-                newALUInst(Lang.GreaterThanOperation, instReg, inst.rhs(), inst.lhs());
+            case "ugt":
+                newALUInst(Lang.GreaterThanOperation, instReg, inst.lhs(), inst.rhs());
                 break;
             case "sge":
             case "uge":
@@ -332,7 +332,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
                 break;
             case "sle":
             case "ule":
-                newALUInst(Lang.LessThanEqOperation, instReg, inst.rhs(), inst.lhs());
+                newALUInst(Lang.LessThanEqOperation, instReg, inst.lhs(), inst.rhs());
                 break;
             case "eq": {
                 newALUInst(Lang.EqualOperation, instReg, inst.lhs(), inst.rhs());
@@ -432,7 +432,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
             intValue = ((NumConst) value).constData;
             Register ret;
             if (CurrentBlock.recordLi.containsKey(intValue)) {
-                ret =CurrentBlock.recordLi.get(intValue);
+                ret = CurrentBlock.recordLi.get(intValue);
             } else {
                 ret = new VirtualReg();
                 new AsmLiInst(ret, new Immediate(intValue), CurrentBlock);

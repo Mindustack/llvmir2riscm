@@ -9,7 +9,7 @@ public class Minterpreter {
     public List<Instruction> instructions = new ArrayList<>();
     public Map<String, Instruction> labels = new HashMap<>();
     public VariableFactory varFctr;
-    public MemoryFactory memFctr;
+   public Memory memory=new Memory();
     Variable counter;
 
     public static void main(String[] args) {
@@ -22,8 +22,8 @@ public class Minterpreter {
         }
         minterpreter.run();
     }
+
     public Minterpreter() {
-        this.memFctr = new MemoryFactory();
         this.varFctr = new VariableFactory();
 
         logger.info("minterpreter started");
@@ -72,12 +72,10 @@ public class Minterpreter {
                         instruction = new JmpInst(count, split[1], split[2], this.varFctr.getVar(split.length < 4 ? null : split[3]), this.varFctr.getVar(split.length < 5 ? null : split[4]));
                     }
                     case "write" -> {
-                        instruction = new WriteInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]), this.varFctr.getVar(split[3]),
-
-                                split.length < 5 ? 0 : Integer.parseInt(split[4]));
+                        instruction = new WriteInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]),  Integer.parseInt(split[3]));
                     }
                     case "read" -> {
-                        instruction = new ReadInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]), this.varFctr.getVar(split[3]), split.length < 5 ? 0 : Integer.parseInt(split[4]));
+                        instruction = new ReadInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]),  Integer.parseInt(split[3]));
 
                     }
                     case "call" -> {
@@ -144,6 +142,12 @@ public class Minterpreter {
     /**
      * @return return the value in 'ret' variable to vertify
      */
+    public void dumpMem() {
+        for (int i = 0; i < memory.mem.size(); i++) {
+           System.out.printf("\t%d:\t%.2f",i,memory.mem.get(i));
+        }
+    }
+
     public double getRet() {
         return this.varFctr.getVar("a0").value;
     }

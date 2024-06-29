@@ -1,5 +1,7 @@
 package kvtodev.mindustack.minterpreter;
 
+import kvtodev.mindustack.llvmir2riscm.compiler.share.Lang;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +10,7 @@ public class Memory {
   List<Double> mem;
 
   protected Memory() {
-    mem = new ArrayList<Double>(Collections.nCopies(512, 0.0));
+    mem = new ArrayList<Double>(Collections.nCopies(Lang.defaultMemory, 0.0));
   }
 
   public void read(Variable ret, Variable index) {

@@ -3,7 +3,7 @@ package kvtodev.mindustack.minterpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-class VariableFactory {
+public class VariableFactory {
   static Variable nullVariable = new Variable("_null", 0);
 
   public Map<String, Variable> variables = new HashMap<>();

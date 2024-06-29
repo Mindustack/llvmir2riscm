@@ -7,10 +7,10 @@ import java.io.FileNotFoundException;
 public class IrBuilderTest {
     public static void main(String[] args) {
 //        test("testcases/Arithmetic_operation.ll");
-        test("testcases/Array_operations.ll");
+//        test("testcases/Array_operations.ll");
 //        test("testcases/Array_pointer.ll");
 //        test("testcases/Assignment_statement.ll");
-//        test("testcases/Assign_values_to_arrays_through_loops.ll");
+        test("testcases/Assign_values_to_arrays_through_loops.ll");
 //        test("testcases/Boolean_operation.ll");
 //        test("testcases/Branch_without_loop.ll");
 //        test("testcases/break_statement.ll");
@@ -64,6 +64,8 @@ public class IrBuilderTest {
 
             Minterpreter minterpreter = new Minterpreter();
             minterpreter.parse(code).run();
+            System.out.println(minterpreter.getRet());
+            minterpreter.dumpMem();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

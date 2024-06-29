@@ -5,15 +5,8 @@ import java.util.*;
 public class Lang {
 
     public static Set<String> ignoredLLVMFunctions =new HashSet<>(List.of("@llvm.lifetime.start.p0","@llvm.lifetime.end.p0"));
-    public static final int SpLowUnit = 1;
-    public static final int I32Unit = 1;
-    public static final int MaxStackSize = Integer.MAX_VALUE;
-    public static final int MaxDataZoneSize = 0x200;
-
-    // public static final String DefaultMemmory = "bank1";
     // --- Register Related ---
 
-    // public static final String VirtualRegPrefix = "v";
     public static final String FuncArgRegPrefix = "a";
     public static final String TempRegPrefix = "t";
     public static final String SavedRegPrefix = "s";
@@ -57,6 +50,7 @@ public class Lang {
         }
     };
 
+
     public static final String AddOperation = "add";
     public static final String SubOperation = "sub";
     public static final String MulOperation = "mul";
@@ -67,15 +61,6 @@ public class Lang {
     public static final String ShiftRightOperation = "shr";// too
     public static final String DivOperation = "div";
     public static final String ModOpertion = "mod";
-    public static final String GreaterEqualSuffix = "greaterThanEq";
-    public static final String GreaterSuffix = "greaterThan";
-    public static final String LessEqualSuffix = "lessThanEq";
-    public static final String GreaterThanSuffix = "greaterThan";
-    public static final String LessSuffix = "lessThan";
-    public static final String EqualSuffix = "equal";
-    public static final String NotEqualSuffix = "notEqual";
-    public static final String StrictEqualSuffix = "strictEqual";
-
     public static final String LessThanOperation = "lessThan";
     public static final String GreaterThanOperation = "greaterThan";
     public static final String LessThanEqOperation = "lessThanEq";
@@ -83,7 +68,8 @@ public class Lang {
     public static final String EqualOperation = "equal";
     public static final String NotEqualOperation = "notEqual";
     public static final String GPRegPrefix = "gp";
-    public static final String MainFunctionIdentifier = "main";
 
     public static String VirtualRegPrefix = "virtualReg";
+
+    public static  int defaultMemory=1<<9;
 }
