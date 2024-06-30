@@ -10,7 +10,7 @@ public class WriteInst extends Instruction {
 
   @Override
   void execute(Minterpreter env) {
-    env.memory.write(ret, r2);
+    env.memory.write(ret, r2,imm);
     env.counter.value++;
   }
 }

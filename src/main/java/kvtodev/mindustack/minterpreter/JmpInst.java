@@ -12,6 +12,11 @@ public class JmpInst extends Instruction {
     }
 
     @Override
+    public String toString() {
+        return super.toString() + " ->" + this.label;
+    }
+
+    @Override
     void execute(Minterpreter env) {
         boolean jmp = false;
         switch (this.op) {

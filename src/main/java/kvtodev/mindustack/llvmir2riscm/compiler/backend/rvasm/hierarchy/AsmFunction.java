@@ -18,6 +18,5 @@ public class AsmFunction extends BaseOperand {
 
     public AsmFunction(String identifier) {
         super(identifier);
-        stackUse.pointed=1;
     }
 }

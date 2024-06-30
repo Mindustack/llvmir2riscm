@@ -10,7 +10,7 @@ public class ReadInst extends Instruction {
 
   @Override
   void execute(Minterpreter env) {
-    env.memory.read(ret, r2);
+    env.memory.read(ret, r2,imm);
     env.counter.value++;
   }
 }

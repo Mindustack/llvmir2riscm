@@ -5,10 +5,9 @@ import java.util.List;
 public class NumType extends IRBaseType {
 
 
-
     @Override
     public boolean match(IRBaseType other) {
-        return other instanceof NumType ;
+        return other instanceof NumType;
     }
 
     @Override
@@ -18,13 +17,12 @@ public class NumType extends IRBaseType {
 
     @Override
     public String toString() {
-        return "num"
-                ;
+        return "num";
     }
 
     @Override
     public List<String> toReg(List<String> list, String name) {
-      list.add(name);
-      return list;
+        list.add(name);
+        return list;
     }
 }

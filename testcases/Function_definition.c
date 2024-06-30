@@ -1,7 +1,4 @@
-int add() {
-    int a,b;
-    a = 1;
-    b = 2;
+int add(int a,int b) {
     return a + b;
 }
 
@@ -10,6 +7,6 @@ int add() {
     int a,b,c;
     a = 1;
     b = 2;
-    c = add();
-    return 0;
+    c = add(a,b);
+    return c;
 }

@@ -59,6 +59,125 @@ public class IRBuilder extends LLVMIRBaseVisitor<Value> {
         return label;
     }
 
+    @Override
+    public Value visitSExtInst(LLVMIRParser.SExtInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+    }
+
+    @Override
+    public Value visitFenceInst(LLVMIRParser.FenceInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFNegInst(LLVMIRParser.FNegInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitAShrInst(LLVMIRParser.AShrInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitExtractElementInst(LLVMIRParser.ExtractElementInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitInsertElementInst(LLVMIRParser.InsertElementInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitShuffleVectorInst(LLVMIRParser.ShuffleVectorInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitCmpXchgInst(LLVMIRParser.CmpXchgInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitAtomicRMWInst(LLVMIRParser.AtomicRMWInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFpTruncInst(LLVMIRParser.FpTruncInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFpExtInst(LLVMIRParser.FpExtInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFpToUiInst(LLVMIRParser.FpToUiInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+//        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFpToSiInst(LLVMIRParser.FpToSiInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+//        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitUiToFpInst(LLVMIRParser.UiToFpInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+    }
+
+    @Override
+    public Value visitSiToFpInst(LLVMIRParser.SiToFpInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+//        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitIntToPtrInst(LLVMIRParser.IntToPtrInstContext ctx) {
+        return new IRCastInst(visit(ctx.typeValue()), visitType(ctx.type()).type);
+//        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitAddrSpaceCastInst(LLVMIRParser.AddrSpaceCastInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFCmpInst(LLVMIRParser.FCmpInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitFreezeInst(LLVMIRParser.FreezeInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitVaargInst(LLVMIRParser.VaargInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitLandingPadInst(LLVMIRParser.LandingPadInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitCatchPadInst(LLVMIRParser.CatchPadInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
+    @Override
+    public Value visitCleanupPadInst(LLVMIRParser.CleanupPadInstContext ctx) {
+        throw new RuntimeException("unsupported llvmir Inst");
+    }
+
     public void run(CharStream charStream) {
         LLVMIRLexer irLexer = new LLVMIRLexer(charStream);
         LLVMIRParser irParser = new LLVMIRParser(new CommonTokenStream(irLexer));
@@ -142,7 +261,7 @@ public class IRBuilder extends LLVMIRBaseVisitor<Value> {
         ctx.funcBody().basicBlock().forEach(this::visitBasicBlock);
         analyzer.runOnFunc(function);
 
-        RawOnlyName.solveRawOnlyName(this);
+        solveRawOnlyName();
         return function;
     }
 
@@ -200,7 +319,7 @@ public class IRBuilder extends LLVMIRBaseVisitor<Value> {
         if (ctx.value() != null) {
             return new IRRetInst(visit(ctx.value()));
         }
-        return new IRRetInst(null);
+        return new IRRetInst();
     }
 
     @Override
@@ -742,10 +861,11 @@ public class IRBuilder extends LLVMIRBaseVisitor<Value> {
         infoValue = temp;
         return null;
     }
+
     @Override
     public Value visitCallInst(LLVMIRParser.CallInstContext ctx) {
         IRFunction callFunc = (IRFunction) visitValue(ctx.value());
-        if(Lang.ignoredLLVMFunctions.contains(callFunc.name))return null;
+        if (Lang.ignoredLLVMFunctions.contains(callFunc.name)) return null;
         ArrayList<Value> argsValue = new ArrayList<>();
         for (var arg : ctx.args().arg())
             argsValue.add(visit(arg));
@@ -795,34 +915,31 @@ public class IRBuilder extends LLVMIRBaseVisitor<Value> {
         return super.visitTerminal(node);
     }
 
+    public ArrayList<RawOnlyName> workList = new ArrayList<>();
+
     // this is used to handle forward reference
-    static class RawOnlyName extends Value {
-        public static ArrayList<RawOnlyName> workList = new ArrayList<>();
+    class RawOnlyName extends Value {
 
         public RawOnlyName(String name) {
             super(name, null);
             workList.add(this);
         }
 
-        static void solveRawOnlyName(IRBuilder irBuilder) {
-            try {
-                for (RawOnlyName onlyName : RawOnlyName.workList) {
-                    var userList = new ArrayList<>(onlyName.users);
+    }
 
-
-                    for (User user : userList) {
-                        user.resetOperand(user.operands.indexOf(onlyName), irBuilder.getValue(onlyName.name));
-                    }
-
-
+    void solveRawOnlyName() {
+        try {
+            for (RawOnlyName onlyName : workList) {
+                var userList = new ArrayList<>(onlyName.users);
+                for (User user : userList) {
+                    user.resetOperand(user.operands.indexOf(onlyName), getValue(onlyName.name));
                 }
-                RawOnlyName.workList.clear();
-            } catch (ConcurrentModificationException e) {
-                llvmir2riscm.logger.severe("can't find forward reference ");
-                e.printStackTrace();
-
             }
-        }
+            workList.clear();
+        } catch (ConcurrentModificationException e) {
+            llvmir2riscm.logger.severe("can't find forward reference ");
+            e.printStackTrace();
 
+        }
     }
 }

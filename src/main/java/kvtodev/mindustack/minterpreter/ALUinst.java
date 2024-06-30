@@ -13,6 +13,7 @@ public class ALUinst extends Instruction {
 
   @Override
   void execute(Minterpreter env) {
+    env.counter.value++;
     switch (this.op) {
 
       case "add" -> {
@@ -62,6 +63,5 @@ public class ALUinst extends Instruction {
         throw new RuntimeException("invalid operation:" + op);
       }
     }
-    env.counter.value++;
   }
 }

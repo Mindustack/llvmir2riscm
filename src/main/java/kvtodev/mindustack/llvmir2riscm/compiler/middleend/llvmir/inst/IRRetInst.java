@@ -11,6 +11,10 @@ public class IRRetInst extends IRBaseInst {
     this.addOperand(retVal);
     this.instName= "ret\t";
   }
+  public IRRetInst(){
+    super("ret\t",null) ;
+    this.instName="ret\t";
+  }
 
   public Value retVal() {
     return (this.getOperand(0));

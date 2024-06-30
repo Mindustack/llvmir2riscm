@@ -17,6 +17,7 @@ import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRBlockPass;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRFuncPass;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRInstPass;
 import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRModulePass;
+import kvtodev.mindustack.llvmir2riscm.llvmir2riscm;
 
 import java.util.ArrayList;
 
@@ -86,7 +87,8 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
 
         }
 //        module.functions.remove(main);
-        module.functions.addFirst(main);
+        if (main == null) llvmir2riscm.logger.info("no main func");
+        else module.functions.addFirst(main);
 
         irModule.functions.forEach(this::runOnFunc);
     }
@@ -253,6 +255,7 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
             newMoveInst(PhysicalReg.a(i), inst.getArg(i));
         }
 
+        new AsmALUInst(Lang.AddOperation,PhysicalReg.reg("ra"),PhysicalReg.reg("pc"),new Immediate(1),CurrentBlock);
         new AsmCallInst(callFunc, CurrentBlock);
 
         if (!inst.getCallFunc().isVoid()) {
@@ -292,9 +295,8 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
 
                 var constData = ((NumConst) operand).constData;
 
-                new AsmLiInst(virtualReg, new Immediate(((StructType) type).memberOffset(((NumConst) operand).constData.intValue())), CurrentBlock);
+                new AsmALUInst(Lang.AddOperation, instReg, instReg,  getReg(((StructType) type).memberOffset(((NumConst) operand).constData.intValue())), CurrentBlock);
                 type = memberVarTypes.get(constData.intValue());
-                new AsmALUInst(Lang.AddOperation, instReg, instReg, virtualReg, CurrentBlock);
             } else if (type instanceof PointerType) {
                 type = ((PointerType) type).pointedType;
                 elementSize = type.size();
@@ -408,6 +410,17 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
         return new AsmALUInst(rvOp, dest, getReg(lhs), getReg(rhs), CurrentBlock);
     }
 
+    public Register getReg(Number v){
+        Register ret;
+        if (CurrentBlock.recordLi.containsKey(v)) {
+            ret = CurrentBlock.recordLi.get(v);
+        } else {
+            ret = new VirtualReg();
+            new AsmLiInst(ret, new Immediate(v), CurrentBlock);
+            CurrentBlock.recordLi.put(v, ret);
+        }
+        return ret;
+    }
     public Register getReg(Value value) {
 
         if (value.asmOperand != null) {
@@ -430,15 +443,8 @@ public class AsmBuilder implements IRModulePass, IRFuncPass, IRBlockPass, IRInst
 
             Number intValue = 0;
             intValue = ((NumConst) value).constData;
-            Register ret;
-            if (CurrentBlock.recordLi.containsKey(intValue)) {
-                ret = CurrentBlock.recordLi.get(intValue);
-            } else {
-                ret = new VirtualReg();
-                new AsmLiInst(ret, new Immediate(intValue), CurrentBlock);
-                CurrentBlock.recordLi.put(intValue, ret);
-            }
-            return ret;
+            return getReg(intValue);
+
         }
 
         VirtualReg newReg = new VirtualReg();

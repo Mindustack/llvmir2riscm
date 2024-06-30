@@ -1,8 +1,881 @@
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
-INFO: source_filename="Boolean_operation.c"
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Arithmetic_operation.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
 INFO: Build Module finish from .ll file.
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@foo:%0:num	%1:num	%2:num	->num
+	@foo0:		
+		op-mul		[%1:num, 5.0]		->%4
+		op-div		[%2:num, %0:num]		->%5
+		op-mul		[%5:num, %1:num]		->%6
+		op-mul		[%6:num, -3.0]		->%7
+		op-div		[%4:num, %7:num]		->%8
+		ret			[%8:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[3.0, %2:num*]
+		store		[4.0, %3:num*]
+		store		[5.0, %4:num*]
+		load		[%2:num*]		->%6
+		load		[%3:num*]		->%7
+		load		[%4:num*]		->%8
+		call		[@foo:num, %6:num, %7:num, %8:num]		->%9
+		store		[%9:num, %5:num*]
+		load		[%5:num*]		->%10
+		call		[@print:void, %10:num]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		set virtualReg28 s0
+		set virtualReg29 s1
+		set virtualReg30 s2
+		set virtualReg31 s3
+		set virtualReg32 s4
+		set virtualReg33 s5
+		set virtualReg34 s6
+		set virtualReg35 s7
+		set virtualReg36 s8
+		set virtualReg37 s9
+		set virtualReg38 s10
+		set virtualReg39 s11
+		set virtualReg40 ra
+		op add virtualReg41 sp 0
+		op add virtualReg42 sp 1
+		op add virtualReg43 sp 2
+		op add virtualReg44 sp 3
+		op add virtualReg45 sp 4
+		set virtualReg46 0
+		write virtualReg46 virtualReg41 0	
+		set virtualReg47 3.0
+		write virtualReg47 virtualReg42 0	
+		set virtualReg48 4.0
+		write virtualReg48 virtualReg43 0	
+		set virtualReg49 5.0
+		write virtualReg49 virtualReg44 0	
+		read virtualReg50 virtualReg42 0	
+		read virtualReg51 virtualReg43 0	
+		read virtualReg52 virtualReg44 0	
+		set a0 virtualReg50
+		set a1 virtualReg51
+		set a2 virtualReg52
+		op add ra pc 1
+		jump @foo0 always
+		set virtualReg53 a0
+		write virtualReg53 virtualReg45 0	
+		read virtualReg54 virtualReg45 0	
+		set a0 virtualReg54
+		op add ra pc 1
+		jump @print0 always
+		set a0 virtualReg46
+		set s0 virtualReg28
+		set s1 virtualReg29
+		set s2 virtualReg30
+		set s3 virtualReg31
+		set s4 virtualReg32
+		set s5 virtualReg33
+		set s6 virtualReg34
+		set s7 virtualReg35
+		set s8 virtualReg36
+		set s9 virtualReg37
+		set s10 virtualReg38
+		set s11 virtualReg39
+		set ra virtualReg40
+		op add sp sp 5
+		set pc ra
+#@foo:	virtualReg5	virtualReg6	virtualReg7	
+	@foo0:		
+		op sub sp sp 0
+		set virtualReg8 s0
+		set virtualReg9 s1
+		set virtualReg10 s2
+		set virtualReg11 s3
+		set virtualReg12 s4
+		set virtualReg13 s5
+		set virtualReg14 s6
+		set virtualReg15 s7
+		set virtualReg16 s8
+		set virtualReg17 s9
+		set virtualReg18 s10
+		set virtualReg19 s11
+		set virtualReg20 ra
+		set virtualReg5 a0
+		set virtualReg6 a1
+		set virtualReg7 a2
+		set virtualReg22 5.0
+		op mul virtualReg21 virtualReg6 virtualReg22
+		op div virtualReg23 virtualReg7 virtualReg5
+		op mul virtualReg24 virtualReg23 virtualReg6
+		set virtualReg26 -3.0
+		op mul virtualReg25 virtualReg24 virtualReg26
+		op div virtualReg27 virtualReg21 virtualReg25
+		set a0 virtualReg27
+		set s0 virtualReg8
+		set s1 virtualReg9
+		set s2 virtualReg10
+		set s3 virtualReg11
+		set s4 virtualReg12
+		set s5 virtualReg13
+		set s6 virtualReg14
+		set s7 virtualReg15
+		set s8 virtualReg16
+		set s9 virtualReg17
+		set s10 virtualReg18
+		set s11 virtualReg19
+		set ra virtualReg20
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @foo
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 8
+		write s0 sp 6	
+		write s1 sp 5	
+		write ra sp 7	
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t2 sp 2
+		op add t1 sp 3
+		op add s0 sp 4
+		set s1 0
+		write s1 t0 0	
+		set t0 3.0
+		write t0 t3 0	
+		set t0 4.0
+		write t0 t2 0	
+		set t0 5.0
+		write t0 t1 0	
+		read a0 t3 0	
+		read a1 t2 0	
+		set a2 t0
+		op add ra pc 1
+		jump @foo0 always
+		write a0 s0 0	
+		op add ra pc 1
+		jump @print0 always
+		set a0 s1
+		read s0 sp 6	
+		read s1 sp 5	
+		read ra sp 7	
+		op add sp sp 8
+		set pc ra
+#@foo:	a0	a1	a2	
+	@foo0:		
+		set t0 5.0
+		op mul t2 a1 t0
+		op div t0 a2 a0
+		op mul t1 t0 a1
+		set t0 -3.0
+		op mul t0 t1 t0
+		op div a0 t2 t0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Array_operations.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[2 x num]*]		->%2
+		alloca		[%3:[5 x num]*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[2 x num]*, 0, 0]		->%4
+		store		[1, %4:num*]
+		gep			[%3:[5 x num]*, 0, 1]		->%5
+		store		[4, %5:num*]
+		gep			[%3:[5 x num]*, 0, 2]		->%6
+		store		[2, %6:num*]
+		gep			[%3:[5 x num]*, 0, 3]		->%7
+		store		[98, %7:num*]
+		gep			[%2:[2 x num]*, 0, 1]		->%8
+		load		[%8:num*]		->%9
+		gep			[%3:[5 x num]*, 0, 1]		->%10
+		load		[%10:num*]		->%11
+		op-add		[%9:num, %11:num]		->%12
+		gep			[%3:[5 x num]*, 0, 2]		->%13
+		load		[%13:num*]		->%14
+		gep			[%3:[5 x num]*, 0, 3]		->%15
+		load		[%15:num*]		->%16
+		op-mul		[%14:num, %16:num]		->%17
+		op-sub		[%12:num, %17:num]		->%18
+		gep			[%3:[5 x num]*, 0, 4]		->%19
+		store		[%18:num, %19:num*]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 8
+		set virtualReg59 s0
+		set virtualReg60 s1
+		set virtualReg61 s2
+		set virtualReg62 s3
+		set virtualReg63 s4
+		set virtualReg64 s5
+		set virtualReg65 s6
+		set virtualReg66 s7
+		set virtualReg67 s8
+		set virtualReg68 s9
+		set virtualReg69 s10
+		set virtualReg70 s11
+		set virtualReg71 ra
+		op add virtualReg72 sp 0
+		op add virtualReg73 sp 1
+		op add virtualReg74 sp 3
+		set virtualReg75 0
+		write virtualReg75 virtualReg72 0	
+		set virtualReg76 0
+		set virtualReg78 1
+		op mul virtualReg77 virtualReg75 virtualReg78
+		op add virtualReg76 virtualReg76 virtualReg77
+		op add virtualReg76 virtualReg76 virtualReg75
+		op add virtualReg76 virtualReg76 virtualReg73
+		write virtualReg78 virtualReg76 0	
+		set virtualReg79 0
+		op mul virtualReg80 virtualReg75 virtualReg78
+		op add virtualReg79 virtualReg79 virtualReg80
+		op add virtualReg79 virtualReg79 virtualReg78
+		op add virtualReg79 virtualReg79 virtualReg74
+		set virtualReg81 4
+		write virtualReg81 virtualReg79 0	
+		set virtualReg82 0
+		op mul virtualReg83 virtualReg75 virtualReg78
+		op add virtualReg82 virtualReg82 virtualReg83
+		set virtualReg84 2
+		op add virtualReg82 virtualReg82 virtualReg84
+		op add virtualReg82 virtualReg82 virtualReg74
+		write virtualReg84 virtualReg82 0	
+		set virtualReg85 0
+		op mul virtualReg86 virtualReg75 virtualReg78
+		op add virtualReg85 virtualReg85 virtualReg86
+		set virtualReg87 3
+		op add virtualReg85 virtualReg85 virtualReg87
+		op add virtualReg85 virtualReg85 virtualReg74
+		set virtualReg88 98
+		write virtualReg88 virtualReg85 0	
+		set virtualReg89 0
+		op mul virtualReg90 virtualReg75 virtualReg78
+		op add virtualReg89 virtualReg89 virtualReg90
+		op add virtualReg89 virtualReg89 virtualReg78
+		op add virtualReg89 virtualReg89 virtualReg73
+		read virtualReg91 virtualReg89 0	
+		set virtualReg92 0
+		op mul virtualReg93 virtualReg75 virtualReg78
+		op add virtualReg92 virtualReg92 virtualReg93
+		op add virtualReg92 virtualReg92 virtualReg78
+		op add virtualReg92 virtualReg92 virtualReg74
+		read virtualReg94 virtualReg92 0	
+		op add virtualReg95 virtualReg91 virtualReg94
+		set virtualReg96 0
+		op mul virtualReg97 virtualReg75 virtualReg78
+		op add virtualReg96 virtualReg96 virtualReg97
+		op add virtualReg96 virtualReg96 virtualReg84
+		op add virtualReg96 virtualReg96 virtualReg74
+		read virtualReg98 virtualReg96 0	
+		set virtualReg99 0
+		op mul virtualReg100 virtualReg75 virtualReg78
+		op add virtualReg99 virtualReg99 virtualReg100
+		op add virtualReg99 virtualReg99 virtualReg87
+		op add virtualReg99 virtualReg99 virtualReg74
+		read virtualReg101 virtualReg99 0	
+		op mul virtualReg102 virtualReg98 virtualReg101
+		op sub virtualReg103 virtualReg95 virtualReg102
+		set virtualReg104 0
+		op mul virtualReg105 virtualReg75 virtualReg78
+		op add virtualReg104 virtualReg104 virtualReg105
+		op add virtualReg104 virtualReg104 virtualReg81
+		op add virtualReg104 virtualReg104 virtualReg74
+		write virtualReg103 virtualReg104 0	
+		set a0 virtualReg75
+		set s0 virtualReg59
+		set s1 virtualReg60
+		set s2 virtualReg61
+		set s3 virtualReg62
+		set s4 virtualReg63
+		set s5 virtualReg64
+		set s6 virtualReg65
+		set s7 virtualReg66
+		set s8 virtualReg67
+		set s9 virtualReg68
+		set s10 virtualReg69
+		set s11 virtualReg70
+		set ra virtualReg71
+		op add sp sp 8
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 8
+		op add t0 sp 0
+		op add t5 sp 1
+		op add t1 sp 3
+		set a0 0
+		write a0 t0 0	
+		set t3 0
+		set t2 1
+		op mul t0 a0 t2
+		op add t3 t3 t0
+		op add t3 t3 a0
+		op add t3 t3 t5
+		write t2 t3 0	
+		set t3 0
+		op mul t0 a0 t2
+		op add t3 t3 t0
+		op add t3 t3 t2
+		op add t3 t3 t1
+		set t0 4
+		write t0 t3 0	
+		set t6 0
+		op mul t3 a0 t2
+		op add t6 t6 t3
+		set t4 2
+		op add t6 t6 t4
+		op add t6 t6 t1
+		write t4 t6 0	
+		set a1 0
+		op mul t3 a0 t2
+		op add a1 a1 t3
+		set t3 3
+		op add a1 a1 t3
+		op add a1 a1 t1
+		set t6 98
+		write t6 a1 0	
+		set a1 0
+		op mul t6 a0 t2
+		op add a1 a1 t6
+		op add a1 a1 t2
+		op add a1 a1 t5
+		read a1 a1 0	
+		set t6 0
+		op mul t5 a0 t2
+		op add t6 t6 t5
+		op add t6 t6 t2
+		op add t6 t6 t1
+		read t5 t6 0	
+		op add a1 a1 t5
+		set t6 0
+		op mul t5 a0 t2
+		op add t6 t6 t5
+		op add t6 t6 t4
+		op add t6 t6 t1
+		read t6 t6 0	
+		set t5 0
+		op mul t4 a0 t2
+		op add t5 t5 t4
+		op add t5 t5 t3
+		op add t5 t5 t1
+		read t3 t5 0	
+		op mul t3 t6 t3
+		op sub t4 a1 t3
+		set t3 0
+		op mul t2 a0 t2
+		op add t3 t3 t2
+		op add t3 t3 t0
+		op add t3 t3 t1
+		write t4 t3 0	
+		op add sp sp 8
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Array_pointer.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[5 x num]*]		->%2
+		alloca		[%3:void**]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		gep			[%2:[5 x num]*, 0, 0]		->%5
+		store		[1, %5:num*]
+		gep			[%2:[5 x num]*, 0, 1]		->%6
+		store		[2, %6:num*]
+		gep			[%2:[5 x num]*, 0, 2]		->%7
+		store		[3, %7:num*]
+		gep			[%2:[5 x num]*, 0, 3]		->%8
+		store		[4, %8:num*]
+		gep			[%2:[5 x num]*, 0, 4]		->%9
+		store		[5, %9:num*]
+		store		[0, %4:num*]
+		store		[%2:[5 x num]*, %3:void**]
+		load		[%3:void**]		->%10
+		gep			[%10:void*, 0, 4]		->%11
+		load		[%11:num*]		->%12
+		ic-eq		[%12:num, 5]		->%13
+		br			[%13:num, IRBlock:%14, IRBlock:%15]
+	%14:		
+		store		[0, %4:num*]
+		br			[IRBlock:%16]
+	%15:		
+		store		[-1, %4:num*]
+		br			[IRBlock:%16]
+	%16:		
+		load		[%4:num*]		->%17
+		ret			[%17:num]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 8
+		set virtualReg110 s0
+		set virtualReg111 s1
+		set virtualReg112 s2
+		set virtualReg113 s3
+		set virtualReg114 s4
+		set virtualReg115 s5
+		set virtualReg116 s6
+		set virtualReg117 s7
+		set virtualReg118 s8
+		set virtualReg119 s9
+		set virtualReg120 s10
+		set virtualReg121 s11
+		set virtualReg122 ra
+		op add virtualReg123 sp 0
+		op add virtualReg124 sp 1
+		op add virtualReg125 sp 6
+		op add virtualReg126 sp 7
+		set virtualReg127 0
+		write virtualReg127 virtualReg123 0	
+		set virtualReg128 0
+		set virtualReg130 1
+		op mul virtualReg129 virtualReg127 virtualReg130
+		op add virtualReg128 virtualReg128 virtualReg129
+		op add virtualReg128 virtualReg128 virtualReg127
+		op add virtualReg128 virtualReg128 virtualReg124
+		write virtualReg130 virtualReg128 0	
+		set virtualReg131 0
+		op mul virtualReg132 virtualReg127 virtualReg130
+		op add virtualReg131 virtualReg131 virtualReg132
+		op add virtualReg131 virtualReg131 virtualReg130
+		op add virtualReg131 virtualReg131 virtualReg124
+		set virtualReg133 2
+		write virtualReg133 virtualReg131 0	
+		set virtualReg134 0
+		op mul virtualReg135 virtualReg127 virtualReg130
+		op add virtualReg134 virtualReg134 virtualReg135
+		op add virtualReg134 virtualReg134 virtualReg133
+		op add virtualReg134 virtualReg134 virtualReg124
+		set virtualReg136 3
+		write virtualReg136 virtualReg134 0	
+		set virtualReg137 0
+		op mul virtualReg138 virtualReg127 virtualReg130
+		op add virtualReg137 virtualReg137 virtualReg138
+		op add virtualReg137 virtualReg137 virtualReg136
+		op add virtualReg137 virtualReg137 virtualReg124
+		set virtualReg139 4
+		write virtualReg139 virtualReg137 0	
+		set virtualReg140 0
+		op mul virtualReg141 virtualReg127 virtualReg130
+		op add virtualReg140 virtualReg140 virtualReg141
+		op add virtualReg140 virtualReg140 virtualReg139
+		op add virtualReg140 virtualReg140 virtualReg124
+		set virtualReg142 5
+		write virtualReg142 virtualReg140 0	
+		write virtualReg127 virtualReg126 0	
+		write virtualReg124 virtualReg125 0	
+		read virtualReg143 virtualReg125 0	
+		set virtualReg144 0
+		op add virtualReg144 virtualReg144 virtualReg143
+		read virtualReg146 virtualReg144 0	
+		jump %14 equal virtualReg146 virtualReg142
+		jump %15 always
+	%14:		
+		set virtualReg147 0
+		write virtualReg147 virtualReg126 0	
+		jump %16 always
+	%15:		
+		set virtualReg148 -1
+		write virtualReg148 virtualReg126 0	
+		jump %16 always
+	%16:		
+		read virtualReg149 virtualReg126 0	
+		set a0 virtualReg149
+		set s0 virtualReg110
+		set s1 virtualReg111
+		set s2 virtualReg112
+		set s3 virtualReg113
+		set s4 virtualReg114
+		set s5 virtualReg115
+		set s6 virtualReg116
+		set s7 virtualReg117
+		set s8 virtualReg118
+		set s9 virtualReg119
+		set s10 virtualReg120
+		set s11 virtualReg121
+		set ra virtualReg122
+		op add sp sp 8
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 8
+		op add t4 sp 0
+		op add t1 sp 1
+		op add t3 sp 6
+		op add t0 sp 7
+		set t2 0
+		write t2 t4 0	
+		set t6 0
+		set t4 1
+		op mul t5 t2 t4
+		op add t6 t6 t5
+		op add t6 t6 t2
+		op add t6 t6 t1
+		write t4 t6 0	
+		set a0 0
+		op mul t5 t2 t4
+		op add a0 a0 t5
+		op add a0 a0 t4
+		op add a0 a0 t1
+		set t6 2
+		write t6 a0 0	
+		set a0 0
+		op mul t5 t2 t4
+		op add a0 a0 t5
+		op add a0 a0 t6
+		op add a0 a0 t1
+		set t6 3
+		write t6 a0 0	
+		set a0 0
+		op mul t5 t2 t4
+		op add a0 a0 t5
+		op add a0 a0 t6
+		op add a0 a0 t1
+		set t6 4
+		write t6 a0 0	
+		set t5 0
+		op mul t4 t2 t4
+		op add t5 t5 t4
+		op add t5 t5 t6
+		op add t5 t5 t1
+		set t4 5
+		write t4 t5 0	
+		write t2 t0 0	
+		write t1 t3 0	
+		set t2 t1
+		set t1 0
+		op add t1 t1 t2
+		read t1 t1 0	
+		jump %14 equal t1 t4
+	%15:		
+		set t1 -1
+		write t1 t0 0	
+	%16:		
+		read a0 t0 0	
+		op add sp sp 8
+		set pc ra
+	%14:		
+		set t1 0
+		write t1 t0 0	
+		jump %16 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Assignment_statement.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@b:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[2, @a:num*]
+		store		[3, @a:num*]
+		load		[@a:num*]		->%2
+		store		[%2:num, @b:num*]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg150 s0
+		set virtualReg151 s1
+		set virtualReg152 s2
+		set virtualReg153 s3
+		set virtualReg154 s4
+		set virtualReg155 s5
+		set virtualReg156 s6
+		set virtualReg157 s7
+		set virtualReg158 s8
+		set virtualReg159 s9
+		set virtualReg160 s10
+		set virtualReg161 s11
+		set virtualReg162 ra
+		op add virtualReg163 sp 0
+		set virtualReg164 0
+		write virtualReg164 virtualReg163 0	
+		set virtualReg165 2
+		write virtualReg165 zero 0	
+		set virtualReg166 3
+		write virtualReg166 zero 0	
+		read virtualReg167 zero 0	
+		write virtualReg167 zero 1	
+		set a0 virtualReg164
+		set s0 virtualReg150
+		set s1 virtualReg151
+		set s2 virtualReg152
+		set s3 virtualReg153
+		set s4 virtualReg154
+		set s5 virtualReg155
+		set s6 virtualReg156
+		set s7 virtualReg157
+		set s8 virtualReg158
+		set s9 virtualReg159
+		set s10 virtualReg160
+		set s11 virtualReg161
+		set ra virtualReg162
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t0 sp 0
+		set a0 0
+		write a0 t0 0	
+		set t0 2
+		write t0 zero 0	
+		set t0 3
+		write t0 zero 0	
+		write t0 zero 1	
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Assign_values_to_arrays_through_loops.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:[10 x num]*]		->%3
+		store		[0, %1:num*]
+		store		[10, %2:num*]
+		br			[IRBlock:%4]
+	%4:		
+		load		[%2:num*]		->%5
+		ic-sgt		[%5:num, 0]		->%6
+		br			[%6:num, IRBlock:%7, IRBlock:%13]
+	%7:		
+		load		[%2:num*]		->%8
+		load		[%2:num*]		->%9
+		gep			[%3:[10 x num]*, 0, %9:num]		->%10
+		store		[%8:num, %10:num*]
+		load		[%2:num*]		->%11
+		op-add		[%11:num, -1]		->%12
+		store		[%12:num, %2:num*]
+		br			[IRBlock:%4]
+	%13:		
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 12
+		set virtualReg172 s0
+		set virtualReg173 s1
+		set virtualReg174 s2
+		set virtualReg175 s3
+		set virtualReg176 s4
+		set virtualReg177 s5
+		set virtualReg178 s6
+		set virtualReg179 s7
+		set virtualReg180 s8
+		set virtualReg181 s9
+		set virtualReg182 s10
+		set virtualReg183 s11
+		set virtualReg184 ra
+		op add virtualReg185 sp 0
+		op add virtualReg186 sp 1
+		op add virtualReg187 sp 2
+		set virtualReg188 0
+		write virtualReg188 virtualReg185 0	
+		set virtualReg189 10
+		write virtualReg189 virtualReg186 0	
+		jump %4 always
+	%4:		
+		read virtualReg190 virtualReg186 0	
+		set virtualReg191 0
+		jump %7 greaterThan virtualReg190 virtualReg191
+		jump %13 always
+	%7:		
+		read virtualReg192 virtualReg186 0	
+		read virtualReg193 virtualReg186 0	
+		set virtualReg194 0
+		set virtualReg196 0
+		set virtualReg197 1
+		op mul virtualReg195 virtualReg196 virtualReg197
+		op add virtualReg194 virtualReg194 virtualReg195
+		op add virtualReg194 virtualReg194 virtualReg193
+		op add virtualReg194 virtualReg194 virtualReg187
+		write virtualReg192 virtualReg194 0	
+		read virtualReg198 virtualReg186 0	
+		set virtualReg200 -1
+		op add virtualReg199 virtualReg198 virtualReg200
+		write virtualReg199 virtualReg186 0	
+		jump %4 always
+	%13:		
+		set virtualReg201 0
+		set a0 virtualReg201
+		set s0 virtualReg172
+		set s1 virtualReg173
+		set s2 virtualReg174
+		set s3 virtualReg175
+		set s4 virtualReg176
+		set s5 virtualReg177
+		set s6 virtualReg178
+		set s7 virtualReg179
+		set s8 virtualReg180
+		set s9 virtualReg181
+		set s10 virtualReg182
+		set s11 virtualReg183
+		set ra virtualReg184
+		op add sp sp 12
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 12
+		op add t1 sp 0
+		op add t6 sp 1
+		op add t5 sp 2
+		set t0 0
+		write t0 t1 0	
+		set t0 10
+		write t0 t6 0	
+	%4:		
+		read t1 t6 0	
+		set t0 0
+		jump %7 greaterThan t1 t0
+	%13:		
+		set a0 0
+		op add sp sp 12
+		set pc ra
+	%7:		
+		read t4 t6 0	
+		read t3 t6 0	
+		set t2 0
+		set t1 0
+		set t0 1
+		op mul t0 t1 t0
+		op add t2 t2 t0
+		op add t2 t2 t3
+		op add t2 t2 t5
+		write t4 t2 0	
+		read t1 t6 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 t6 0	
+		jump %4 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Boolean_operation.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
 INFO: 
 @main:->num
 	@main0:		
@@ -57,122 +930,122 @@ INFO:
 	%26_%28:		
 		move		[%29:num, %27:num]
 		br			[IRBlock:%28]
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
 INFO: 
 #@main:	
 	@main0:		
 		set sp 511
 		set ra -2
-		op sub sp sp 6
-		set virtualReg4 s0
-		set virtualReg5 s1
-		set virtualReg6 s2
-		set virtualReg7 s3
-		set virtualReg8 s4
-		set virtualReg9 s5
-		set virtualReg10 s6
-		set virtualReg11 s7
-		set virtualReg12 s8
-		set virtualReg13 s9
-		set virtualReg14 s10
-		set virtualReg15 s11
-		set virtualReg16 ra
-		op add virtualReg17 sp 1
-		op add virtualReg18 sp 2
-		op add virtualReg19 sp 3
-		op add virtualReg20 sp 4
-		op add virtualReg21 sp 5
-		set virtualReg22 0
-		write virtualReg22 virtualReg17 0	
-		set virtualReg23 1
-		write virtualReg23 virtualReg18 0	
-		set virtualReg24 2
-		write virtualReg24 virtualReg19 0	
-		set virtualReg25 3
-		write virtualReg25 virtualReg20 0	
-		read virtualReg26 virtualReg18 0	
-		jump %16 notEqual virtualReg26 virtualReg22
+		op sub sp sp 5
+		set virtualReg206 s0
+		set virtualReg207 s1
+		set virtualReg208 s2
+		set virtualReg209 s3
+		set virtualReg210 s4
+		set virtualReg211 s5
+		set virtualReg212 s6
+		set virtualReg213 s7
+		set virtualReg214 s8
+		set virtualReg215 s9
+		set virtualReg216 s10
+		set virtualReg217 s11
+		set virtualReg218 ra
+		op add virtualReg219 sp 0
+		op add virtualReg220 sp 1
+		op add virtualReg221 sp 2
+		op add virtualReg222 sp 3
+		op add virtualReg223 sp 4
+		set virtualReg224 0
+		write virtualReg224 virtualReg219 0	
+		set virtualReg225 1
+		write virtualReg225 virtualReg220 0	
+		set virtualReg226 2
+		write virtualReg226 virtualReg221 0	
+		set virtualReg227 3
+		write virtualReg227 virtualReg222 0	
+		read virtualReg228 virtualReg220 0	
+		jump %16 notEqual virtualReg228 virtualReg224
 		jump %8 always
 	%8:		
-		read virtualReg27 virtualReg19 0	
-		read virtualReg28 virtualReg18 0	
-		set virtualReg30 -3
-		op add virtualReg29 virtualReg30 virtualReg28
-		op greaterThanEq virtualReg31 virtualReg27 virtualReg29
-		set virtualReg32 virtualReg31
-		read virtualReg33 virtualReg19 0	
-		jump %8_%28 greaterThanEq virtualReg32 virtualReg33
+		read virtualReg229 virtualReg221 0	
+		read virtualReg230 virtualReg220 0	
+		set virtualReg232 -3
+		op add virtualReg231 virtualReg232 virtualReg230
+		op greaterThanEq virtualReg233 virtualReg229 virtualReg231
+		set virtualReg234 virtualReg233
+		read virtualReg235 virtualReg221 0	
+		jump %8_%28 greaterThanEq virtualReg234 virtualReg235
 		jump %16 always
 	%16:		
-		read virtualReg34 virtualReg18 0	
-		read virtualReg35 virtualReg19 0	
-		op add virtualReg36 virtualReg34 virtualReg35
-		read virtualReg37 virtualReg18 0	
-		jump %22 notEqual virtualReg36 virtualReg37
+		read virtualReg236 virtualReg220 0	
+		read virtualReg237 virtualReg221 0	
+		op add virtualReg238 virtualReg236 virtualReg237
+		read virtualReg239 virtualReg220 0	
+		jump %22 notEqual virtualReg238 virtualReg239
 		jump %16_%26 always
 	%22:		
-		read virtualReg38 virtualReg20 0	
-		set virtualReg40 -1
-		op add virtualReg39 virtualReg40 virtualReg38
-		set virtualReg42 0
-		op notEqual virtualReg41 virtualReg39 virtualReg42
+		read virtualReg240 virtualReg222 0	
+		set virtualReg242 -1
+		op add virtualReg241 virtualReg242 virtualReg240
+		set virtualReg244 0
+		op notEqual virtualReg243 virtualReg241 virtualReg244
 		jump %22_%26 always
 	%26:		
 		jump %26_%28 always
 	%28:		
-		set virtualReg43 virtualReg44
-		write virtualReg43 virtualReg21 0	
-		set virtualReg45 0
-		set a0 virtualReg45
-		set s0 virtualReg4
-		set s1 virtualReg5
-		set s2 virtualReg6
-		set s3 virtualReg7
-		set s4 virtualReg8
-		set s5 virtualReg9
-		set s6 virtualReg10
-		set s7 virtualReg11
-		set s8 virtualReg12
-		set s9 virtualReg13
-		set s10 virtualReg14
-		set s11 virtualReg15
-		set ra virtualReg16
-		op add sp sp 6
+		set virtualReg245 virtualReg246
+		write virtualReg245 virtualReg223 0	
+		set virtualReg247 0
+		set a0 virtualReg247
+		set s0 virtualReg206
+		set s1 virtualReg207
+		set s2 virtualReg208
+		set s3 virtualReg209
+		set s4 virtualReg210
+		set s5 virtualReg211
+		set s6 virtualReg212
+		set s7 virtualReg213
+		set s8 virtualReg214
+		set s9 virtualReg215
+		set s10 virtualReg216
+		set s11 virtualReg217
+		set ra virtualReg218
+		op add sp sp 5
 		set pc ra
 	%16_%26:		
-		set virtualReg47 0
-		set virtualReg46 virtualReg47
+		set virtualReg249 0
+		set virtualReg248 virtualReg249
 		jump %26 always
 	%22_%26:		
-		set virtualReg46 virtualReg41
+		set virtualReg248 virtualReg243
 		jump %26 always
 	%8_%28:		
-		set virtualReg48 1
-		set virtualReg44 virtualReg48
+		set virtualReg250 1
+		set virtualReg246 virtualReg250
 		jump %28 always
 	%26_%28:		
-		set virtualReg44 virtualReg46
+		set virtualReg246 virtualReg248
 		jump %28 always
 @print0:
 print a0 
 set pc ra
 
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
 INFO: K 31
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
 INFO: color func: @main
-Jun 29, 2024 9:54:03 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
 INFO: 
 #@main:	
 	@main0:		
 		set sp 511
 		set ra -2
-		op sub sp sp 6
-		op add t0 sp 1
-		op add t3 sp 2
-		op add t4 sp 3
-		op add t2 sp 4
-		op add t1 sp 5
+		op sub sp sp 5
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t4 sp 2
+		op add t2 sp 3
+		op add t1 sp 4
 		set t5 0
 		write t5 t0 0	
 		set t0 1
@@ -202,7 +1075,7 @@ INFO:
 	%28:		
 		write t0 t1 0	
 		set a0 0
-		op add sp sp 6
+		op add sp sp 5
 		set pc ra
 	%22:		
 		read t2 t2 0	
@@ -214,6 +1087,5796 @@ INFO:
 	%8_%28:		
 		set t0 1
 		jump %28 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Branch_without_loop.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[5, %2:num*]
+		store		[4, %3:num*]
+		store		[-5, %4:num*]
+		br			[IRBlock:%5]
+	%5:		
+		load		[%2:num*]		->%6
+		ic-sgt		[%6:num, 0]		->%7
+		br			[%7:num, IRBlock:%8, IRBlock:%16]
+	%8:		
+		load		[%3:num*]		->%9
+		ic-sgt		[%9:num, 0]		->%10
+		br			[%10:num, IRBlock:%11, IRBlock:%12]
+	%11:		
+		store		[0, %3:num*]
+		br			[IRBlock:%13]
+	%12:		
+		store		[10, %3:num*]
+		br			[IRBlock:%13]
+	%13:		
+		load		[%2:num*]		->%14
+		op-add		[%14:num, -1]		->%15
+		store		[%15:num, %2:num*]
+		br			[IRBlock:%5]
+	%16:		
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg255 s0
+		set virtualReg256 s1
+		set virtualReg257 s2
+		set virtualReg258 s3
+		set virtualReg259 s4
+		set virtualReg260 s5
+		set virtualReg261 s6
+		set virtualReg262 s7
+		set virtualReg263 s8
+		set virtualReg264 s9
+		set virtualReg265 s10
+		set virtualReg266 s11
+		set virtualReg267 ra
+		op add virtualReg268 sp 0
+		op add virtualReg269 sp 1
+		op add virtualReg270 sp 2
+		op add virtualReg271 sp 3
+		set virtualReg272 0
+		write virtualReg272 virtualReg268 0	
+		set virtualReg273 5
+		write virtualReg273 virtualReg269 0	
+		set virtualReg274 4
+		write virtualReg274 virtualReg270 0	
+		set virtualReg275 -5
+		write virtualReg275 virtualReg271 0	
+		jump %5 always
+	%5:		
+		read virtualReg276 virtualReg269 0	
+		set virtualReg277 0
+		jump %8 greaterThan virtualReg276 virtualReg277
+		jump %16 always
+	%8:		
+		read virtualReg278 virtualReg270 0	
+		set virtualReg279 0
+		jump %11 greaterThan virtualReg278 virtualReg279
+		jump %12 always
+	%11:		
+		set virtualReg280 0
+		write virtualReg280 virtualReg270 0	
+		jump %13 always
+	%12:		
+		set virtualReg281 10
+		write virtualReg281 virtualReg270 0	
+		jump %13 always
+	%13:		
+		read virtualReg282 virtualReg269 0	
+		set virtualReg284 -1
+		op add virtualReg283 virtualReg282 virtualReg284
+		write virtualReg283 virtualReg269 0	
+		jump %5 always
+	%16:		
+		set virtualReg285 0
+		set a0 virtualReg285
+		set s0 virtualReg255
+		set s1 virtualReg256
+		set s2 virtualReg257
+		set s3 virtualReg258
+		set s4 virtualReg259
+		set s5 virtualReg260
+		set s6 virtualReg261
+		set s7 virtualReg262
+		set s8 virtualReg263
+		set s9 virtualReg264
+		set s10 virtualReg265
+		set s11 virtualReg266
+		set ra virtualReg267
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		op add t4 sp 0
+		op add t0 sp 1
+		op add t1 sp 2
+		op add t3 sp 3
+		set t2 0
+		write t2 t4 0	
+		set t2 5
+		write t2 t0 0	
+		set t2 4
+		write t2 t1 0	
+		set t2 -5
+		write t2 t3 0	
+	%5:		
+		read t3 t0 0	
+		set t2 0
+		jump %8 greaterThan t3 t2
+	%16:		
+		set a0 0
+		op add sp sp 4
+		set pc ra
+	%8:		
+		read t3 t1 0	
+		set t2 0
+		jump %11 greaterThan t3 t2
+	%12:		
+		set t2 10
+		write t2 t1 0	
+	%13:		
+		read t3 t0 0	
+		set t2 -1
+		op add t2 t3 t2
+		write t2 t0 0	
+		jump %5 always
+	%11:		
+		set t2 0
+		write t2 t1 0	
+		jump %13 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="break_statement.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[1, @a:num*]
+		br			[IRBlock:%2]
+	%2:		
+		load		[@a:num*]		->%3
+		ic-ne		[%3:num, 0]		->%4
+		br			[%4:num, IRBlock:%5, IRBlock:%6]
+	%5:		
+		br			[IRBlock:%6]
+	%6:		
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg286 s0
+		set virtualReg287 s1
+		set virtualReg288 s2
+		set virtualReg289 s3
+		set virtualReg290 s4
+		set virtualReg291 s5
+		set virtualReg292 s6
+		set virtualReg293 s7
+		set virtualReg294 s8
+		set virtualReg295 s9
+		set virtualReg296 s10
+		set virtualReg297 s11
+		set virtualReg298 ra
+		op add virtualReg299 sp 0
+		set virtualReg300 0
+		write virtualReg300 virtualReg299 0	
+		set virtualReg301 1
+		write virtualReg301 zero 0	
+		jump %2 always
+	%2:		
+		read virtualReg302 zero 0	
+		set virtualReg303 0
+		jump %5 notEqual virtualReg302 virtualReg303
+		jump %6 always
+	%5:		
+		jump %6 always
+	%6:		
+		set virtualReg304 0
+		set a0 virtualReg304
+		set s0 virtualReg286
+		set s1 virtualReg287
+		set s2 virtualReg288
+		set s3 virtualReg289
+		set s4 virtualReg290
+		set s5 virtualReg291
+		set s6 virtualReg292
+		set s7 virtualReg293
+		set s8 virtualReg294
+		set s9 virtualReg295
+		set s10 virtualReg296
+		set s11 virtualReg297
+		set ra virtualReg298
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t1 sp 0
+		set t0 0
+		write t0 t1 0	
+		set t0 1
+		write t0 zero 0	
+	%2:		
+		read t1 zero 0	
+		set t0 0
+		jump %6 notEqual t1 t0
+	%6:		
+		set a0 0
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="char.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		store		[101, %2:num*]
+		store		[99, %3:num*]
+		load		[%2:num*]		->%4
+		store		[%4:num, %3:num*]
+		store		[99, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg309 s0
+		set virtualReg310 s1
+		set virtualReg311 s2
+		set virtualReg312 s3
+		set virtualReg313 s4
+		set virtualReg314 s5
+		set virtualReg315 s6
+		set virtualReg316 s7
+		set virtualReg317 s8
+		set virtualReg318 s9
+		set virtualReg319 s10
+		set virtualReg320 s11
+		set virtualReg321 ra
+		op add virtualReg322 sp 0
+		op add virtualReg323 sp 1
+		op add virtualReg324 sp 2
+		set virtualReg325 0
+		write virtualReg325 virtualReg322 0	
+		set virtualReg326 101
+		write virtualReg326 virtualReg323 0	
+		set virtualReg327 99
+		write virtualReg327 virtualReg324 0	
+		read virtualReg328 virtualReg323 0	
+		write virtualReg328 virtualReg324 0	
+		write virtualReg327 virtualReg323 0	
+		set a0 virtualReg325
+		set s0 virtualReg309
+		set s1 virtualReg310
+		set s2 virtualReg311
+		set s3 virtualReg312
+		set s4 virtualReg313
+		set s5 virtualReg314
+		set s6 virtualReg315
+		set s7 virtualReg316
+		set s8 virtualReg317
+		set s9 virtualReg318
+		set s10 virtualReg319
+		set s11 virtualReg320
+		set ra virtualReg321
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t2 sp 2
+		set a0 0
+		write a0 t0 0	
+		set t0 101
+		write t0 t3 0	
+		set t1 99
+		write t1 t2 0	
+		read t0 t3 0	
+		write t0 t2 0	
+		write t1 t3 0	
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Compound_sentence.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		store		[5, %2:num*]
+		store		[4, %3:num*]
+		br			[IRBlock:%4]
+	%4:		
+		load		[%2:num*]		->%5
+		ic-sgt		[%5:num, 0]		->%6
+		br			[%6:num, IRBlock:%7, IRBlock:%32]
+	%7:		
+		load		[%3:num*]		->%8
+		ic-sgt		[%8:num, 0]		->%9
+		br			[%9:num, IRBlock:%10, IRBlock:%13]
+	%10:		
+		load		[%3:num*]		->%11
+		op-add		[%11:num, -1]		->%12
+		store		[%12:num, %3:num*]
+		br			[IRBlock:%16]
+	%13:		
+		load		[%3:num*]		->%14
+		op-add		[%14:num, 1]		->%15
+		store		[%15:num, %3:num*]
+		br			[IRBlock:%16]
+	%16:		
+		load		[%3:num*]		->%17
+		ic-eq		[%17:num, 5]		->%18
+		br			[%18:num, IRBlock:%19, IRBlock:%20]
+	%19:		
+		br			[IRBlock:%4]
+	%20:		
+		load		[%2:num*]		->%21
+		ic-sgt		[%21:num, 0]		->%22
+		br			[%22:num, IRBlock:%23, IRBlock:%24]
+	%23:		
+		br			[IRBlock:%24]
+	%24:		
+		br			[IRBlock:%25]
+	%25:		
+		load		[%3:num*]		->%26
+		ic-sgt		[%26:num, 5]		->%27
+		br			[%27:num, IRBlock:%28, IRBlock:%29]
+	%28:		
+		br			[IRBlock:%29]
+	%29:		
+		load		[%2:num*]		->%30
+		op-add		[%30:num, -1]		->%31
+		store		[%31:num, %2:num*]
+		br			[IRBlock:%4]
+	%32:		
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg333 s0
+		set virtualReg334 s1
+		set virtualReg335 s2
+		set virtualReg336 s3
+		set virtualReg337 s4
+		set virtualReg338 s5
+		set virtualReg339 s6
+		set virtualReg340 s7
+		set virtualReg341 s8
+		set virtualReg342 s9
+		set virtualReg343 s10
+		set virtualReg344 s11
+		set virtualReg345 ra
+		op add virtualReg346 sp 0
+		op add virtualReg347 sp 1
+		op add virtualReg348 sp 2
+		set virtualReg349 0
+		write virtualReg349 virtualReg346 0	
+		set virtualReg350 5
+		write virtualReg350 virtualReg347 0	
+		set virtualReg351 4
+		write virtualReg351 virtualReg348 0	
+		jump %4 always
+	%4:		
+		read virtualReg352 virtualReg347 0	
+		set virtualReg353 0
+		jump %7 greaterThan virtualReg352 virtualReg353
+		jump %32 always
+	%7:		
+		read virtualReg354 virtualReg348 0	
+		set virtualReg355 0
+		jump %10 greaterThan virtualReg354 virtualReg355
+		jump %13 always
+	%10:		
+		read virtualReg356 virtualReg348 0	
+		set virtualReg358 -1
+		op add virtualReg357 virtualReg356 virtualReg358
+		write virtualReg357 virtualReg348 0	
+		jump %16 always
+	%13:		
+		read virtualReg359 virtualReg348 0	
+		set virtualReg361 1
+		op add virtualReg360 virtualReg359 virtualReg361
+		write virtualReg360 virtualReg348 0	
+		jump %16 always
+	%16:		
+		read virtualReg362 virtualReg348 0	
+		set virtualReg363 5
+		jump %19 equal virtualReg362 virtualReg363
+		jump %20 always
+	%19:		
+		jump %4 always
+	%20:		
+		read virtualReg364 virtualReg347 0	
+		set virtualReg365 0
+		jump %23 greaterThan virtualReg364 virtualReg365
+		jump %24 always
+	%23:		
+		jump %24 always
+	%24:		
+		jump %25 always
+	%25:		
+		read virtualReg366 virtualReg348 0	
+		set virtualReg367 5
+		jump %28 greaterThan virtualReg366 virtualReg367
+		jump %29 always
+	%28:		
+		jump %29 always
+	%29:		
+		read virtualReg368 virtualReg347 0	
+		set virtualReg370 -1
+		op add virtualReg369 virtualReg368 virtualReg370
+		write virtualReg369 virtualReg347 0	
+		jump %4 always
+	%32:		
+		set virtualReg371 0
+		set a0 virtualReg371
+		set s0 virtualReg333
+		set s1 virtualReg334
+		set s2 virtualReg335
+		set s3 virtualReg336
+		set s4 virtualReg337
+		set s5 virtualReg338
+		set s6 virtualReg339
+		set s7 virtualReg340
+		set s8 virtualReg341
+		set s9 virtualReg342
+		set s10 virtualReg343
+		set s11 virtualReg344
+		set ra virtualReg345
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t3 sp 0
+		op add t0 sp 1
+		op add t1 sp 2
+		set t2 0
+		write t2 t3 0	
+		set t2 5
+		write t2 t0 0	
+		set t2 4
+		write t2 t1 0	
+	%4:		
+		read t3 t0 0	
+		set t2 0
+		jump %7 greaterThan t3 t2
+	%32:		
+		set a0 0
+		op add sp sp 3
+		set pc ra
+	%7:		
+		read t3 t1 0	
+		set t2 0
+		jump %10 greaterThan t3 t2
+	%13:		
+		read t3 t1 0	
+		set t2 1
+		op add t2 t3 t2
+		write t2 t1 0	
+	%16:		
+		read t3 t1 0	
+		set t2 5
+		jump %4 equal t3 t2
+	%20:		
+		read t3 t0 0	
+		set t2 0
+		jump %25 greaterThan t3 t2
+	%25:		
+		read t3 t1 0	
+		set t2 5
+		jump %29 greaterThan t3 t2
+	%29:		
+		read t3 t0 0	
+		set t2 -1
+		op add t2 t3 t2
+		write t2 t0 0	
+		jump %4 always
+	%10:		
+		read t3 t1 0	
+		set t2 -1
+		op add t2 t3 t2
+		write t2 t1 0	
+		jump %16 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="continue_statement.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[2, @a:num*]
+		br			[IRBlock:%2]
+	%2:		
+		load		[@a:num*]		->%3
+		ic-ne		[%3:num, 0]		->%4
+		br			[%4:num, IRBlock:%5, IRBlock:%8]
+	%5:		
+		load		[@a:num*]		->%6
+		op-add		[%6:num, -1]		->%7
+		store		[%7:num, @a:num*]
+		br			[IRBlock:%2]
+	%8:		
+		load		[@a:num*]		->%9
+		ret			[%9:num]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg372 s0
+		set virtualReg373 s1
+		set virtualReg374 s2
+		set virtualReg375 s3
+		set virtualReg376 s4
+		set virtualReg377 s5
+		set virtualReg378 s6
+		set virtualReg379 s7
+		set virtualReg380 s8
+		set virtualReg381 s9
+		set virtualReg382 s10
+		set virtualReg383 s11
+		set virtualReg384 ra
+		op add virtualReg385 sp 0
+		set virtualReg386 0
+		write virtualReg386 virtualReg385 0	
+		set virtualReg387 2
+		write virtualReg387 zero 0	
+		jump %2 always
+	%2:		
+		read virtualReg388 zero 0	
+		set virtualReg389 0
+		jump %5 notEqual virtualReg388 virtualReg389
+		jump %8 always
+	%5:		
+		read virtualReg390 zero 0	
+		set virtualReg392 -1
+		op add virtualReg391 virtualReg390 virtualReg392
+		write virtualReg391 zero 0	
+		jump %2 always
+	%8:		
+		read virtualReg393 zero 0	
+		set a0 virtualReg393
+		set s0 virtualReg372
+		set s1 virtualReg373
+		set s2 virtualReg374
+		set s3 virtualReg375
+		set s4 virtualReg376
+		set s5 virtualReg377
+		set s6 virtualReg378
+		set s7 virtualReg379
+		set s8 virtualReg380
+		set s9 virtualReg381
+		set s10 virtualReg382
+		set s11 virtualReg383
+		set ra virtualReg384
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t1 sp 0
+		set t0 0
+		write t0 t1 0	
+		set t0 2
+		write t0 zero 0	
+	%2:		
+		read t1 zero 0	
+		set t0 0
+		jump %5 notEqual t1 t0
+	%8:		
+		read a0 zero 0	
+		op add sp sp 1
+		set pc ra
+	%5:		
+		read t1 zero 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 zero 0	
+		jump %2 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="double.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1.2, %2:num*]
+		store		[2.4, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		op-add		[%5:num, %6:num]		->%7
+		store		[%7:num, %4:num*]
+		load		[%4:num*]		->%8
+		cast		[%8:num]		->%9
+		ret			[%9:num]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg398 s0
+		set virtualReg399 s1
+		set virtualReg400 s2
+		set virtualReg401 s3
+		set virtualReg402 s4
+		set virtualReg403 s5
+		set virtualReg404 s6
+		set virtualReg405 s7
+		set virtualReg406 s8
+		set virtualReg407 s9
+		set virtualReg408 s10
+		set virtualReg409 s11
+		set virtualReg410 ra
+		op add virtualReg411 sp 0
+		op add virtualReg412 sp 1
+		op add virtualReg413 sp 2
+		op add virtualReg414 sp 3
+		set virtualReg415 0
+		write virtualReg415 virtualReg411 0	
+		set virtualReg416 1.2
+		write virtualReg416 virtualReg412 0	
+		set virtualReg417 2.4
+		write virtualReg417 virtualReg413 0	
+		read virtualReg418 virtualReg412 0	
+		read virtualReg419 virtualReg413 0	
+		op add virtualReg420 virtualReg418 virtualReg419
+		write virtualReg420 virtualReg414 0	
+		read virtualReg421 virtualReg414 0	
+		set virtualReg422 virtualReg421
+		set a0 virtualReg422
+		set s0 virtualReg398
+		set s1 virtualReg399
+		set s2 virtualReg400
+		set s3 virtualReg401
+		set s4 virtualReg402
+		set s5 virtualReg403
+		set s6 virtualReg404
+		set s7 virtualReg405
+		set s8 virtualReg406
+		set s9 virtualReg407
+		set s10 virtualReg408
+		set s11 virtualReg409
+		set ra virtualReg410
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		op add t4 sp 0
+		op add t1 sp 1
+		op add t3 sp 2
+		op add t2 sp 3
+		set t0 0
+		write t0 t4 0	
+		set t0 1.2
+		write t0 t1 0	
+		set t0 2.4
+		write t0 t3 0	
+		read t1 t1 0	
+		op add t0 t1 t0
+		write t0 t2 0	
+		set a0 t0
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Empty_statement.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		store		[0, %1:num*]
+		store		[5, %2:num*]
+		br			[IRBlock:%3]
+	%3:		
+		load		[%2:num*]		->%4
+		op-add		[%4:num, -1]		->%5
+		store		[%5:num, %2:num*]
+		ic-ne		[%4:num, 0]		->%6
+		br			[%6:num, IRBlock:%7, IRBlock:%8]
+	%7:		
+		br			[IRBlock:%3]
+	%8:		
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		set virtualReg427 s0
+		set virtualReg428 s1
+		set virtualReg429 s2
+		set virtualReg430 s3
+		set virtualReg431 s4
+		set virtualReg432 s5
+		set virtualReg433 s6
+		set virtualReg434 s7
+		set virtualReg435 s8
+		set virtualReg436 s9
+		set virtualReg437 s10
+		set virtualReg438 s11
+		set virtualReg439 ra
+		op add virtualReg440 sp 0
+		op add virtualReg441 sp 1
+		set virtualReg442 0
+		write virtualReg442 virtualReg440 0	
+		set virtualReg443 5
+		write virtualReg443 virtualReg441 0	
+		jump %3 always
+	%3:		
+		read virtualReg444 virtualReg441 0	
+		set virtualReg446 -1
+		op add virtualReg445 virtualReg444 virtualReg446
+		write virtualReg445 virtualReg441 0	
+		set virtualReg447 0
+		jump %7 notEqual virtualReg444 virtualReg447
+		jump %8 always
+	%7:		
+		jump %3 always
+	%8:		
+		set virtualReg448 0
+		set a0 virtualReg448
+		set s0 virtualReg427
+		set s1 virtualReg428
+		set s2 virtualReg429
+		set s3 virtualReg430
+		set s4 virtualReg431
+		set s5 virtualReg432
+		set s6 virtualReg433
+		set s7 virtualReg434
+		set s8 virtualReg435
+		set s9 virtualReg436
+		set s10 virtualReg437
+		set s11 virtualReg438
+		set ra virtualReg439
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		op add t1 sp 0
+		op add t2 sp 1
+		set t0 0
+		write t0 t1 0	
+		set t0 5
+		write t0 t2 0	
+	%3:		
+		read t1 t2 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 t2 0	
+		set t0 0
+		jump %3 notEqual t1 t0
+	%8:		
+		set a0 0
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="float.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1.2000000476837158, %2:num*]
+		store		[2.4000000953674316, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		op-add		[%5:num, %6:num]		->%7
+		store		[%7:num, %4:num*]
+		load		[%4:num*]		->%8
+		cast		[%8:num]		->%9
+		ret			[%9:num]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg453 s0
+		set virtualReg454 s1
+		set virtualReg455 s2
+		set virtualReg456 s3
+		set virtualReg457 s4
+		set virtualReg458 s5
+		set virtualReg459 s6
+		set virtualReg460 s7
+		set virtualReg461 s8
+		set virtualReg462 s9
+		set virtualReg463 s10
+		set virtualReg464 s11
+		set virtualReg465 ra
+		op add virtualReg466 sp 0
+		op add virtualReg467 sp 1
+		op add virtualReg468 sp 2
+		op add virtualReg469 sp 3
+		set virtualReg470 0
+		write virtualReg470 virtualReg466 0	
+		set virtualReg471 1.2000000476837158
+		write virtualReg471 virtualReg467 0	
+		set virtualReg472 2.4000000953674316
+		write virtualReg472 virtualReg468 0	
+		read virtualReg473 virtualReg467 0	
+		read virtualReg474 virtualReg468 0	
+		op add virtualReg475 virtualReg473 virtualReg474
+		write virtualReg475 virtualReg469 0	
+		read virtualReg476 virtualReg469 0	
+		set virtualReg477 virtualReg476
+		set a0 virtualReg477
+		set s0 virtualReg453
+		set s1 virtualReg454
+		set s2 virtualReg455
+		set s3 virtualReg456
+		set s4 virtualReg457
+		set s5 virtualReg458
+		set s6 virtualReg459
+		set s7 virtualReg460
+		set s8 virtualReg461
+		set s9 virtualReg462
+		set s10 virtualReg463
+		set s11 virtualReg464
+		set ra virtualReg465
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		op add t4 sp 0
+		op add t1 sp 1
+		op add t3 sp 2
+		op add t2 sp 3
+		set t0 0
+		write t0 t4 0	
+		set t0 1.2000000476837158
+		write t0 t1 0	
+		set t0 2.4000000953674316
+		write t0 t3 0	
+		read t1 t1 0	
+		op add t0 t1 t0
+		write t0 t2 0	
+		set a0 t0
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Function_declaration.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg482 s0
+		set virtualReg483 s1
+		set virtualReg484 s2
+		set virtualReg485 s3
+		set virtualReg486 s4
+		set virtualReg487 s5
+		set virtualReg488 s6
+		set virtualReg489 s7
+		set virtualReg490 s8
+		set virtualReg491 s9
+		set virtualReg492 s10
+		set virtualReg493 s11
+		set virtualReg494 ra
+		op add virtualReg495 sp 0
+		op add virtualReg496 sp 1
+		op add virtualReg497 sp 2
+		set virtualReg498 0
+		write virtualReg498 virtualReg495 0	
+		set virtualReg499 1
+		write virtualReg499 virtualReg496 0	
+		set virtualReg500 2
+		write virtualReg500 virtualReg497 0	
+		set a0 virtualReg498
+		set s0 virtualReg482
+		set s1 virtualReg483
+		set s2 virtualReg484
+		set s3 virtualReg485
+		set s4 virtualReg486
+		set s5 virtualReg487
+		set s6 virtualReg488
+		set s7 virtualReg489
+		set s8 virtualReg490
+		set s9 virtualReg491
+		set s10 virtualReg492
+		set s11 virtualReg493
+		set ra virtualReg494
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		set a0 0
+		write a0 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Function_definition.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:num	%1:num	->num
+	@add0:		
+		op-add		[%1:num, %0:num]		->%3
+		ret			[%3:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		call		[@add:num, %5:num, %6:num]		->%7
+		store		[%7:num, %4:num*]
+		load		[%4:num*]		->%8
+		ret			[%8:num]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg521 s0
+		set virtualReg522 s1
+		set virtualReg523 s2
+		set virtualReg524 s3
+		set virtualReg525 s4
+		set virtualReg526 s5
+		set virtualReg527 s6
+		set virtualReg528 s7
+		set virtualReg529 s8
+		set virtualReg530 s9
+		set virtualReg531 s10
+		set virtualReg532 s11
+		set virtualReg533 ra
+		op add virtualReg534 sp 0
+		op add virtualReg535 sp 1
+		op add virtualReg536 sp 2
+		op add virtualReg537 sp 3
+		set virtualReg538 0
+		write virtualReg538 virtualReg534 0	
+		set virtualReg539 1
+		write virtualReg539 virtualReg535 0	
+		set virtualReg540 2
+		write virtualReg540 virtualReg536 0	
+		read virtualReg541 virtualReg535 0	
+		read virtualReg542 virtualReg536 0	
+		set a0 virtualReg541
+		set a1 virtualReg542
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg543 a0
+		write virtualReg543 virtualReg537 0	
+		read virtualReg544 virtualReg537 0	
+		set a0 virtualReg544
+		set s0 virtualReg521
+		set s1 virtualReg522
+		set s2 virtualReg523
+		set s3 virtualReg524
+		set s4 virtualReg525
+		set s5 virtualReg526
+		set s6 virtualReg527
+		set s7 virtualReg528
+		set s8 virtualReg529
+		set s9 virtualReg530
+		set s10 virtualReg531
+		set s11 virtualReg532
+		set ra virtualReg533
+		op add sp sp 4
+		set pc ra
+#@add:	virtualReg505	virtualReg506	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg507 s0
+		set virtualReg508 s1
+		set virtualReg509 s2
+		set virtualReg510 s3
+		set virtualReg511 s4
+		set virtualReg512 s5
+		set virtualReg513 s6
+		set virtualReg514 s7
+		set virtualReg515 s8
+		set virtualReg516 s9
+		set virtualReg517 s10
+		set virtualReg518 s11
+		set virtualReg519 ra
+		set virtualReg505 a0
+		set virtualReg506 a1
+		op add virtualReg520 virtualReg506 virtualReg505
+		set a0 virtualReg520
+		set s0 virtualReg507
+		set s1 virtualReg508
+		set s2 virtualReg509
+		set s3 virtualReg510
+		set s4 virtualReg511
+		set s5 virtualReg512
+		set s6 virtualReg513
+		set s7 virtualReg514
+		set s8 virtualReg515
+		set s9 virtualReg516
+		set s10 virtualReg517
+		set s11 virtualReg518
+		set ra virtualReg519
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 6
+		write s0 sp 4	
+		write ra sp 5	
+		op add t3 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set t0 0
+		write t0 t3 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		read a0 t2 0	
+		set a1 t0
+		op add ra pc 1
+		jump @add0 always
+		write a0 s0 0	
+		read s0 sp 4	
+		read ra sp 5	
+		op add sp sp 6
+		set pc ra
+#@add:	a0	a1	
+	@add0:		
+		op add a0 a1 a0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Function_return_value.c"
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:num	%1:num	->num
+	@add0:		
+		op-add		[%1:num, %0:num]		->%3
+		ret			[%3:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		call		[@add:num, %5:num, %6:num]		->%7
+		store		[%7:num, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:04 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg565 s0
+		set virtualReg566 s1
+		set virtualReg567 s2
+		set virtualReg568 s3
+		set virtualReg569 s4
+		set virtualReg570 s5
+		set virtualReg571 s6
+		set virtualReg572 s7
+		set virtualReg573 s8
+		set virtualReg574 s9
+		set virtualReg575 s10
+		set virtualReg576 s11
+		set virtualReg577 ra
+		op add virtualReg578 sp 0
+		op add virtualReg579 sp 1
+		op add virtualReg580 sp 2
+		op add virtualReg581 sp 3
+		set virtualReg582 0
+		write virtualReg582 virtualReg578 0	
+		set virtualReg583 1
+		write virtualReg583 virtualReg579 0	
+		set virtualReg584 2
+		write virtualReg584 virtualReg580 0	
+		read virtualReg585 virtualReg579 0	
+		read virtualReg586 virtualReg580 0	
+		set a0 virtualReg585
+		set a1 virtualReg586
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg587 a0
+		write virtualReg587 virtualReg581 0	
+		set a0 virtualReg582
+		set s0 virtualReg565
+		set s1 virtualReg566
+		set s2 virtualReg567
+		set s3 virtualReg568
+		set s4 virtualReg569
+		set s5 virtualReg570
+		set s6 virtualReg571
+		set s7 virtualReg572
+		set s8 virtualReg573
+		set s9 virtualReg574
+		set s10 virtualReg575
+		set s11 virtualReg576
+		set ra virtualReg577
+		op add sp sp 4
+		set pc ra
+#@add:	virtualReg549	virtualReg550	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg551 s0
+		set virtualReg552 s1
+		set virtualReg553 s2
+		set virtualReg554 s3
+		set virtualReg555 s4
+		set virtualReg556 s5
+		set virtualReg557 s6
+		set virtualReg558 s7
+		set virtualReg559 s8
+		set virtualReg560 s9
+		set virtualReg561 s10
+		set virtualReg562 s11
+		set virtualReg563 ra
+		set virtualReg549 a0
+		set virtualReg550 a1
+		op add virtualReg564 virtualReg550 virtualReg549
+		set a0 virtualReg564
+		set s0 virtualReg551
+		set s1 virtualReg552
+		set s2 virtualReg553
+		set s3 virtualReg554
+		set s4 virtualReg555
+		set s5 virtualReg556
+		set s6 virtualReg557
+		set s7 virtualReg558
+		set s8 virtualReg559
+		set s9 virtualReg560
+		set s10 virtualReg561
+		set s11 virtualReg562
+		set ra virtualReg563
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		read a0 t2 0	
+		set a1 t0
+		op add ra pc 1
+		jump @add0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@add:	a0	a1	
+	@add0:		
+		op add a0 a1 a0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="hanshucanshu_erweishuzu.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@head:%0:void*	->num
+	@head0:		
+		load		[%0:void*]		->%2
+		ret			[%2:void]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[2 x [2 x num]]*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[2 x [2 x num]]*, 0, 0]		->%4
+		gep			[%4:[2 x num]*, 0, 0]		->%5
+		store		[1, %5:num*]
+		gep			[%2:[2 x [2 x num]]*, 0, 0]		->%6
+		gep			[%6:[2 x num]*, 0, 1]		->%7
+		store		[2, %7:num*]
+		gep			[%2:[2 x [2 x num]]*, 0, 0]		->%8
+		call		[@head:num, %8:[2 x num]*]		->%9
+		store		[%9:num, %3:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 6
+		set virtualReg607 s0
+		set virtualReg608 s1
+		set virtualReg609 s2
+		set virtualReg610 s3
+		set virtualReg611 s4
+		set virtualReg612 s5
+		set virtualReg613 s6
+		set virtualReg614 s7
+		set virtualReg615 s8
+		set virtualReg616 s9
+		set virtualReg617 s10
+		set virtualReg618 s11
+		set virtualReg619 ra
+		op add virtualReg620 sp 0
+		op add virtualReg621 sp 1
+		op add virtualReg622 sp 5
+		set virtualReg623 0
+		write virtualReg623 virtualReg620 0	
+		set virtualReg624 0
+		set virtualReg626 2
+		op mul virtualReg625 virtualReg623 virtualReg626
+		op add virtualReg624 virtualReg624 virtualReg625
+		set virtualReg627 1
+		op mul virtualReg625 virtualReg623 virtualReg627
+		op add virtualReg624 virtualReg624 virtualReg625
+		op add virtualReg624 virtualReg624 virtualReg621
+		set virtualReg628 0
+		op mul virtualReg629 virtualReg623 virtualReg627
+		op add virtualReg628 virtualReg628 virtualReg629
+		op add virtualReg628 virtualReg628 virtualReg623
+		op add virtualReg628 virtualReg628 virtualReg624
+		write virtualReg627 virtualReg628 0	
+		set virtualReg630 0
+		op mul virtualReg631 virtualReg623 virtualReg626
+		op add virtualReg630 virtualReg630 virtualReg631
+		op mul virtualReg631 virtualReg623 virtualReg627
+		op add virtualReg630 virtualReg630 virtualReg631
+		op add virtualReg630 virtualReg630 virtualReg621
+		set virtualReg632 0
+		op mul virtualReg633 virtualReg623 virtualReg627
+		op add virtualReg632 virtualReg632 virtualReg633
+		op add virtualReg632 virtualReg632 virtualReg627
+		op add virtualReg632 virtualReg632 virtualReg630
+		write virtualReg626 virtualReg632 0	
+		set virtualReg634 0
+		op mul virtualReg635 virtualReg623 virtualReg626
+		op add virtualReg634 virtualReg634 virtualReg635
+		op mul virtualReg635 virtualReg623 virtualReg627
+		op add virtualReg634 virtualReg634 virtualReg635
+		op add virtualReg634 virtualReg634 virtualReg621
+		set a0 virtualReg634
+		op add ra pc 1
+		jump @head0 always
+		set virtualReg636 a0
+		write virtualReg636 virtualReg622 0	
+		set a0 virtualReg623
+		set s0 virtualReg607
+		set s1 virtualReg608
+		set s2 virtualReg609
+		set s3 virtualReg610
+		set s4 virtualReg611
+		set s5 virtualReg612
+		set s6 virtualReg613
+		set s7 virtualReg614
+		set s8 virtualReg615
+		set s9 virtualReg616
+		set s10 virtualReg617
+		set s11 virtualReg618
+		set ra virtualReg619
+		op add sp sp 6
+		set pc ra
+#@head:	virtualReg592	
+	@head0:		
+		op sub sp sp 0
+		set virtualReg593 s0
+		set virtualReg594 s1
+		set virtualReg595 s2
+		set virtualReg596 s3
+		set virtualReg597 s4
+		set virtualReg598 s5
+		set virtualReg599 s6
+		set virtualReg600 s7
+		set virtualReg601 s8
+		set virtualReg602 s9
+		set virtualReg603 s10
+		set virtualReg604 s11
+		set virtualReg605 ra
+		set virtualReg592 a0
+		read virtualReg606 virtualReg592 0	
+		set a0 virtualReg606
+		set s0 virtualReg593
+		set s1 virtualReg594
+		set s2 virtualReg595
+		set s3 virtualReg596
+		set s4 virtualReg597
+		set s5 virtualReg598
+		set s6 virtualReg599
+		set s7 virtualReg600
+		set s8 virtualReg601
+		set s9 virtualReg602
+		set s10 virtualReg603
+		set s11 virtualReg604
+		set ra virtualReg605
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @head
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 9
+		write s0 sp 7	
+		write s1 sp 6	
+		write ra sp 8	
+		op add t0 sp 0
+		op add t5 sp 1
+		op add s0 sp 5
+		set s1 0
+		write s1 t0 0	
+		set t2 0
+		set t4 2
+		op mul t0 s1 t4
+		op add t2 t2 t0
+		set t3 1
+		op mul t0 s1 t3
+		op add t2 t2 t0
+		op add t2 t2 t5
+		set t1 0
+		op mul t0 s1 t3
+		op add t1 t1 t0
+		op add t1 t1 s1
+		op add t1 t1 t2
+		write t3 t1 0	
+		set t2 0
+		op mul t0 s1 t4
+		op add t2 t2 t0
+		op mul t0 s1 t3
+		op add t2 t2 t0
+		op add t2 t2 t5
+		set t1 0
+		op mul t0 s1 t3
+		op add t1 t1 t0
+		op add t1 t1 t3
+		op add t1 t1 t2
+		write t4 t1 0	
+		set a0 0
+		op mul t0 s1 t4
+		op add a0 a0 t0
+		op mul t0 s1 t3
+		op add a0 a0 t0
+		op add a0 a0 t5
+		op add ra pc 1
+		jump @head0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 7	
+		read s1 sp 6	
+		read ra sp 8	
+		op add sp sp 9
+		set pc ra
+#@head:	a0	
+	@head0:		
+		read a0 a0 0	
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="hanshucanshu_sanweishuzu.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@head:%0:void*	->num
+	@head0:		
+		load		[%0:void*]		->%2
+		ret			[%2:void]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[2 x [2 x [2 x num]]]*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[2 x [2 x [2 x num]]]*, 0, 0]		->%4
+		gep			[%4:[2 x [2 x num]]*, 0, 0]		->%5
+		gep			[%5:[2 x num]*, 0, 0]		->%6
+		store		[1, %6:num*]
+		gep			[%2:[2 x [2 x [2 x num]]]*, 0, 0]		->%7
+		gep			[%7:[2 x [2 x num]]*, 0, 0]		->%8
+		gep			[%8:[2 x num]*, 0, 1]		->%9
+		store		[2, %9:num*]
+		gep			[%2:[2 x [2 x [2 x num]]]*, 0, 0]		->%10
+		call		[@head:num, %10:[2 x [2 x num]]*]		->%11
+		store		[%11:num, %3:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 10
+		set virtualReg656 s0
+		set virtualReg657 s1
+		set virtualReg658 s2
+		set virtualReg659 s3
+		set virtualReg660 s4
+		set virtualReg661 s5
+		set virtualReg662 s6
+		set virtualReg663 s7
+		set virtualReg664 s8
+		set virtualReg665 s9
+		set virtualReg666 s10
+		set virtualReg667 s11
+		set virtualReg668 ra
+		op add virtualReg669 sp 0
+		op add virtualReg670 sp 1
+		op add virtualReg671 sp 9
+		set virtualReg672 0
+		write virtualReg672 virtualReg669 0	
+		set virtualReg673 0
+		set virtualReg675 4
+		op mul virtualReg674 virtualReg672 virtualReg675
+		op add virtualReg673 virtualReg673 virtualReg674
+		set virtualReg676 2
+		op mul virtualReg674 virtualReg672 virtualReg676
+		op add virtualReg673 virtualReg673 virtualReg674
+		op add virtualReg673 virtualReg673 virtualReg670
+		set virtualReg677 0
+		op mul virtualReg678 virtualReg672 virtualReg676
+		op add virtualReg677 virtualReg677 virtualReg678
+		set virtualReg679 1
+		op mul virtualReg678 virtualReg672 virtualReg679
+		op add virtualReg677 virtualReg677 virtualReg678
+		op add virtualReg677 virtualReg677 virtualReg673
+		set virtualReg680 0
+		op mul virtualReg681 virtualReg672 virtualReg679
+		op add virtualReg680 virtualReg680 virtualReg681
+		op add virtualReg680 virtualReg680 virtualReg672
+		op add virtualReg680 virtualReg680 virtualReg677
+		write virtualReg679 virtualReg680 0	
+		set virtualReg682 0
+		op mul virtualReg683 virtualReg672 virtualReg675
+		op add virtualReg682 virtualReg682 virtualReg683
+		op mul virtualReg683 virtualReg672 virtualReg676
+		op add virtualReg682 virtualReg682 virtualReg683
+		op add virtualReg682 virtualReg682 virtualReg670
+		set virtualReg684 0
+		op mul virtualReg685 virtualReg672 virtualReg676
+		op add virtualReg684 virtualReg684 virtualReg685
+		op mul virtualReg685 virtualReg672 virtualReg679
+		op add virtualReg684 virtualReg684 virtualReg685
+		op add virtualReg684 virtualReg684 virtualReg682
+		set virtualReg686 0
+		op mul virtualReg687 virtualReg672 virtualReg679
+		op add virtualReg686 virtualReg686 virtualReg687
+		op add virtualReg686 virtualReg686 virtualReg679
+		op add virtualReg686 virtualReg686 virtualReg684
+		write virtualReg676 virtualReg686 0	
+		set virtualReg688 0
+		op mul virtualReg689 virtualReg672 virtualReg675
+		op add virtualReg688 virtualReg688 virtualReg689
+		op mul virtualReg689 virtualReg672 virtualReg676
+		op add virtualReg688 virtualReg688 virtualReg689
+		op add virtualReg688 virtualReg688 virtualReg670
+		set a0 virtualReg688
+		op add ra pc 1
+		jump @head0 always
+		set virtualReg690 a0
+		write virtualReg690 virtualReg671 0	
+		set a0 virtualReg672
+		set s0 virtualReg656
+		set s1 virtualReg657
+		set s2 virtualReg658
+		set s3 virtualReg659
+		set s4 virtualReg660
+		set s5 virtualReg661
+		set s6 virtualReg662
+		set s7 virtualReg663
+		set s8 virtualReg664
+		set s9 virtualReg665
+		set s10 virtualReg666
+		set s11 virtualReg667
+		set ra virtualReg668
+		op add sp sp 10
+		set pc ra
+#@head:	virtualReg641	
+	@head0:		
+		op sub sp sp 0
+		set virtualReg642 s0
+		set virtualReg643 s1
+		set virtualReg644 s2
+		set virtualReg645 s3
+		set virtualReg646 s4
+		set virtualReg647 s5
+		set virtualReg648 s6
+		set virtualReg649 s7
+		set virtualReg650 s8
+		set virtualReg651 s9
+		set virtualReg652 s10
+		set virtualReg653 s11
+		set virtualReg654 ra
+		set virtualReg641 a0
+		read virtualReg655 virtualReg641 0	
+		set a0 virtualReg655
+		set s0 virtualReg642
+		set s1 virtualReg643
+		set s2 virtualReg644
+		set s3 virtualReg645
+		set s4 virtualReg646
+		set s5 virtualReg647
+		set s6 virtualReg648
+		set s7 virtualReg649
+		set s8 virtualReg650
+		set s9 virtualReg651
+		set s10 virtualReg652
+		set s11 virtualReg653
+		set ra virtualReg654
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @head
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 13
+		write s0 sp 11	
+		write s1 sp 10	
+		write ra sp 12	
+		op add t1 sp 0
+		op add t0 sp 1
+		op add s0 sp 9
+		set s1 0
+		write s1 t1 0	
+		set t4 0
+		set t2 4
+		op mul t3 s1 t2
+		op add t4 t4 t3
+		set t1 2
+		op mul t3 s1 t1
+		op add t4 t4 t3
+		op add t4 t4 t0
+		set t5 0
+		op mul t3 s1 t1
+		op add t5 t5 t3
+		set t6 1
+		op mul t3 s1 t6
+		op add t5 t5 t3
+		op add t5 t5 t4
+		set t4 0
+		op mul t3 s1 t6
+		op add t4 t4 t3
+		op add t4 t4 s1
+		op add t4 t4 t5
+		write t6 t4 0	
+		set t4 0
+		op mul t3 s1 t2
+		op add t4 t4 t3
+		op mul t3 s1 t1
+		op add t4 t4 t3
+		op add t4 t4 t0
+		set t5 0
+		op mul t3 s1 t1
+		op add t5 t5 t3
+		op mul t3 s1 t6
+		op add t5 t5 t3
+		op add t5 t5 t4
+		set t4 0
+		op mul t3 s1 t6
+		op add t4 t4 t3
+		op add t4 t4 t6
+		op add t4 t4 t5
+		write t1 t4 0	
+		set a0 0
+		op mul t2 s1 t2
+		op add a0 a0 t2
+		op mul t2 s1 t1
+		op add a0 a0 t2
+		op add a0 a0 t0
+		op add ra pc 1
+		jump @head0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 11	
+		read s1 sp 10	
+		read ra sp 12	
+		op add sp sp 13
+		set pc ra
+#@head:	a0	
+	@head0:		
+		read a0 a0 0	
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="hanshucanshu_yiweishuzu.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@head:%0:void*	->num
+	@head0:		
+		load		[%0:void*]		->%2
+		ret			[%2:void]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[2 x num]*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[2 x num]*, 0, 0]		->%4
+		store		[1, %4:num*]
+		gep			[%2:[2 x num]*, 0, 1]		->%5
+		store		[2, %5:num*]
+		gep			[%2:[2 x num]*, 0, 0]		->%6
+		call		[@head:num, %6:num*]		->%7
+		store		[%7:num, %3:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg710 s0
+		set virtualReg711 s1
+		set virtualReg712 s2
+		set virtualReg713 s3
+		set virtualReg714 s4
+		set virtualReg715 s5
+		set virtualReg716 s6
+		set virtualReg717 s7
+		set virtualReg718 s8
+		set virtualReg719 s9
+		set virtualReg720 s10
+		set virtualReg721 s11
+		set virtualReg722 ra
+		op add virtualReg723 sp 0
+		op add virtualReg724 sp 1
+		op add virtualReg725 sp 3
+		set virtualReg726 0
+		write virtualReg726 virtualReg723 0	
+		set virtualReg727 0
+		set virtualReg729 1
+		op mul virtualReg728 virtualReg726 virtualReg729
+		op add virtualReg727 virtualReg727 virtualReg728
+		op add virtualReg727 virtualReg727 virtualReg726
+		op add virtualReg727 virtualReg727 virtualReg724
+		write virtualReg729 virtualReg727 0	
+		set virtualReg730 0
+		op mul virtualReg731 virtualReg726 virtualReg729
+		op add virtualReg730 virtualReg730 virtualReg731
+		op add virtualReg730 virtualReg730 virtualReg729
+		op add virtualReg730 virtualReg730 virtualReg724
+		set virtualReg732 2
+		write virtualReg732 virtualReg730 0	
+		set virtualReg733 0
+		op mul virtualReg734 virtualReg726 virtualReg729
+		op add virtualReg733 virtualReg733 virtualReg734
+		op add virtualReg733 virtualReg733 virtualReg726
+		op add virtualReg733 virtualReg733 virtualReg724
+		set a0 virtualReg733
+		op add ra pc 1
+		jump @head0 always
+		set virtualReg735 a0
+		write virtualReg735 virtualReg725 0	
+		set a0 virtualReg726
+		set s0 virtualReg710
+		set s1 virtualReg711
+		set s2 virtualReg712
+		set s3 virtualReg713
+		set s4 virtualReg714
+		set s5 virtualReg715
+		set s6 virtualReg716
+		set s7 virtualReg717
+		set s8 virtualReg718
+		set s9 virtualReg719
+		set s10 virtualReg720
+		set s11 virtualReg721
+		set ra virtualReg722
+		op add sp sp 4
+		set pc ra
+#@head:	virtualReg695	
+	@head0:		
+		op sub sp sp 0
+		set virtualReg696 s0
+		set virtualReg697 s1
+		set virtualReg698 s2
+		set virtualReg699 s3
+		set virtualReg700 s4
+		set virtualReg701 s5
+		set virtualReg702 s6
+		set virtualReg703 s7
+		set virtualReg704 s8
+		set virtualReg705 s9
+		set virtualReg706 s10
+		set virtualReg707 s11
+		set virtualReg708 ra
+		set virtualReg695 a0
+		read virtualReg709 virtualReg695 0	
+		set a0 virtualReg709
+		set s0 virtualReg696
+		set s1 virtualReg697
+		set s2 virtualReg698
+		set s3 virtualReg699
+		set s4 virtualReg700
+		set s5 virtualReg701
+		set s6 virtualReg702
+		set s7 virtualReg703
+		set s8 virtualReg704
+		set s9 virtualReg705
+		set s10 virtualReg706
+		set s11 virtualReg707
+		set ra virtualReg708
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @head
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t3 sp 1
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t1 0
+		set t2 1
+		op mul t0 s1 t2
+		op add t1 t1 t0
+		op add t1 t1 s1
+		op add t1 t1 t3
+		write t2 t1 0	
+		set t1 0
+		op mul t0 s1 t2
+		op add t1 t1 t0
+		op add t1 t1 t2
+		op add t1 t1 t3
+		set t0 2
+		write t0 t1 0	
+		set a0 0
+		op mul t0 s1 t2
+		op add a0 a0 t0
+		op add a0 a0 s1
+		op add a0 a0 t3
+		op add ra pc 1
+		jump @head0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@head:	a0	
+	@head0:		
+		read a0 a0 0	
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="if-else_statement.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[2, @a:num*]
+		load		[@a:num*]		->%2
+		ic-sgt		[%2:num, 0]		->%3
+		br			[%3:num, IRBlock:%4, IRBlock:%7]
+	%4:		
+		load		[@a:num*]		->%5
+		op-add		[%5:num, -1]		->%6
+		store		[%6:num, @a:num*]
+		br			[IRBlock:%10]
+	%7:		
+		load		[@a:num*]		->%8
+		op-add		[%8:num, 1]		->%9
+		store		[%9:num, @a:num*]
+		br			[IRBlock:%10]
+	%10:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg736 s0
+		set virtualReg737 s1
+		set virtualReg738 s2
+		set virtualReg739 s3
+		set virtualReg740 s4
+		set virtualReg741 s5
+		set virtualReg742 s6
+		set virtualReg743 s7
+		set virtualReg744 s8
+		set virtualReg745 s9
+		set virtualReg746 s10
+		set virtualReg747 s11
+		set virtualReg748 ra
+		op add virtualReg749 sp 0
+		set virtualReg750 0
+		write virtualReg750 virtualReg749 0	
+		set virtualReg751 2
+		write virtualReg751 zero 0	
+		read virtualReg752 zero 0	
+		jump %4 greaterThan virtualReg752 virtualReg750
+		jump %7 always
+	%4:		
+		read virtualReg753 zero 0	
+		set virtualReg755 -1
+		op add virtualReg754 virtualReg753 virtualReg755
+		write virtualReg754 zero 0	
+		jump %10 always
+	%7:		
+		read virtualReg756 zero 0	
+		set virtualReg758 1
+		op add virtualReg757 virtualReg756 virtualReg758
+		write virtualReg757 zero 0	
+		jump %10 always
+	%10:		
+		set virtualReg759 0
+		set a0 virtualReg759
+		set s0 virtualReg736
+		set s1 virtualReg737
+		set s2 virtualReg738
+		set s3 virtualReg739
+		set s4 virtualReg740
+		set s5 virtualReg741
+		set s6 virtualReg742
+		set s7 virtualReg743
+		set s8 virtualReg744
+		set s9 virtualReg745
+		set s10 virtualReg746
+		set s11 virtualReg747
+		set ra virtualReg748
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t0 sp 0
+		set t1 0
+		write t1 t0 0	
+		set t0 2
+		write t0 zero 0	
+		jump %4 greaterThan t0 t1
+	%7:		
+		read t1 zero 0	
+		set t0 1
+		op add t0 t1 t0
+		write t0 zero 0	
+	%10:		
+		set a0 0
+		op add sp sp 1
+		set pc ra
+	%4:		
+		read t1 zero 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 zero 0	
+		jump %10 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="if_statement.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[2, @a:num*]
+		load		[@a:num*]		->%2
+		ic-sgt		[%2:num, 1]		->%3
+		br			[%3:num, IRBlock:%4, IRBlock:%7]
+	%4:		
+		load		[@a:num*]		->%5
+		op-add		[%5:num, -1]		->%6
+		store		[%6:num, @a:num*]
+		br			[IRBlock:%7]
+	%7:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg760 s0
+		set virtualReg761 s1
+		set virtualReg762 s2
+		set virtualReg763 s3
+		set virtualReg764 s4
+		set virtualReg765 s5
+		set virtualReg766 s6
+		set virtualReg767 s7
+		set virtualReg768 s8
+		set virtualReg769 s9
+		set virtualReg770 s10
+		set virtualReg771 s11
+		set virtualReg772 ra
+		op add virtualReg773 sp 0
+		set virtualReg774 0
+		write virtualReg774 virtualReg773 0	
+		set virtualReg775 2
+		write virtualReg775 zero 0	
+		read virtualReg776 zero 0	
+		set virtualReg777 1
+		jump %4 greaterThan virtualReg776 virtualReg777
+		jump %7 always
+	%4:		
+		read virtualReg778 zero 0	
+		set virtualReg780 -1
+		op add virtualReg779 virtualReg778 virtualReg780
+		write virtualReg779 zero 0	
+		jump %7 always
+	%7:		
+		set virtualReg781 0
+		set a0 virtualReg781
+		set s0 virtualReg760
+		set s1 virtualReg761
+		set s2 virtualReg762
+		set s3 virtualReg763
+		set s4 virtualReg764
+		set s5 virtualReg765
+		set s6 virtualReg766
+		set s7 virtualReg767
+		set s8 virtualReg768
+		set s9 virtualReg769
+		set s10 virtualReg770
+		set s11 virtualReg771
+		set ra virtualReg772
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t1 sp 0
+		set t0 0
+		write t0 t1 0	
+		set t0 2
+		write t0 zero 0	
+		set t1 t0
+		set t0 1
+		jump %4 greaterThan t1 t0
+	%7:		
+		set a0 0
+		op add sp sp 1
+		set pc ra
+	%4:		
+		read t1 zero 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 zero 0	
+		jump %7 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="long.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%4
+		store		[%4:num, %3:num*]
+		store		[1, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg786 s0
+		set virtualReg787 s1
+		set virtualReg788 s2
+		set virtualReg789 s3
+		set virtualReg790 s4
+		set virtualReg791 s5
+		set virtualReg792 s6
+		set virtualReg793 s7
+		set virtualReg794 s8
+		set virtualReg795 s9
+		set virtualReg796 s10
+		set virtualReg797 s11
+		set virtualReg798 ra
+		op add virtualReg799 sp 0
+		op add virtualReg800 sp 1
+		op add virtualReg801 sp 2
+		set virtualReg802 0
+		write virtualReg802 virtualReg799 0	
+		set virtualReg803 1
+		write virtualReg803 virtualReg800 0	
+		set virtualReg804 2
+		write virtualReg804 virtualReg801 0	
+		read virtualReg805 virtualReg800 0	
+		write virtualReg805 virtualReg801 0	
+		write virtualReg803 virtualReg800 0	
+		set a0 virtualReg802
+		set s0 virtualReg786
+		set s1 virtualReg787
+		set s2 virtualReg788
+		set s3 virtualReg789
+		set s4 virtualReg790
+		set s5 virtualReg791
+		set s6 virtualReg792
+		set s7 virtualReg793
+		set s8 virtualReg794
+		set s9 virtualReg795
+		set s10 virtualReg796
+		set s11 virtualReg797
+		set ra virtualReg798
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t2 sp 2
+		set a0 0
+		write a0 t0 0	
+		set t1 1
+		write t1 t3 0	
+		set t0 2
+		write t0 t2 0	
+		read t0 t3 0	
+		write t0 t2 0	
+		write t1 t3 0	
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Loop_in_branch.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[5, %2:num*]
+		store		[4, %3:num*]
+		store		[-5, %4:num*]
+		load		[%2:num*]		->%5
+		ic-sgt		[%5:num, 0]		->%6
+		br			[%6:num, IRBlock:%7, IRBlock:%15]
+	%7:		
+		br			[IRBlock:%8]
+	%8:		
+		load		[%3:num*]		->%9
+		ic-sgt		[%9:num, 0]		->%10
+		br			[%10:num, IRBlock:%11, IRBlock:%14]
+	%11:		
+		load		[%3:num*]		->%12
+		op-add		[%12:num, -1]		->%13
+		store		[%13:num, %3:num*]
+		br			[IRBlock:%8]
+	%14:		
+		br			[IRBlock:%23]
+	%15:		
+		br			[IRBlock:%16]
+	%16:		
+		load		[%4:num*]		->%17
+		ic-slt		[%17:num, 0]		->%18
+		br			[%18:num, IRBlock:%19, IRBlock:%22]
+	%19:		
+		load		[%4:num*]		->%20
+		op-add		[%20:num, 1]		->%21
+		store		[%21:num, %4:num*]
+		br			[IRBlock:%16]
+	%22:		
+		br			[IRBlock:%23]
+	%23:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg810 s0
+		set virtualReg811 s1
+		set virtualReg812 s2
+		set virtualReg813 s3
+		set virtualReg814 s4
+		set virtualReg815 s5
+		set virtualReg816 s6
+		set virtualReg817 s7
+		set virtualReg818 s8
+		set virtualReg819 s9
+		set virtualReg820 s10
+		set virtualReg821 s11
+		set virtualReg822 ra
+		op add virtualReg823 sp 0
+		op add virtualReg824 sp 1
+		op add virtualReg825 sp 2
+		op add virtualReg826 sp 3
+		set virtualReg827 0
+		write virtualReg827 virtualReg823 0	
+		set virtualReg828 5
+		write virtualReg828 virtualReg824 0	
+		set virtualReg829 4
+		write virtualReg829 virtualReg825 0	
+		set virtualReg830 -5
+		write virtualReg830 virtualReg826 0	
+		read virtualReg831 virtualReg824 0	
+		jump %7 greaterThan virtualReg831 virtualReg827
+		jump %15 always
+	%7:		
+		jump %8 always
+	%8:		
+		read virtualReg832 virtualReg825 0	
+		set virtualReg833 0
+		jump %11 greaterThan virtualReg832 virtualReg833
+		jump %14 always
+	%11:		
+		read virtualReg834 virtualReg825 0	
+		set virtualReg836 -1
+		op add virtualReg835 virtualReg834 virtualReg836
+		write virtualReg835 virtualReg825 0	
+		jump %8 always
+	%14:		
+		jump %23 always
+	%15:		
+		jump %16 always
+	%16:		
+		read virtualReg837 virtualReg826 0	
+		set virtualReg838 0
+		jump %19 lessThan virtualReg837 virtualReg838
+		jump %22 always
+	%19:		
+		read virtualReg839 virtualReg826 0	
+		set virtualReg841 1
+		op add virtualReg840 virtualReg839 virtualReg841
+		write virtualReg840 virtualReg826 0	
+		jump %16 always
+	%22:		
+		jump %23 always
+	%23:		
+		set virtualReg842 0
+		set a0 virtualReg842
+		set s0 virtualReg810
+		set s1 virtualReg811
+		set s2 virtualReg812
+		set s3 virtualReg813
+		set s4 virtualReg814
+		set s5 virtualReg815
+		set s6 virtualReg816
+		set s7 virtualReg817
+		set s8 virtualReg818
+		set s9 virtualReg819
+		set s10 virtualReg820
+		set s11 virtualReg821
+		set ra virtualReg822
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		op add t0 sp 0
+		op add t4 sp 1
+		op add t3 sp 2
+		op add t2 sp 3
+		set t1 0
+		write t1 t0 0	
+		set t0 5
+		write t0 t4 0	
+		set t0 4
+		write t0 t3 0	
+		set t0 -5
+		write t0 t2 0	
+		read t0 t4 0	
+		jump %8 greaterThan t0 t1
+	%16:		
+		read t1 t2 0	
+		set t0 0
+		jump %19 lessThan t1 t0
+	%23:		
+		set a0 0
+		op add sp sp 4
+		set pc ra
+	%8:		
+		read t1 t3 0	
+		set t0 0
+		jump %11 greaterThan t1 t0
+		jump %23 always
+	%11:		
+		read t1 t3 0	
+		set t0 -1
+		op add t0 t1 t0
+		write t0 t3 0	
+		jump %8 always
+	%19:		
+		read t1 t2 0	
+		set t0 1
+		op add t0 t1 t0
+		write t0 t2 0	
+		jump %16 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Multi-parameter_function_call.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:num	%1:num	%2:num	%3:num	->num
+	@add0:		
+		op-add		[%1:num, %0:num]		->%5
+		op-add		[%5:num, %2:num]		->%6
+		op-add		[%6:num, %3:num]		->%7
+		ret			[%7:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		load		[%2:num*]		->%7
+		load		[%3:num*]		->%8
+		call		[@add:num, %5:num, %6:num, %7:num, %8:num]		->%9
+		store		[%9:num, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg867 s0
+		set virtualReg868 s1
+		set virtualReg869 s2
+		set virtualReg870 s3
+		set virtualReg871 s4
+		set virtualReg872 s5
+		set virtualReg873 s6
+		set virtualReg874 s7
+		set virtualReg875 s8
+		set virtualReg876 s9
+		set virtualReg877 s10
+		set virtualReg878 s11
+		set virtualReg879 ra
+		op add virtualReg880 sp 0
+		op add virtualReg881 sp 1
+		op add virtualReg882 sp 2
+		op add virtualReg883 sp 3
+		set virtualReg884 0
+		write virtualReg884 virtualReg880 0	
+		set virtualReg885 1
+		write virtualReg885 virtualReg881 0	
+		set virtualReg886 2
+		write virtualReg886 virtualReg882 0	
+		read virtualReg887 virtualReg881 0	
+		read virtualReg888 virtualReg882 0	
+		read virtualReg889 virtualReg881 0	
+		read virtualReg890 virtualReg882 0	
+		set a0 virtualReg887
+		set a1 virtualReg888
+		set a2 virtualReg889
+		set a3 virtualReg890
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg891 a0
+		write virtualReg891 virtualReg883 0	
+		set a0 virtualReg884
+		set s0 virtualReg867
+		set s1 virtualReg868
+		set s2 virtualReg869
+		set s3 virtualReg870
+		set s4 virtualReg871
+		set s5 virtualReg872
+		set s6 virtualReg873
+		set s7 virtualReg874
+		set s8 virtualReg875
+		set s9 virtualReg876
+		set s10 virtualReg877
+		set s11 virtualReg878
+		set ra virtualReg879
+		op add sp sp 4
+		set pc ra
+#@add:	virtualReg847	virtualReg848	virtualReg849	virtualReg850	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg851 s0
+		set virtualReg852 s1
+		set virtualReg853 s2
+		set virtualReg854 s3
+		set virtualReg855 s4
+		set virtualReg856 s5
+		set virtualReg857 s6
+		set virtualReg858 s7
+		set virtualReg859 s8
+		set virtualReg860 s9
+		set virtualReg861 s10
+		set virtualReg862 s11
+		set virtualReg863 ra
+		set virtualReg847 a0
+		set virtualReg848 a1
+		set virtualReg849 a2
+		set virtualReg850 a3
+		op add virtualReg864 virtualReg848 virtualReg847
+		op add virtualReg865 virtualReg864 virtualReg849
+		op add virtualReg866 virtualReg865 virtualReg850
+		set a0 virtualReg866
+		set s0 virtualReg851
+		set s1 virtualReg852
+		set s2 virtualReg853
+		set s3 virtualReg854
+		set s4 virtualReg855
+		set s5 virtualReg856
+		set s6 virtualReg857
+		set s7 virtualReg858
+		set s8 virtualReg859
+		set s9 virtualReg860
+		set s10 virtualReg861
+		set s11 virtualReg862
+		set ra virtualReg863
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		read a0 t2 0	
+		set a1 t0
+		read a2 t2 0	
+		set a3 t0
+		op add ra pc 1
+		jump @add0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@add:	a0	a1	a2	a3	
+	@add0:		
+		op add t0 a1 a0
+		op add t0 t0 a2
+		op add a0 t0 a3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Multiple_declarations.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[2, %2:num*]
+		store		[3, %3:num*]
+		store		[4, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg896 s0
+		set virtualReg897 s1
+		set virtualReg898 s2
+		set virtualReg899 s3
+		set virtualReg900 s4
+		set virtualReg901 s5
+		set virtualReg902 s6
+		set virtualReg903 s7
+		set virtualReg904 s8
+		set virtualReg905 s9
+		set virtualReg906 s10
+		set virtualReg907 s11
+		set virtualReg908 ra
+		op add virtualReg909 sp 0
+		op add virtualReg910 sp 1
+		op add virtualReg911 sp 2
+		op add virtualReg912 sp 3
+		set virtualReg913 0
+		write virtualReg913 virtualReg909 0	
+		set virtualReg914 2
+		write virtualReg914 virtualReg910 0	
+		set virtualReg915 3
+		write virtualReg915 virtualReg911 0	
+		set virtualReg916 4
+		write virtualReg916 virtualReg912 0	
+		set a0 virtualReg913
+		set s0 virtualReg896
+		set s1 virtualReg897
+		set s2 virtualReg898
+		set s3 virtualReg899
+		set s4 virtualReg900
+		set s5 virtualReg901
+		set s6 virtualReg902
+		set s7 virtualReg903
+		set s8 virtualReg904
+		set s9 virtualReg905
+		set s10 virtualReg906
+		set s11 virtualReg907
+		set ra virtualReg908
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t2 sp 2
+		op add t1 sp 3
+		set a0 0
+		write a0 t0 0	
+		set t0 2
+		write t0 t3 0	
+		set t0 3
+		write t0 t2 0	
+		set t0 4
+		write t0 t1 0	
+		op add sp sp 4
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="No-argument_function_call.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:->num
+	@add0:		
+		ret			[3]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		call		[@add:num]		->%5
+		store		[3, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg935 s0
+		set virtualReg936 s1
+		set virtualReg937 s2
+		set virtualReg938 s3
+		set virtualReg939 s4
+		set virtualReg940 s5
+		set virtualReg941 s6
+		set virtualReg942 s7
+		set virtualReg943 s8
+		set virtualReg944 s9
+		set virtualReg945 s10
+		set virtualReg946 s11
+		set virtualReg947 ra
+		op add virtualReg948 sp 0
+		op add virtualReg949 sp 1
+		op add virtualReg950 sp 2
+		op add virtualReg951 sp 3
+		set virtualReg952 0
+		write virtualReg952 virtualReg948 0	
+		set virtualReg953 1
+		write virtualReg953 virtualReg949 0	
+		set virtualReg954 2
+		write virtualReg954 virtualReg950 0	
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg955 a0
+		set virtualReg956 3
+		write virtualReg956 virtualReg951 0	
+		set a0 virtualReg952
+		set s0 virtualReg935
+		set s1 virtualReg936
+		set s2 virtualReg937
+		set s3 virtualReg938
+		set s4 virtualReg939
+		set s5 virtualReg940
+		set s6 virtualReg941
+		set s7 virtualReg942
+		set s8 virtualReg943
+		set s9 virtualReg944
+		set s10 virtualReg945
+		set s11 virtualReg946
+		set ra virtualReg947
+		op add sp sp 4
+		set pc ra
+#@add:	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg921 s0
+		set virtualReg922 s1
+		set virtualReg923 s2
+		set virtualReg924 s3
+		set virtualReg925 s4
+		set virtualReg926 s5
+		set virtualReg927 s6
+		set virtualReg928 s7
+		set virtualReg929 s8
+		set virtualReg930 s9
+		set virtualReg931 s10
+		set virtualReg932 s11
+		set virtualReg933 ra
+		set virtualReg934 3
+		set a0 virtualReg934
+		set s0 virtualReg921
+		set s1 virtualReg922
+		set s2 virtualReg923
+		set s3 virtualReg924
+		set s4 virtualReg925
+		set s5 virtualReg926
+		set s6 virtualReg927
+		set s7 virtualReg928
+		set s8 virtualReg929
+		set s9 virtualReg930
+		set s10 virtualReg931
+		set s11 virtualReg932
+		set ra virtualReg933
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		op add ra pc 1
+		jump @add0 always
+		set t0 3
+		write t0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@add:	
+	@add0:		
+		set a0 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Nomain.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@nomain:->num
+	@nomain0:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.AsmBuilder runOnModule
+INFO: no main func
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@nomain:	
+	@nomain0:		
+		op sub sp sp 0
+		set virtualReg957 s0
+		set virtualReg958 s1
+		set virtualReg959 s2
+		set virtualReg960 s3
+		set virtualReg961 s4
+		set virtualReg962 s5
+		set virtualReg963 s6
+		set virtualReg964 s7
+		set virtualReg965 s8
+		set virtualReg966 s9
+		set virtualReg967 s10
+		set virtualReg968 s11
+		set virtualReg969 ra
+		set virtualReg970 0
+		set a0 virtualReg970
+		set s0 virtualReg957
+		set s1 virtualReg958
+		set s2 virtualReg959
+		set s3 virtualReg960
+		set s4 virtualReg961
+		set s5 virtualReg962
+		set s6 virtualReg963
+		set s7 virtualReg964
+		set s8 virtualReg965
+		set s9 virtualReg966
+		set s10 virtualReg967
+		set s11 virtualReg968
+		set ra virtualReg969
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @nomain
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@nomain:	
+	@nomain0:		
+		set a0 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Number_array_definition.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[4 x [5 x num]]*]		->%2
+		alloca		[%3:[5 x num]*]		->%3
+		alloca		[%4:[2 x [2 x [2 x [2 x [2 x [2 x [2 x num]]]]]]]*]		->%4
+		store		[0, %1:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 154
+		set virtualReg975 s0
+		set virtualReg976 s1
+		set virtualReg977 s2
+		set virtualReg978 s3
+		set virtualReg979 s4
+		set virtualReg980 s5
+		set virtualReg981 s6
+		set virtualReg982 s7
+		set virtualReg983 s8
+		set virtualReg984 s9
+		set virtualReg985 s10
+		set virtualReg986 s11
+		set virtualReg987 ra
+		op add virtualReg988 sp 0
+		op add virtualReg989 sp 1
+		op add virtualReg990 sp 21
+		op add virtualReg991 sp 26
+		set virtualReg992 0
+		write virtualReg992 virtualReg988 0	
+		set a0 virtualReg992
+		set s0 virtualReg975
+		set s1 virtualReg976
+		set s2 virtualReg977
+		set s3 virtualReg978
+		set s4 virtualReg979
+		set s5 virtualReg980
+		set s6 virtualReg981
+		set s7 virtualReg982
+		set s8 virtualReg983
+		set s9 virtualReg984
+		set s10 virtualReg985
+		set s11 virtualReg986
+		set ra virtualReg987
+		op add sp sp 154
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 154
+		op add t1 sp 0
+		op add t0 sp 26
+		set a0 0
+		write a0 t1 0	
+		op add sp sp 154
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="OneArray.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:void*	->num
+	@add0:		
+		gep			[%0:void*, 4]		->%2
+		load		[%2:num*]		->%3
+		ret			[%3:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[10 x num]*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[10 x num]*, 0, 2]		->%4
+		store		[5, %4:num*]
+		gep			[%2:[10 x num]*, 0, 2]		->%5
+		load		[%5:num*]		->%6
+		store		[%6:num, %3:num*]
+		gep			[%2:[10 x num]*, 0, 0]		->%7
+		call		[@add:num, %7:num*]		->%8
+		ret			[%8:num]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 12
+		set virtualReg1014 s0
+		set virtualReg1015 s1
+		set virtualReg1016 s2
+		set virtualReg1017 s3
+		set virtualReg1018 s4
+		set virtualReg1019 s5
+		set virtualReg1020 s6
+		set virtualReg1021 s7
+		set virtualReg1022 s8
+		set virtualReg1023 s9
+		set virtualReg1024 s10
+		set virtualReg1025 s11
+		set virtualReg1026 ra
+		op add virtualReg1027 sp 0
+		op add virtualReg1028 sp 1
+		op add virtualReg1029 sp 11
+		set virtualReg1030 0
+		write virtualReg1030 virtualReg1027 0	
+		set virtualReg1031 0
+		set virtualReg1033 1
+		op mul virtualReg1032 virtualReg1030 virtualReg1033
+		op add virtualReg1031 virtualReg1031 virtualReg1032
+		set virtualReg1034 2
+		op add virtualReg1031 virtualReg1031 virtualReg1034
+		op add virtualReg1031 virtualReg1031 virtualReg1028
+		set virtualReg1035 5
+		write virtualReg1035 virtualReg1031 0	
+		set virtualReg1036 0
+		op mul virtualReg1037 virtualReg1030 virtualReg1033
+		op add virtualReg1036 virtualReg1036 virtualReg1037
+		op add virtualReg1036 virtualReg1036 virtualReg1034
+		op add virtualReg1036 virtualReg1036 virtualReg1028
+		read virtualReg1038 virtualReg1036 0	
+		write virtualReg1038 virtualReg1029 0	
+		set virtualReg1039 0
+		op mul virtualReg1040 virtualReg1030 virtualReg1033
+		op add virtualReg1039 virtualReg1039 virtualReg1040
+		op add virtualReg1039 virtualReg1039 virtualReg1030
+		op add virtualReg1039 virtualReg1039 virtualReg1028
+		set a0 virtualReg1039
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg1041 a0
+		set a0 virtualReg1041
+		set s0 virtualReg1014
+		set s1 virtualReg1015
+		set s2 virtualReg1016
+		set s3 virtualReg1017
+		set s4 virtualReg1018
+		set s5 virtualReg1019
+		set s6 virtualReg1020
+		set s7 virtualReg1021
+		set s8 virtualReg1022
+		set s9 virtualReg1023
+		set s10 virtualReg1024
+		set s11 virtualReg1025
+		set ra virtualReg1026
+		op add sp sp 12
+		set pc ra
+#@add:	virtualReg997	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg998 s0
+		set virtualReg999 s1
+		set virtualReg1000 s2
+		set virtualReg1001 s3
+		set virtualReg1002 s4
+		set virtualReg1003 s5
+		set virtualReg1004 s6
+		set virtualReg1005 s7
+		set virtualReg1006 s8
+		set virtualReg1007 s9
+		set virtualReg1008 s10
+		set virtualReg1009 s11
+		set virtualReg1010 ra
+		set virtualReg997 a0
+		set virtualReg1011 0
+		op add virtualReg1011 virtualReg1011 virtualReg997
+		read virtualReg1013 virtualReg1011 0	
+		set a0 virtualReg1013
+		set s0 virtualReg998
+		set s1 virtualReg999
+		set s2 virtualReg1000
+		set s3 virtualReg1001
+		set s4 virtualReg1002
+		set s5 virtualReg1003
+		set s6 virtualReg1004
+		set s7 virtualReg1005
+		set s8 virtualReg1006
+		set s9 virtualReg1007
+		set s10 virtualReg1008
+		set s11 virtualReg1009
+		set ra virtualReg1010
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 13
+		write ra sp 12	
+		op add t0 sp 0
+		op add t6 sp 1
+		op add t5 sp 11
+		set t4 0
+		write t4 t0 0	
+		set t1 0
+		set t3 1
+		op mul t0 t4 t3
+		op add t1 t1 t0
+		set t2 2
+		op add t1 t1 t2
+		op add t1 t1 t6
+		set t0 5
+		write t0 t1 0	
+		set t1 0
+		op mul t0 t4 t3
+		op add t1 t1 t0
+		op add t1 t1 t2
+		op add t1 t1 t6
+		read t0 t1 0	
+		write t0 t5 0	
+		set a0 0
+		op mul t0 t4 t3
+		op add a0 a0 t0
+		op add a0 a0 t4
+		op add a0 a0 t6
+		op add ra pc 1
+		jump @add0 always
+		read ra sp 12	
+		op add sp sp 13
+		set pc ra
+#@add:	a0	
+	@add0:		
+		set t0 0
+		op add t0 t0 a0
+		read a0 t0 0	
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Operate_arrays_through_loops.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:[10 x num]*]		->%3
+		store		[0, %1:num*]
+		store		[10, %2:num*]
+		br			[IRBlock:%4]
+	%4:		
+		load		[%2:num*]		->%5
+		ic-sgt		[%5:num, 0]		->%6
+		br			[%6:num, IRBlock:%7, IRBlock:%12]
+	%7:		
+		load		[%2:num*]		->%8
+		gep			[%3:[10 x num]*, 0, %8:num]		->%9
+		store		[0, %9:num*]
+		load		[%2:num*]		->%10
+		op-add		[%10:num, -1]		->%11
+		store		[%11:num, %2:num*]
+		br			[IRBlock:%4]
+	%12:		
+		store		[10, %2:num*]
+		br			[IRBlock:%13]
+	%13:		
+		load		[%2:num*]		->%14
+		ic-sgt		[%14:num, 0]		->%15
+		br			[%15:num, IRBlock:%16, IRBlock:%23]
+	%16:		
+		load		[%2:num*]		->%17
+		gep			[%3:[10 x num]*, 0, %17:num]		->%18
+		load		[%18:num*]		->%19
+		op-add		[%19:num, 1]		->%20
+		store		[%20:num, %18:num*]
+		load		[%2:num*]		->%21
+		op-add		[%21:num, -1]		->%22
+		store		[%22:num, %2:num*]
+		br			[IRBlock:%13]
+	%23:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 12
+		set virtualReg1046 s0
+		set virtualReg1047 s1
+		set virtualReg1048 s2
+		set virtualReg1049 s3
+		set virtualReg1050 s4
+		set virtualReg1051 s5
+		set virtualReg1052 s6
+		set virtualReg1053 s7
+		set virtualReg1054 s8
+		set virtualReg1055 s9
+		set virtualReg1056 s10
+		set virtualReg1057 s11
+		set virtualReg1058 ra
+		op add virtualReg1059 sp 0
+		op add virtualReg1060 sp 1
+		op add virtualReg1061 sp 2
+		set virtualReg1062 0
+		write virtualReg1062 virtualReg1059 0	
+		set virtualReg1063 10
+		write virtualReg1063 virtualReg1060 0	
+		jump %4 always
+	%4:		
+		read virtualReg1064 virtualReg1060 0	
+		set virtualReg1065 0
+		jump %7 greaterThan virtualReg1064 virtualReg1065
+		jump %12 always
+	%7:		
+		read virtualReg1066 virtualReg1060 0	
+		set virtualReg1067 0
+		set virtualReg1069 0
+		set virtualReg1070 1
+		op mul virtualReg1068 virtualReg1069 virtualReg1070
+		op add virtualReg1067 virtualReg1067 virtualReg1068
+		op add virtualReg1067 virtualReg1067 virtualReg1066
+		op add virtualReg1067 virtualReg1067 virtualReg1061
+		write virtualReg1069 virtualReg1067 0	
+		read virtualReg1071 virtualReg1060 0	
+		set virtualReg1073 -1
+		op add virtualReg1072 virtualReg1071 virtualReg1073
+		write virtualReg1072 virtualReg1060 0	
+		jump %4 always
+	%12:		
+		set virtualReg1074 10
+		write virtualReg1074 virtualReg1060 0	
+		jump %13 always
+	%13:		
+		read virtualReg1075 virtualReg1060 0	
+		set virtualReg1076 0
+		jump %16 greaterThan virtualReg1075 virtualReg1076
+		jump %23 always
+	%16:		
+		read virtualReg1077 virtualReg1060 0	
+		set virtualReg1078 0
+		set virtualReg1080 0
+		set virtualReg1081 1
+		op mul virtualReg1079 virtualReg1080 virtualReg1081
+		op add virtualReg1078 virtualReg1078 virtualReg1079
+		op add virtualReg1078 virtualReg1078 virtualReg1077
+		op add virtualReg1078 virtualReg1078 virtualReg1061
+		read virtualReg1082 virtualReg1078 0	
+		op add virtualReg1083 virtualReg1082 virtualReg1081
+		write virtualReg1083 virtualReg1078 0	
+		read virtualReg1084 virtualReg1060 0	
+		set virtualReg1086 -1
+		op add virtualReg1085 virtualReg1084 virtualReg1086
+		write virtualReg1085 virtualReg1060 0	
+		jump %13 always
+	%23:		
+		set virtualReg1087 0
+		set a0 virtualReg1087
+		set s0 virtualReg1046
+		set s1 virtualReg1047
+		set s2 virtualReg1048
+		set s3 virtualReg1049
+		set s4 virtualReg1050
+		set s5 virtualReg1051
+		set s6 virtualReg1052
+		set s7 virtualReg1053
+		set s8 virtualReg1054
+		set s9 virtualReg1055
+		set s10 virtualReg1056
+		set s11 virtualReg1057
+		set ra virtualReg1058
+		op add sp sp 12
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 12
+		op add t3 sp 0
+		op add t0 sp 1
+		op add t1 sp 2
+		set t2 0
+		write t2 t3 0	
+		set t2 10
+		write t2 t0 0	
+	%4:		
+		read t3 t0 0	
+		set t2 0
+		jump %7 greaterThan t3 t2
+	%12:		
+		set t2 10
+		write t2 t0 0	
+	%13:		
+		read t3 t0 0	
+		set t2 0
+		jump %16 greaterThan t3 t2
+	%23:		
+		set a0 0
+		op add sp sp 12
+		set pc ra
+	%7:		
+		read t5 t0 0	
+		set t4 0
+		set t3 0
+		set t2 1
+		op mul t2 t3 t2
+		op add t4 t4 t2
+		op add t4 t4 t5
+		op add t4 t4 t1
+		write t3 t4 0	
+		read t3 t0 0	
+		set t2 -1
+		op add t2 t3 t2
+		write t2 t0 0	
+		jump %4 always
+	%16:		
+		read t5 t0 0	
+		set t4 0
+		set t2 0
+		set t3 1
+		op mul t2 t2 t3
+		op add t4 t4 t2
+		op add t4 t4 t5
+		op add t4 t4 t1
+		read t2 t4 0	
+		op add t2 t2 t3
+		write t2 t4 0	
+		read t3 t0 0	
+		set t2 -1
+		op add t2 t3 t2
+		write t2 t0 0	
+		jump %13 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Other_statements.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[10, %2:num*]
+		store		[4, %4:num*]
+		store		[9, %5:num*]
+		br			[IRBlock:%6]
+	%6:		
+		load		[%2:num*]		->%7
+		op-add		[%7:num, -1]		->%8
+		store		[%8:num, %2:num*]
+		load		[%2:num*]		->%9
+		ic-sgt		[%9:num, 5]		->%10
+		br			[%10:num, IRBlock:%11, IRBlock:%12]
+	%11:		
+		br			[IRBlock:%6]
+	%12:		
+		load		[%5:num*]		->%22
+		ic-eq		[%22:num, 6]		->%12_check
+		br			[%12_check:num, IRBlock:%14, IRBlock:%12case0]
+	%14:		
+		load		[%5:num*]		->%15
+		op-add		[%15:num, -1]		->%16
+		store		[%16:num, %5:num*]
+		br			[IRBlock:%17]
+	%17:		
+		load		[%5:num*]		->%18
+		op-add		[%18:num, -1]		->%19
+		store		[%19:num, %5:num*]
+		br			[IRBlock:%20]
+	%20:		
+		load		[%5:num*]		->%21
+		op-add		[%21:num, -1]		->%22
+		store		[%22:num, %5:num*]
+		br			[IRBlock:%23]
+	%23:		
+		store		[15, %5:num*]
+		br			[IRBlock:%24]
+	%24:		
+		ret			[0]
+	%12case0:		
+		ic-eq		[%22:num, 5]		->%12case0_check
+		br			[%12case0_check:num, IRBlock:%17, IRBlock:%12case1]
+	%12case1:		
+		ic-eq		[%22:num, 4]		->%12case1_check
+		br			[%12case1_check:num, IRBlock:%20, IRBlock:%23]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		set virtualReg1092 s0
+		set virtualReg1093 s1
+		set virtualReg1094 s2
+		set virtualReg1095 s3
+		set virtualReg1096 s4
+		set virtualReg1097 s5
+		set virtualReg1098 s6
+		set virtualReg1099 s7
+		set virtualReg1100 s8
+		set virtualReg1101 s9
+		set virtualReg1102 s10
+		set virtualReg1103 s11
+		set virtualReg1104 ra
+		op add virtualReg1105 sp 0
+		op add virtualReg1106 sp 1
+		op add virtualReg1107 sp 2
+		op add virtualReg1108 sp 3
+		op add virtualReg1109 sp 4
+		set virtualReg1110 0
+		write virtualReg1110 virtualReg1105 0	
+		set virtualReg1111 10
+		write virtualReg1111 virtualReg1106 0	
+		set virtualReg1112 4
+		write virtualReg1112 virtualReg1108 0	
+		set virtualReg1113 9
+		write virtualReg1113 virtualReg1109 0	
+		jump %6 always
+	%6:		
+		read virtualReg1114 virtualReg1106 0	
+		set virtualReg1116 -1
+		op add virtualReg1115 virtualReg1114 virtualReg1116
+		write virtualReg1115 virtualReg1106 0	
+		read virtualReg1117 virtualReg1106 0	
+		set virtualReg1118 5
+		jump %11 greaterThan virtualReg1117 virtualReg1118
+		jump %12 always
+	%11:		
+		jump %6 always
+	%12:		
+		read virtualReg1119 virtualReg1109 0	
+		set virtualReg1120 6
+		jump %14 equal virtualReg1119 virtualReg1120
+		jump %12case0 always
+	%14:		
+		read virtualReg1121 virtualReg1109 0	
+		set virtualReg1123 -1
+		op add virtualReg1122 virtualReg1121 virtualReg1123
+		write virtualReg1122 virtualReg1109 0	
+		jump %17 always
+	%17:		
+		read virtualReg1124 virtualReg1109 0	
+		set virtualReg1126 -1
+		op add virtualReg1125 virtualReg1124 virtualReg1126
+		write virtualReg1125 virtualReg1109 0	
+		jump %20 always
+	%20:		
+		read virtualReg1127 virtualReg1109 0	
+		set virtualReg1129 -1
+		op add virtualReg1128 virtualReg1127 virtualReg1129
+		write virtualReg1128 virtualReg1109 0	
+		jump %23 always
+	%23:		
+		set virtualReg1130 15
+		write virtualReg1130 virtualReg1109 0	
+		jump %24 always
+	%24:		
+		set virtualReg1131 0
+		set a0 virtualReg1131
+		set s0 virtualReg1092
+		set s1 virtualReg1093
+		set s2 virtualReg1094
+		set s3 virtualReg1095
+		set s4 virtualReg1096
+		set s5 virtualReg1097
+		set s6 virtualReg1098
+		set s7 virtualReg1099
+		set s8 virtualReg1100
+		set s9 virtualReg1101
+		set s10 virtualReg1102
+		set s11 virtualReg1103
+		set ra virtualReg1104
+		op add sp sp 5
+		set pc ra
+	%12case0:		
+		set virtualReg1132 5
+		jump %17 equal virtualReg1119 virtualReg1132
+		jump %12case1 always
+	%12case1:		
+		set virtualReg1133 4
+		jump %20 equal virtualReg1119 virtualReg1133
+		jump %23 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		op add t4 sp 0
+		op add t3 sp 1
+		op add t2 sp 3
+		op add t0 sp 4
+		set t1 0
+		write t1 t4 0	
+		set t1 10
+		write t1 t3 0	
+		set t1 4
+		write t1 t2 0	
+		set t1 9
+		write t1 t0 0	
+	%6:		
+		read t2 t3 0	
+		set t1 -1
+		op add t1 t2 t1
+		write t1 t3 0	
+		set t2 t1
+		set t1 5
+		jump %6 greaterThan t2 t1
+	%12:		
+		read t2 t0 0	
+		set t1 6
+		jump %14 equal t2 t1
+	%12case0:		
+		set t1 5
+		jump %17 equal t2 t1
+	%12case1:		
+		set t1 4
+		jump %20 equal t2 t1
+	%23:		
+		set t1 15
+		write t1 t0 0	
+	%24:		
+		set a0 0
+		op add sp sp 5
+		set pc ra
+	%14:		
+		read t2 t0 0	
+		set t1 -1
+		op add t1 t2 t1
+		write t1 t0 0	
+	%17:		
+		read t2 t0 0	
+		set t1 -1
+		op add t1 t2 t1
+		write t1 t0 0	
+	%20:		
+		read t2 t0 0	
+		set t1 -1
+		op add t1 t2 t1
+		write t1 t0 0	
+		jump %23 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Pointer_array.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[5 x num]*]		->%2
+		alloca		[%3:[5 x void*]*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[0, %4:num*]
+		br			[IRBlock:%6]
+	%6:		
+		load		[%4:num*]		->%7
+		ic-slt		[%7:num, 5]		->%8
+		br			[%8:num, IRBlock:%9, IRBlock:%18]
+	%9:		
+		load		[%4:num*]		->%10
+		cast		[%10:num]		->%11
+		gep			[%2:[5 x num]*, 0, %11:num]		->%12
+		load		[%4:num*]		->%13
+		cast		[%13:num]		->%14
+		gep			[%3:[5 x void*]*, 0, %14:num]		->%15
+		store		[%12:num*, %15:void**]
+		load		[%4:num*]		->%16
+		op-add		[%16:num, 1]		->%17
+		store		[%17:num, %4:num*]
+		br			[IRBlock:%6]
+	%18:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 13
+		set virtualReg1138 s0
+		set virtualReg1139 s1
+		set virtualReg1140 s2
+		set virtualReg1141 s3
+		set virtualReg1142 s4
+		set virtualReg1143 s5
+		set virtualReg1144 s6
+		set virtualReg1145 s7
+		set virtualReg1146 s8
+		set virtualReg1147 s9
+		set virtualReg1148 s10
+		set virtualReg1149 s11
+		set virtualReg1150 ra
+		op add virtualReg1151 sp 0
+		op add virtualReg1152 sp 1
+		op add virtualReg1153 sp 6
+		op add virtualReg1154 sp 11
+		op add virtualReg1155 sp 12
+		set virtualReg1156 0
+		write virtualReg1156 virtualReg1151 0	
+		write virtualReg1156 virtualReg1154 0	
+		jump %6 always
+	%6:		
+		read virtualReg1157 virtualReg1154 0	
+		set virtualReg1158 5
+		jump %9 lessThan virtualReg1157 virtualReg1158
+		jump %18 always
+	%9:		
+		read virtualReg1159 virtualReg1154 0	
+		set virtualReg1160 virtualReg1159
+		set virtualReg1161 0
+		set virtualReg1163 0
+		set virtualReg1164 1
+		op mul virtualReg1162 virtualReg1163 virtualReg1164
+		op add virtualReg1161 virtualReg1161 virtualReg1162
+		op add virtualReg1161 virtualReg1161 virtualReg1160
+		op add virtualReg1161 virtualReg1161 virtualReg1152
+		read virtualReg1165 virtualReg1154 0	
+		set virtualReg1166 virtualReg1165
+		set virtualReg1167 0
+		op mul virtualReg1168 virtualReg1163 virtualReg1164
+		op add virtualReg1167 virtualReg1167 virtualReg1168
+		op mul virtualReg1168 virtualReg1166 virtualReg1164
+		op add virtualReg1167 virtualReg1167 virtualReg1168
+		op add virtualReg1167 virtualReg1167 virtualReg1153
+		write virtualReg1161 virtualReg1167 0	
+		read virtualReg1169 virtualReg1154 0	
+		op add virtualReg1170 virtualReg1169 virtualReg1164
+		write virtualReg1170 virtualReg1154 0	
+		jump %6 always
+	%18:		
+		set virtualReg1171 0
+		set a0 virtualReg1171
+		set s0 virtualReg1138
+		set s1 virtualReg1139
+		set s2 virtualReg1140
+		set s3 virtualReg1141
+		set s4 virtualReg1142
+		set s5 virtualReg1143
+		set s6 virtualReg1144
+		set s7 virtualReg1145
+		set s8 virtualReg1146
+		set s9 virtualReg1147
+		set s10 virtualReg1148
+		set s11 virtualReg1149
+		set ra virtualReg1150
+		op add sp sp 13
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 13
+		op add t4 sp 0
+		op add t3 sp 1
+		op add t1 sp 6
+		op add t2 sp 11
+		set t0 0
+		write t0 t4 0	
+		write t0 t2 0	
+	%6:		
+		read t4 t2 0	
+		set t0 5
+		jump %9 lessThan t4 t0
+	%18:		
+		set a0 0
+		op add sp sp 13
+		set pc ra
+	%9:		
+		read t0 t2 0	
+		set a1 0
+		set a0 0
+		set t6 1
+		op mul t4 a0 t6
+		op add a1 a1 t4
+		op add a1 a1 t0
+		op add a1 a1 t3
+		read t0 t2 0	
+		set t5 0
+		op mul t4 a0 t6
+		op add t5 t5 t4
+		op mul t4 t0 t6
+		op add t5 t5 t4
+		op add t5 t5 t1
+		write a1 t5 0	
+		read t0 t2 0	
+		op add t0 t0 t6
+		write t0 t2 0	
+		jump %6 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="pointer.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:void**]		->%3
+		store		[0, %1:num*]
+		store		[%2:num*, %3:void**]
+		load		[%3:void**]		->%4
+		store		[456, %4:void*]
+		store		[234, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg1176 s0
+		set virtualReg1177 s1
+		set virtualReg1178 s2
+		set virtualReg1179 s3
+		set virtualReg1180 s4
+		set virtualReg1181 s5
+		set virtualReg1182 s6
+		set virtualReg1183 s7
+		set virtualReg1184 s8
+		set virtualReg1185 s9
+		set virtualReg1186 s10
+		set virtualReg1187 s11
+		set virtualReg1188 ra
+		op add virtualReg1189 sp 0
+		op add virtualReg1190 sp 1
+		op add virtualReg1191 sp 2
+		set virtualReg1192 0
+		write virtualReg1192 virtualReg1189 0	
+		write virtualReg1190 virtualReg1191 0	
+		read virtualReg1193 virtualReg1191 0	
+		set virtualReg1194 456
+		write virtualReg1194 virtualReg1193 0	
+		set virtualReg1195 234
+		write virtualReg1195 virtualReg1190 0	
+		set a0 virtualReg1192
+		set s0 virtualReg1176
+		set s1 virtualReg1177
+		set s2 virtualReg1178
+		set s3 virtualReg1179
+		set s4 virtualReg1180
+		set s5 virtualReg1181
+		set s6 virtualReg1182
+		set s7 virtualReg1183
+		set s8 virtualReg1184
+		set s9 virtualReg1185
+		set s10 virtualReg1186
+		set s11 virtualReg1187
+		set ra virtualReg1188
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t1 sp 0
+		op add t2 sp 1
+		op add t0 sp 2
+		set a0 0
+		write a0 t1 0	
+		write t2 t0 0	
+		set t1 t2
+		set t0 456
+		write t0 t1 0	
+		set t0 234
+		write t0 t2 0	
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Pointer_passed_as_parameter.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:void*	%1:void*	->num
+	@add0:		
+		load		[%0:void*]		->%3
+		load		[%1:void*]		->%4
+		op-add		[%4:void, %3:void]		->%5
+		ret			[%5:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[2, %2:num*]
+		store		[3, %3:num*]
+		call		[@add:num, %2:num*, %3:num*]		->%5
+		store		[%5:num, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg1218 s0
+		set virtualReg1219 s1
+		set virtualReg1220 s2
+		set virtualReg1221 s3
+		set virtualReg1222 s4
+		set virtualReg1223 s5
+		set virtualReg1224 s6
+		set virtualReg1225 s7
+		set virtualReg1226 s8
+		set virtualReg1227 s9
+		set virtualReg1228 s10
+		set virtualReg1229 s11
+		set virtualReg1230 ra
+		op add virtualReg1231 sp 0
+		op add virtualReg1232 sp 1
+		op add virtualReg1233 sp 2
+		op add virtualReg1234 sp 3
+		set virtualReg1235 0
+		write virtualReg1235 virtualReg1231 0	
+		set virtualReg1236 2
+		write virtualReg1236 virtualReg1232 0	
+		set virtualReg1237 3
+		write virtualReg1237 virtualReg1233 0	
+		set a0 virtualReg1232
+		set a1 virtualReg1233
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg1238 a0
+		write virtualReg1238 virtualReg1234 0	
+		set a0 virtualReg1235
+		set s0 virtualReg1218
+		set s1 virtualReg1219
+		set s2 virtualReg1220
+		set s3 virtualReg1221
+		set s4 virtualReg1222
+		set s5 virtualReg1223
+		set s6 virtualReg1224
+		set s7 virtualReg1225
+		set s8 virtualReg1226
+		set s9 virtualReg1227
+		set s10 virtualReg1228
+		set s11 virtualReg1229
+		set ra virtualReg1230
+		op add sp sp 4
+		set pc ra
+#@add:	virtualReg1200	virtualReg1201	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg1202 s0
+		set virtualReg1203 s1
+		set virtualReg1204 s2
+		set virtualReg1205 s3
+		set virtualReg1206 s4
+		set virtualReg1207 s5
+		set virtualReg1208 s6
+		set virtualReg1209 s7
+		set virtualReg1210 s8
+		set virtualReg1211 s9
+		set virtualReg1212 s10
+		set virtualReg1213 s11
+		set virtualReg1214 ra
+		set virtualReg1200 a0
+		set virtualReg1201 a1
+		read virtualReg1215 virtualReg1200 0	
+		read virtualReg1216 virtualReg1201 0	
+		op add virtualReg1217 virtualReg1216 virtualReg1215
+		set a0 virtualReg1217
+		set s0 virtualReg1202
+		set s1 virtualReg1203
+		set s2 virtualReg1204
+		set s3 virtualReg1205
+		set s4 virtualReg1206
+		set s5 virtualReg1207
+		set s6 virtualReg1208
+		set s7 virtualReg1209
+		set s8 virtualReg1210
+		set s9 virtualReg1211
+		set s10 virtualReg1212
+		set s11 virtualReg1213
+		set ra virtualReg1214
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add a0 sp 1
+		op add a1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 2
+		write t0 a0 0	
+		set t0 3
+		write t0 a1 0	
+		op add ra pc 1
+		jump @add0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@add:	a0	a1	
+	@add0:		
+		read t1 a0 0	
+		read t0 a1 0	
+		op add a0 t0 t1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Relational_operations.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		store		[3, %4:num*]
+		load		[%2:num*]		->%6
+		load		[%3:num*]		->%7
+		ic-sgt		[%6:num, %7:num]		->%8
+		cast		[%8:num]		->%9
+		store		[%9:num, %5:num*]
+		load		[%4:num*]		->%10
+		load		[%2:num*]		->%11
+		ic-slt		[%10:num, %11:num]		->%12
+		cast		[%12:num]		->%13
+		load		[%3:num*]		->%14
+		ic-sgt		[%13:num, %14:num]		->%15
+		cast		[%15:num]		->%16
+		store		[%16:num, %5:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		set virtualReg1243 s0
+		set virtualReg1244 s1
+		set virtualReg1245 s2
+		set virtualReg1246 s3
+		set virtualReg1247 s4
+		set virtualReg1248 s5
+		set virtualReg1249 s6
+		set virtualReg1250 s7
+		set virtualReg1251 s8
+		set virtualReg1252 s9
+		set virtualReg1253 s10
+		set virtualReg1254 s11
+		set virtualReg1255 ra
+		op add virtualReg1256 sp 0
+		op add virtualReg1257 sp 1
+		op add virtualReg1258 sp 2
+		op add virtualReg1259 sp 3
+		op add virtualReg1260 sp 4
+		set virtualReg1261 0
+		write virtualReg1261 virtualReg1256 0	
+		set virtualReg1262 1
+		write virtualReg1262 virtualReg1257 0	
+		set virtualReg1263 2
+		write virtualReg1263 virtualReg1258 0	
+		set virtualReg1264 3
+		write virtualReg1264 virtualReg1259 0	
+		read virtualReg1265 virtualReg1257 0	
+		read virtualReg1266 virtualReg1258 0	
+		op greaterThan virtualReg1267 virtualReg1265 virtualReg1266
+		set virtualReg1268 virtualReg1267
+		write virtualReg1268 virtualReg1260 0	
+		read virtualReg1269 virtualReg1259 0	
+		read virtualReg1270 virtualReg1257 0	
+		op lessThan virtualReg1271 virtualReg1269 virtualReg1270
+		set virtualReg1272 virtualReg1271
+		read virtualReg1273 virtualReg1258 0	
+		op greaterThan virtualReg1274 virtualReg1272 virtualReg1273
+		set virtualReg1275 virtualReg1274
+		write virtualReg1275 virtualReg1260 0	
+		set a0 virtualReg1261
+		set s0 virtualReg1243
+		set s1 virtualReg1244
+		set s2 virtualReg1245
+		set s3 virtualReg1246
+		set s4 virtualReg1247
+		set s5 virtualReg1248
+		set s6 virtualReg1249
+		set s7 virtualReg1250
+		set s8 virtualReg1251
+		set s9 virtualReg1252
+		set s10 virtualReg1253
+		set s11 virtualReg1254
+		set ra virtualReg1255
+		op add sp sp 5
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		op add t0 sp 0
+		op add t5 sp 1
+		op add t2 sp 2
+		op add t4 sp 3
+		op add t1 sp 4
+		set a0 0
+		write a0 t0 0	
+		set t0 1
+		write t0 t5 0	
+		set t0 2
+		write t0 t2 0	
+		set t0 3
+		write t0 t4 0	
+		read t3 t5 0	
+		read t0 t2 0	
+		op greaterThan t0 t3 t0
+		write t0 t1 0	
+		read t3 t4 0	
+		read t0 t5 0	
+		op lessThan t0 t3 t0
+		read t2 t2 0	
+		op greaterThan t0 t0 t2
+		write t0 t1 0	
+		op add sp sp 5
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Short-circuit_evaluation.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		alloca		[%5:num*]		->%5
+		store		[0, %1:num*]
+		store		[5, %2:num*]
+		store		[3, %3:num*]
+		store		[1, %4:num*]
+		load		[%2:num*]		->%6
+		load		[%3:num*]		->%7
+		ic-slt		[%6:num, %7:num]		->%8
+		br			[%8:num, IRBlock:%9, IRBlock:%12]
+	%9:		
+		load		[%4:num*]		->%10
+		ic-ne		[%10:num, 0]		->%11
+		br			[%11:num, IRBlock:%9_%16, IRBlock:%12]
+	%12:		
+		load		[%2:num*]		->%13
+		load		[%4:num*]		->%14
+		ic-eq		[%13:num, %14:num]		->%15
+		br			[IRBlock:%12_%16]
+	%16:		
+		cast		[%17:num]		->%18
+		store		[%18:num, %5:num*]
+		ret			[0]
+	%9_%16:		
+		move		[%17:num, 1]
+		br			[IRBlock:%16]
+	%12_%16:		
+		move		[%17:num, %15:num]
+		br			[IRBlock:%16]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		set virtualReg1280 s0
+		set virtualReg1281 s1
+		set virtualReg1282 s2
+		set virtualReg1283 s3
+		set virtualReg1284 s4
+		set virtualReg1285 s5
+		set virtualReg1286 s6
+		set virtualReg1287 s7
+		set virtualReg1288 s8
+		set virtualReg1289 s9
+		set virtualReg1290 s10
+		set virtualReg1291 s11
+		set virtualReg1292 ra
+		op add virtualReg1293 sp 0
+		op add virtualReg1294 sp 1
+		op add virtualReg1295 sp 2
+		op add virtualReg1296 sp 3
+		op add virtualReg1297 sp 4
+		set virtualReg1298 0
+		write virtualReg1298 virtualReg1293 0	
+		set virtualReg1299 5
+		write virtualReg1299 virtualReg1294 0	
+		set virtualReg1300 3
+		write virtualReg1300 virtualReg1295 0	
+		set virtualReg1301 1
+		write virtualReg1301 virtualReg1296 0	
+		read virtualReg1302 virtualReg1294 0	
+		read virtualReg1303 virtualReg1295 0	
+		jump %9 lessThan virtualReg1302 virtualReg1303
+		jump %12 always
+	%9:		
+		read virtualReg1304 virtualReg1296 0	
+		set virtualReg1305 0
+		jump %9_%16 notEqual virtualReg1304 virtualReg1305
+		jump %12 always
+	%12:		
+		read virtualReg1306 virtualReg1294 0	
+		read virtualReg1307 virtualReg1296 0	
+		op equal virtualReg1308 virtualReg1306 virtualReg1307
+		jump %12_%16 always
+	%16:		
+		set virtualReg1309 virtualReg1310
+		write virtualReg1309 virtualReg1297 0	
+		set virtualReg1311 0
+		set a0 virtualReg1311
+		set s0 virtualReg1280
+		set s1 virtualReg1281
+		set s2 virtualReg1282
+		set s3 virtualReg1283
+		set s4 virtualReg1284
+		set s5 virtualReg1285
+		set s6 virtualReg1286
+		set s7 virtualReg1287
+		set s8 virtualReg1288
+		set s9 virtualReg1289
+		set s10 virtualReg1290
+		set s11 virtualReg1291
+		set ra virtualReg1292
+		op add sp sp 5
+		set pc ra
+	%9_%16:		
+		set virtualReg1312 1
+		set virtualReg1310 virtualReg1312
+		jump %16 always
+	%12_%16:		
+		set virtualReg1310 virtualReg1308
+		jump %16 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 5
+		op add t2 sp 0
+		op add t5 sp 1
+		op add t4 sp 2
+		op add t3 sp 3
+		op add t1 sp 4
+		set t0 0
+		write t0 t2 0	
+		set t0 5
+		write t0 t5 0	
+		set t0 3
+		write t0 t4 0	
+		set t0 1
+		write t0 t3 0	
+		read t2 t5 0	
+		read t0 t4 0	
+		jump %9 lessThan t2 t0
+	%12:		
+		read t2 t5 0	
+		read t0 t3 0	
+		op equal t0 t2 t0
+	%16:		
+		write t0 t1 0	
+		set a0 0
+		op add sp sp 5
+		set pc ra
+	%9:		
+		read t2 t3 0	
+		set t0 0
+		jump %9_%16 notEqual t2 t0
+		jump %12 always
+	%9_%16:		
+		set t0 1
+		jump %16 always
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="short.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%4
+		store		[%4:num, %3:num*]
+		store		[1, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		set virtualReg1317 s0
+		set virtualReg1318 s1
+		set virtualReg1319 s2
+		set virtualReg1320 s3
+		set virtualReg1321 s4
+		set virtualReg1322 s5
+		set virtualReg1323 s6
+		set virtualReg1324 s7
+		set virtualReg1325 s8
+		set virtualReg1326 s9
+		set virtualReg1327 s10
+		set virtualReg1328 s11
+		set virtualReg1329 ra
+		op add virtualReg1330 sp 0
+		op add virtualReg1331 sp 1
+		op add virtualReg1332 sp 2
+		set virtualReg1333 0
+		write virtualReg1333 virtualReg1330 0	
+		set virtualReg1334 1
+		write virtualReg1334 virtualReg1331 0	
+		set virtualReg1335 2
+		write virtualReg1335 virtualReg1332 0	
+		read virtualReg1336 virtualReg1331 0	
+		write virtualReg1336 virtualReg1332 0	
+		write virtualReg1334 virtualReg1331 0	
+		set a0 virtualReg1333
+		set s0 virtualReg1317
+		set s1 virtualReg1318
+		set s2 virtualReg1319
+		set s3 virtualReg1320
+		set s4 virtualReg1321
+		set s5 virtualReg1322
+		set s6 virtualReg1323
+		set s7 virtualReg1324
+		set s8 virtualReg1325
+		set s9 virtualReg1326
+		set s10 virtualReg1327
+		set s11 virtualReg1328
+		set ra virtualReg1329
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 3
+		op add t0 sp 0
+		op add t3 sp 1
+		op add t2 sp 2
+		set a0 0
+		write a0 t0 0	
+		set t1 1
+		write t1 t3 0	
+		set t0 2
+		write t0 t2 0	
+		read t0 t3 0	
+		write t0 t2 0	
+		write t1 t3 0	
+		op add sp sp 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Single_statement.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		store		[0, %1:num*]
+		store		[2, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		set virtualReg1341 s0
+		set virtualReg1342 s1
+		set virtualReg1343 s2
+		set virtualReg1344 s3
+		set virtualReg1345 s4
+		set virtualReg1346 s5
+		set virtualReg1347 s6
+		set virtualReg1348 s7
+		set virtualReg1349 s8
+		set virtualReg1350 s9
+		set virtualReg1351 s10
+		set virtualReg1352 s11
+		set virtualReg1353 ra
+		op add virtualReg1354 sp 0
+		op add virtualReg1355 sp 1
+		set virtualReg1356 0
+		write virtualReg1356 virtualReg1354 0	
+		set virtualReg1357 2
+		write virtualReg1357 virtualReg1355 0	
+		set a0 virtualReg1356
+		set s0 virtualReg1341
+		set s1 virtualReg1342
+		set s2 virtualReg1343
+		set s3 virtualReg1344
+		set s4 virtualReg1345
+		set s5 virtualReg1346
+		set s6 virtualReg1347
+		set s7 virtualReg1348
+		set s8 virtualReg1349
+		set s9 virtualReg1350
+		set s10 virtualReg1351
+		set s11 virtualReg1352
+		set ra virtualReg1353
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		op add t0 sp 0
+		op add t1 sp 1
+		set a0 0
+		write a0 t0 0	
+		set t0 2
+		write t0 t1 0	
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Structure.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder solveRawOnlyName
+SEVERE: can't find forward reference 
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:void*	%1:num	%2:num	%3:num	%4:num	->void
+	@add0:		
+		store		[%1:num, %0:void*]
+		ret			[]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[num, num, num, num]*]		->%2
+		alloca		[%3:[num, num, num, num]*]		->%3
+		alloca		[%4:[num, num, num, num]*]		->%4
+		store		[0, %1:num*]
+		gep			[%2:[num, num, num, num]*, 0, 0]		->%5
+		store		[1, %5:num*]
+		gep			[%2:[num, num, num, num]*, 0, 0]		->%6
+		load		[%6:num*]		->%7
+		gep			[%2:[num, num, num, num]*, 0, 1]		->%8
+		load		[%8:num*]		->%9
+		gep			[%2:[num, num, num, num]*, 0, 2]		->%10
+		load		[%10:num*]		->%11
+		gep			[%2:[num, num, num, num]*, 0, 3]		->%12
+		load		[%12:num*]		->%13
+		call		[@add:void, %4:[num, num, num, num]*, %7:num, poison:null, poison:null, poison:null]
+		gep			[%4:[num, num, num, num]*, 0, 0]		->%14
+		load		[%14:num*]		->%15
+		ret			[%15:num]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 13
+		set virtualReg1380 s0
+		set virtualReg1381 s1
+		set virtualReg1382 s2
+		set virtualReg1383 s3
+		set virtualReg1384 s4
+		set virtualReg1385 s5
+		set virtualReg1386 s6
+		set virtualReg1387 s7
+		set virtualReg1388 s8
+		set virtualReg1389 s9
+		set virtualReg1390 s10
+		set virtualReg1391 s11
+		set virtualReg1392 ra
+		op add virtualReg1393 sp 0
+		op add virtualReg1394 sp 1
+		op add virtualReg1395 sp 5
+		op add virtualReg1396 sp 9
+		set virtualReg1397 0
+		write virtualReg1397 virtualReg1393 0	
+		set virtualReg1398 0
+		op add virtualReg1398 virtualReg1398 virtualReg1397
+		op add virtualReg1398 virtualReg1398 virtualReg1397
+		op add virtualReg1398 virtualReg1398 virtualReg1394
+		set virtualReg1400 1
+		write virtualReg1400 virtualReg1398 0	
+		set virtualReg1401 0
+		op add virtualReg1401 virtualReg1401 virtualReg1397
+		op add virtualReg1401 virtualReg1401 virtualReg1397
+		op add virtualReg1401 virtualReg1401 virtualReg1394
+		read virtualReg1403 virtualReg1401 0	
+		set virtualReg1404 0
+		op add virtualReg1404 virtualReg1404 virtualReg1397
+		op add virtualReg1404 virtualReg1404 virtualReg1400
+		op add virtualReg1404 virtualReg1404 virtualReg1394
+		read virtualReg1406 virtualReg1404 0	
+		set virtualReg1407 0
+		op add virtualReg1407 virtualReg1407 virtualReg1397
+		set virtualReg1409 2
+		op add virtualReg1407 virtualReg1407 virtualReg1409
+		op add virtualReg1407 virtualReg1407 virtualReg1394
+		read virtualReg1410 virtualReg1407 0	
+		set virtualReg1411 0
+		op add virtualReg1411 virtualReg1411 virtualReg1397
+		set virtualReg1413 3
+		op add virtualReg1411 virtualReg1411 virtualReg1413
+		op add virtualReg1411 virtualReg1411 virtualReg1394
+		read virtualReg1414 virtualReg1411 0	
+		set a0 virtualReg1396
+		set a1 virtualReg1403
+		set a2 virtualReg1415
+		set a3 virtualReg1416
+		set a4 virtualReg1417
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg1418 0
+		op add virtualReg1418 virtualReg1418 virtualReg1397
+		op add virtualReg1418 virtualReg1418 virtualReg1397
+		op add virtualReg1418 virtualReg1418 virtualReg1396
+		read virtualReg1420 virtualReg1418 0	
+		set a0 virtualReg1420
+		set s0 virtualReg1380
+		set s1 virtualReg1381
+		set s2 virtualReg1382
+		set s3 virtualReg1383
+		set s4 virtualReg1384
+		set s5 virtualReg1385
+		set s6 virtualReg1386
+		set s7 virtualReg1387
+		set s8 virtualReg1388
+		set s9 virtualReg1389
+		set s10 virtualReg1390
+		set s11 virtualReg1391
+		set ra virtualReg1392
+		op add sp sp 13
+		set pc ra
+#@add:	virtualReg1362	virtualReg1363	virtualReg1364	virtualReg1365	virtualReg1366	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg1367 s0
+		set virtualReg1368 s1
+		set virtualReg1369 s2
+		set virtualReg1370 s3
+		set virtualReg1371 s4
+		set virtualReg1372 s5
+		set virtualReg1373 s6
+		set virtualReg1374 s7
+		set virtualReg1375 s8
+		set virtualReg1376 s9
+		set virtualReg1377 s10
+		set virtualReg1378 s11
+		set virtualReg1379 ra
+		set virtualReg1362 a0
+		set virtualReg1363 a1
+		set virtualReg1364 a2
+		set virtualReg1365 a3
+		set virtualReg1366 a4
+		write virtualReg1363 virtualReg1362 0	
+		set s0 virtualReg1367
+		set s1 virtualReg1368
+		set s2 virtualReg1369
+		set s3 virtualReg1370
+		set s4 virtualReg1371
+		set s5 virtualReg1372
+		set s6 virtualReg1373
+		set s7 virtualReg1374
+		set s8 virtualReg1375
+		set s9 virtualReg1376
+		set s10 virtualReg1377
+		set s11 virtualReg1378
+		set ra virtualReg1379
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 16
+		write s0 sp 14	
+		write s1 sp 13	
+		write ra sp 15	
+		op add t2 sp 0
+		op add t0 sp 1
+		op add s0 sp 9
+		set s1 0
+		write s1 t2 0	
+		set t1 0
+		op add t1 t1 s1
+		op add t1 t1 s1
+		op add t1 t1 t0
+		set t2 1
+		write t2 t1 0	
+		set t1 0
+		op add t1 t1 s1
+		op add t1 t1 s1
+		op add t1 t1 t0
+		read a1 t1 0	
+		set t1 0
+		op add t1 t1 s1
+		op add t1 t1 t2
+		op add t1 t1 t0
+		set t2 0
+		op add t2 t2 s1
+		set t1 2
+		op add t2 t2 t1
+		op add t2 t2 t0
+		set t2 0
+		op add t2 t2 s1
+		set t1 3
+		op add t2 t2 t1
+		op add t2 t2 t0
+		read t0 t2 0	
+		set a0 s0
+		op add ra pc 1
+		jump @add0 always
+		set t0 0
+		op add t0 t0 s1
+		op add t0 t0 s1
+		op add t0 t0 s0
+		read a0 t0 0	
+		read s0 sp 14	
+		read s1 sp 13	
+		read ra sp 15	
+		op add sp sp 16
+		set pc ra
+#@add:	a0	a1	a2	a3	a4	
+	@add0:		
+		write a1 a0 0	
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="The_function_has_a_lot_of_arguments.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@add:%0:num	%1:num	%2:num	%3:num	%4:num	%5:num	%6:num	%7:num	%8:num	->num
+	@add0:		
+		op-add		[%1:num, %0:num]		->%10
+		op-add		[%10:num, %2:num]		->%11
+		op-add		[%11:num, %3:num]		->%12
+		op-add		[%12:num, %4:num]		->%13
+		op-add		[%13:num, %5:num]		->%14
+		op-add		[%14:num, %6:num]		->%15
+		op-add		[%15:num, %7:num]		->%16
+		op-add		[%16:num, %8:num]		->%17
+		ret			[%17:num]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		load		[%2:num*]		->%5
+		load		[%3:num*]		->%6
+		load		[%2:num*]		->%7
+		load		[%3:num*]		->%8
+		load		[%2:num*]		->%9
+		load		[%3:num*]		->%10
+		load		[%2:num*]		->%11
+		load		[%3:num*]		->%12
+		load		[%2:num*]		->%13
+		call		[@add:num, %5:num, %6:num, %7:num, %8:num, %9:num, %10:num, %11:num, %12:num, %13:num]		->%14
+		store		[%14:num, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg1455 s0
+		set virtualReg1456 s1
+		set virtualReg1457 s2
+		set virtualReg1458 s3
+		set virtualReg1459 s4
+		set virtualReg1460 s5
+		set virtualReg1461 s6
+		set virtualReg1462 s7
+		set virtualReg1463 s8
+		set virtualReg1464 s9
+		set virtualReg1465 s10
+		set virtualReg1466 s11
+		set virtualReg1467 ra
+		op add virtualReg1468 sp 0
+		op add virtualReg1469 sp 1
+		op add virtualReg1470 sp 2
+		op add virtualReg1471 sp 3
+		set virtualReg1472 0
+		write virtualReg1472 virtualReg1468 0	
+		set virtualReg1473 1
+		write virtualReg1473 virtualReg1469 0	
+		set virtualReg1474 2
+		write virtualReg1474 virtualReg1470 0	
+		read virtualReg1475 virtualReg1469 0	
+		read virtualReg1476 virtualReg1470 0	
+		read virtualReg1477 virtualReg1469 0	
+		read virtualReg1478 virtualReg1470 0	
+		read virtualReg1479 virtualReg1469 0	
+		read virtualReg1480 virtualReg1470 0	
+		read virtualReg1481 virtualReg1469 0	
+		read virtualReg1482 virtualReg1470 0	
+		read virtualReg1483 virtualReg1469 0	
+		set a0 virtualReg1475
+		set a1 virtualReg1476
+		set a2 virtualReg1477
+		set a3 virtualReg1478
+		set a4 virtualReg1479
+		set a5 virtualReg1480
+		set a6 virtualReg1481
+		set a7 virtualReg1482
+		set a8 virtualReg1483
+		op add ra pc 1
+		jump @add0 always
+		set virtualReg1484 a0
+		write virtualReg1484 virtualReg1471 0	
+		set a0 virtualReg1472
+		set s0 virtualReg1455
+		set s1 virtualReg1456
+		set s2 virtualReg1457
+		set s3 virtualReg1458
+		set s4 virtualReg1459
+		set s5 virtualReg1460
+		set s6 virtualReg1461
+		set s7 virtualReg1462
+		set s8 virtualReg1463
+		set s9 virtualReg1464
+		set s10 virtualReg1465
+		set s11 virtualReg1466
+		set ra virtualReg1467
+		op add sp sp 4
+		set pc ra
+#@add:	virtualReg1425	virtualReg1426	virtualReg1427	virtualReg1428	virtualReg1429	virtualReg1430	virtualReg1431	virtualReg1432	virtualReg1433	
+	@add0:		
+		op sub sp sp 0
+		set virtualReg1434 s0
+		set virtualReg1435 s1
+		set virtualReg1436 s2
+		set virtualReg1437 s3
+		set virtualReg1438 s4
+		set virtualReg1439 s5
+		set virtualReg1440 s6
+		set virtualReg1441 s7
+		set virtualReg1442 s8
+		set virtualReg1443 s9
+		set virtualReg1444 s10
+		set virtualReg1445 s11
+		set virtualReg1446 ra
+		set virtualReg1425 a0
+		set virtualReg1426 a1
+		set virtualReg1427 a2
+		set virtualReg1428 a3
+		set virtualReg1429 a4
+		set virtualReg1430 a5
+		set virtualReg1431 a6
+		set virtualReg1432 a7
+		set virtualReg1433 a8
+		op add virtualReg1447 virtualReg1426 virtualReg1425
+		op add virtualReg1448 virtualReg1447 virtualReg1427
+		op add virtualReg1449 virtualReg1448 virtualReg1428
+		op add virtualReg1450 virtualReg1449 virtualReg1429
+		op add virtualReg1451 virtualReg1450 virtualReg1430
+		op add virtualReg1452 virtualReg1451 virtualReg1431
+		op add virtualReg1453 virtualReg1452 virtualReg1432
+		op add virtualReg1454 virtualReg1453 virtualReg1433
+		set a0 virtualReg1454
+		set s0 virtualReg1434
+		set s1 virtualReg1435
+		set s2 virtualReg1436
+		set s3 virtualReg1437
+		set s4 virtualReg1438
+		set s5 virtualReg1439
+		set s6 virtualReg1440
+		set s7 virtualReg1441
+		set s8 virtualReg1442
+		set s9 virtualReg1443
+		set s10 virtualReg1444
+		set s11 virtualReg1445
+		set ra virtualReg1446
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @add
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		read a0 t2 0	
+		set a1 t0
+		read a2 t2 0	
+		set a3 t0
+		read a4 t2 0	
+		set a5 t0
+		read a6 t2 0	
+		set a7 t0
+		read a8 t2 0	
+		op add ra pc 1
+		jump @add0 always
+		write a0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@add:	a0	a1	a2	a3	a4	a5	a6	a7	a8	
+	@add0:		
+		op add t0 a1 a0
+		op add t0 t0 a2
+		op add t0 t0 a3
+		op add t0 t0 a4
+		op add t0 t0 a5
+		op add t0 t0 a6
+		op add t0 t0 a7
+		op add a0 t0 a8
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="The_function_name_is_very_long.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj:->num
+	@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj0:		
+		ret			[3]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		alloca		[%3:num*]		->%3
+		alloca		[%4:num*]		->%4
+		store		[0, %1:num*]
+		store		[1, %2:num*]
+		store		[2, %3:num*]
+		call		[@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj:num]		->%5
+		store		[3, %4:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 4
+		set virtualReg1503 s0
+		set virtualReg1504 s1
+		set virtualReg1505 s2
+		set virtualReg1506 s3
+		set virtualReg1507 s4
+		set virtualReg1508 s5
+		set virtualReg1509 s6
+		set virtualReg1510 s7
+		set virtualReg1511 s8
+		set virtualReg1512 s9
+		set virtualReg1513 s10
+		set virtualReg1514 s11
+		set virtualReg1515 ra
+		op add virtualReg1516 sp 0
+		op add virtualReg1517 sp 1
+		op add virtualReg1518 sp 2
+		op add virtualReg1519 sp 3
+		set virtualReg1520 0
+		write virtualReg1520 virtualReg1516 0	
+		set virtualReg1521 1
+		write virtualReg1521 virtualReg1517 0	
+		set virtualReg1522 2
+		write virtualReg1522 virtualReg1518 0	
+		op add ra pc 1
+		jump @kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj0 always
+		set virtualReg1523 a0
+		set virtualReg1524 3
+		write virtualReg1524 virtualReg1519 0	
+		set a0 virtualReg1520
+		set s0 virtualReg1503
+		set s1 virtualReg1504
+		set s2 virtualReg1505
+		set s3 virtualReg1506
+		set s4 virtualReg1507
+		set s5 virtualReg1508
+		set s6 virtualReg1509
+		set s7 virtualReg1510
+		set s8 virtualReg1511
+		set s9 virtualReg1512
+		set s10 virtualReg1513
+		set s11 virtualReg1514
+		set ra virtualReg1515
+		op add sp sp 4
+		set pc ra
+#@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj:	
+	@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj0:		
+		op sub sp sp 0
+		set virtualReg1489 s0
+		set virtualReg1490 s1
+		set virtualReg1491 s2
+		set virtualReg1492 s3
+		set virtualReg1493 s4
+		set virtualReg1494 s5
+		set virtualReg1495 s6
+		set virtualReg1496 s7
+		set virtualReg1497 s8
+		set virtualReg1498 s9
+		set virtualReg1499 s10
+		set virtualReg1500 s11
+		set virtualReg1501 ra
+		set virtualReg1502 3
+		set a0 virtualReg1502
+		set s0 virtualReg1489
+		set s1 virtualReg1490
+		set s2 virtualReg1491
+		set s3 virtualReg1492
+		set s4 virtualReg1493
+		set s5 virtualReg1494
+		set s6 virtualReg1495
+		set s7 virtualReg1496
+		set s8 virtualReg1497
+		set s9 virtualReg1498
+		set s10 virtualReg1499
+		set s11 virtualReg1500
+		set ra virtualReg1501
+		op add sp sp 0
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 7
+		write s0 sp 5	
+		write s1 sp 4	
+		write ra sp 6	
+		op add t0 sp 0
+		op add t2 sp 1
+		op add t1 sp 2
+		op add s0 sp 3
+		set s1 0
+		write s1 t0 0	
+		set t0 1
+		write t0 t2 0	
+		set t0 2
+		write t0 t1 0	
+		op add ra pc 1
+		jump @kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj0 always
+		set t0 3
+		write t0 s0 0	
+		set a0 s1
+		read s0 sp 5	
+		read s1 sp 4	
+		read ra sp 6	
+		op add sp sp 7
+		set pc ra
+#@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj:	
+	@kaljsflkjlkajsdfkjlaksjdflkjklajsdflkj0:		
+		set a0 3
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="TwoArray.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:[10 x [20 x num]]*]		->%2
+		alloca		[%3:num*]		->%3
+		store		[0, %1:num*]
+		gep			[%2:[10 x [20 x num]]*, 0, 2]		->%4
+		gep			[%4:[20 x num]*, 0, 3]		->%5
+		store		[5, %5:num*]
+		gep			[%2:[10 x [20 x num]]*, 0, 1]		->%6
+		gep			[%6:[20 x num]*, 0, 2]		->%7
+		load		[%7:num*]		->%8
+		store		[%8:num, %3:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 202
+		set virtualReg1529 s0
+		set virtualReg1530 s1
+		set virtualReg1531 s2
+		set virtualReg1532 s3
+		set virtualReg1533 s4
+		set virtualReg1534 s5
+		set virtualReg1535 s6
+		set virtualReg1536 s7
+		set virtualReg1537 s8
+		set virtualReg1538 s9
+		set virtualReg1539 s10
+		set virtualReg1540 s11
+		set virtualReg1541 ra
+		op add virtualReg1542 sp 0
+		op add virtualReg1543 sp 1
+		op add virtualReg1544 sp 201
+		set virtualReg1545 0
+		write virtualReg1545 virtualReg1542 0	
+		set virtualReg1546 0
+		set virtualReg1548 20
+		op mul virtualReg1547 virtualReg1545 virtualReg1548
+		op add virtualReg1546 virtualReg1546 virtualReg1547
+		set virtualReg1549 2
+		set virtualReg1550 1
+		op mul virtualReg1547 virtualReg1549 virtualReg1550
+		op add virtualReg1546 virtualReg1546 virtualReg1547
+		op add virtualReg1546 virtualReg1546 virtualReg1543
+		set virtualReg1551 0
+		op mul virtualReg1552 virtualReg1545 virtualReg1550
+		op add virtualReg1551 virtualReg1551 virtualReg1552
+		set virtualReg1553 3
+		op add virtualReg1551 virtualReg1551 virtualReg1553
+		op add virtualReg1551 virtualReg1551 virtualReg1546
+		set virtualReg1554 5
+		write virtualReg1554 virtualReg1551 0	
+		set virtualReg1555 0
+		op mul virtualReg1556 virtualReg1545 virtualReg1548
+		op add virtualReg1555 virtualReg1555 virtualReg1556
+		op mul virtualReg1556 virtualReg1550 virtualReg1550
+		op add virtualReg1555 virtualReg1555 virtualReg1556
+		op add virtualReg1555 virtualReg1555 virtualReg1543
+		set virtualReg1557 0
+		op mul virtualReg1558 virtualReg1545 virtualReg1550
+		op add virtualReg1557 virtualReg1557 virtualReg1558
+		op add virtualReg1557 virtualReg1557 virtualReg1549
+		op add virtualReg1557 virtualReg1557 virtualReg1555
+		read virtualReg1559 virtualReg1557 0	
+		write virtualReg1559 virtualReg1544 0	
+		set a0 virtualReg1545
+		set s0 virtualReg1529
+		set s1 virtualReg1530
+		set s2 virtualReg1531
+		set s3 virtualReg1532
+		set s4 virtualReg1533
+		set s5 virtualReg1534
+		set s6 virtualReg1535
+		set s7 virtualReg1536
+		set s8 virtualReg1537
+		set s9 virtualReg1538
+		set s10 virtualReg1539
+		set s11 virtualReg1540
+		set ra virtualReg1541
+		op add sp sp 202
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 202
+		op add t1 sp 0
+		op add a1 sp 1
+		op add t0 sp 201
+		set a0 0
+		write a0 t1 0	
+		set t3 0
+		set t6 20
+		op mul t1 a0 t6
+		op add t3 t3 t1
+		set t5 2
+		set t4 1
+		op mul t1 t5 t4
+		op add t3 t3 t1
+		op add t3 t3 a1
+		set t2 0
+		op mul t1 a0 t4
+		op add t2 t2 t1
+		set t1 3
+		op add t2 t2 t1
+		op add t2 t2 t3
+		set t1 5
+		write t1 t2 0	
+		set t3 0
+		op mul t1 a0 t6
+		op add t3 t3 t1
+		op mul t1 t4 t4
+		op add t3 t3 t1
+		op add t3 t3 a1
+		set t2 0
+		op mul t1 a0 t4
+		op add t2 t2 t1
+		op add t2 t2 t5
+		op add t2 t2 t3
+		read t1 t2 0	
+		write t1 t0 0	
+		op add sp sp 202
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Variable_duplicate_name.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		store		[0, %1:num*]
+		store		[3, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		set virtualReg1564 s0
+		set virtualReg1565 s1
+		set virtualReg1566 s2
+		set virtualReg1567 s3
+		set virtualReg1568 s4
+		set virtualReg1569 s5
+		set virtualReg1570 s6
+		set virtualReg1571 s7
+		set virtualReg1572 s8
+		set virtualReg1573 s9
+		set virtualReg1574 s10
+		set virtualReg1575 s11
+		set virtualReg1576 ra
+		op add virtualReg1577 sp 0
+		op add virtualReg1578 sp 1
+		set virtualReg1579 0
+		write virtualReg1579 virtualReg1577 0	
+		set virtualReg1580 3
+		write virtualReg1580 virtualReg1578 0	
+		set a0 virtualReg1579
+		set s0 virtualReg1564
+		set s1 virtualReg1565
+		set s2 virtualReg1566
+		set s3 virtualReg1567
+		set s4 virtualReg1568
+		set s5 virtualReg1569
+		set s6 virtualReg1570
+		set s7 virtualReg1571
+		set s8 virtualReg1572
+		set s9 virtualReg1573
+		set s10 virtualReg1574
+		set s11 virtualReg1575
+		set ra virtualReg1576
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		op add t0 sp 0
+		op add t1 sp 1
+		set a0 0
+		write a0 t0 0	
+		set t0 3
+		write t0 t1 0	
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="Variable_names_are_very_long.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		alloca		[%2:num*]		->%2
+		store		[0, %1:num*]
+		store		[3, %2:num*]
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		set virtualReg1585 s0
+		set virtualReg1586 s1
+		set virtualReg1587 s2
+		set virtualReg1588 s3
+		set virtualReg1589 s4
+		set virtualReg1590 s5
+		set virtualReg1591 s6
+		set virtualReg1592 s7
+		set virtualReg1593 s8
+		set virtualReg1594 s9
+		set virtualReg1595 s10
+		set virtualReg1596 s11
+		set virtualReg1597 ra
+		op add virtualReg1598 sp 0
+		op add virtualReg1599 sp 1
+		set virtualReg1600 0
+		write virtualReg1600 virtualReg1598 0	
+		set virtualReg1601 3
+		write virtualReg1601 virtualReg1599 0	
+		set a0 virtualReg1600
+		set s0 virtualReg1585
+		set s1 virtualReg1586
+		set s2 virtualReg1587
+		set s3 virtualReg1588
+		set s4 virtualReg1589
+		set s5 virtualReg1590
+		set s6 virtualReg1591
+		set s7 virtualReg1592
+		set s8 virtualReg1593
+		set s9 virtualReg1594
+		set s10 virtualReg1595
+		set s11 virtualReg1596
+		set ra virtualReg1597
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 2
+		op add t0 sp 0
+		op add t1 sp 1
+		set a0 0
+		write a0 t0 0	
+		set t0 3
+		write t0 t1 0	
+		op add sp sp 2
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="while_loop.c"
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@a:num*=0
+@b:num*=0
+@c:num*=0
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[0, %1:num*]
+		store		[0, @a:num*]
+		store		[1, @b:num*]
+		store		[2, @c:num*]
+		br			[IRBlock:%2]
+	%2:		
+		load		[@a:num*]		->%3
+		load		[@b:num*]		->%4
+		ic-sgt		[%3:num, %4:num]		->%5
+		br			[%5:num, IRBlock:%6, IRBlock:%7]
+	%6:		
+		store		[1, @c:num*]
+		br			[IRBlock:%2]
+	%7:		
+		br			[IRBlock:%8]
+	%8:		
+		load		[@c:num*]		->%9
+		load		[@a:num*]		->%10
+		ic-sgt		[%9:num, %10:num]		->%11
+		br			[%11:num, IRBlock:%12, IRBlock:%15]
+	%12:		
+		load		[@a:num*]		->%13
+		op-add		[%13:num, 1]		->%14
+		store		[%14:num, @a:num*]
+		br			[IRBlock:%8]
+	%15:		
+		ret			[0]
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		set virtualReg1602 s0
+		set virtualReg1603 s1
+		set virtualReg1604 s2
+		set virtualReg1605 s3
+		set virtualReg1606 s4
+		set virtualReg1607 s5
+		set virtualReg1608 s6
+		set virtualReg1609 s7
+		set virtualReg1610 s8
+		set virtualReg1611 s9
+		set virtualReg1612 s10
+		set virtualReg1613 s11
+		set virtualReg1614 ra
+		op add virtualReg1615 sp 0
+		set virtualReg1616 0
+		write virtualReg1616 virtualReg1615 0	
+		write virtualReg1616 zero 0	
+		set virtualReg1617 1
+		write virtualReg1617 zero 1	
+		set virtualReg1618 2
+		write virtualReg1618 zero 2	
+		jump %2 always
+	%2:		
+		read virtualReg1619 zero 0	
+		read virtualReg1620 zero 1	
+		jump %6 greaterThan virtualReg1619 virtualReg1620
+		jump %7 always
+	%6:		
+		set virtualReg1621 1
+		write virtualReg1621 zero 2	
+		jump %2 always
+	%7:		
+		jump %8 always
+	%8:		
+		read virtualReg1622 zero 2	
+		read virtualReg1623 zero 0	
+		jump %12 greaterThan virtualReg1622 virtualReg1623
+		jump %15 always
+	%12:		
+		read virtualReg1624 zero 0	
+		set virtualReg1626 1
+		op add virtualReg1625 virtualReg1624 virtualReg1626
+		write virtualReg1625 zero 0	
+		jump %8 always
+	%15:		
+		set virtualReg1627 0
+		set a0 virtualReg1627
+		set s0 virtualReg1602
+		set s1 virtualReg1603
+		set s2 virtualReg1604
+		set s3 virtualReg1605
+		set s4 virtualReg1606
+		set s5 virtualReg1607
+		set s6 virtualReg1608
+		set s7 virtualReg1609
+		set s8 virtualReg1610
+		set s9 virtualReg1611
+		set s10 virtualReg1612
+		set s11 virtualReg1613
+		set ra virtualReg1614
+		op add sp sp 1
+		set pc ra
+@print0:
+print a0 
+set pc ra
+
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 31
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Jun 30, 2024 12:11:05 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+#@main:	
+	@main0:		
+		set sp 511
+		set ra -2
+		op sub sp sp 1
+		op add t1 sp 0
+		set t0 0
+		write t0 t1 0	
+		write t0 zero 0	
+		set t0 1
+		write t0 zero 1	
+		set t0 2
+		write t0 zero 2	
+	%2:		
+		read t1 zero 0	
+		read t0 zero 1	
+		jump %6 greaterThan t1 t0
+	%8:		
+		read t1 zero 2	
+		read t0 zero 0	
+		jump %12 greaterThan t1 t0
+	%15:		
+		set a0 0
+		op add sp sp 1
+		set pc ra
+	%6:		
+		set t0 1
+		write t0 zero 2	
+		jump %2 always
+	%12:		
+		read t1 zero 0	
+		set t0 1
+		op add t0 t1 t0
+		write t0 zero 0	
+		jump %8 always
 @print0:
 print a0 
 set pc ra

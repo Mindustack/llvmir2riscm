@@ -78,9 +78,9 @@ public class Minterpreter {
                         instruction = new ReadInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]),  Integer.parseInt(split[3]));
 
                     }
-                    case "call" -> {
-                        instruction = new CallInst(count, split[1]);
-                    }
+//                    case "call" -> {
+//                        instruction = new CallInst(count, split[1]);
+//                    }
                     case "print" -> {
                         instruction = new PrintInst(count, this.varFctr.getVar(split[1]));
                     }

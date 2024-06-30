@@ -10,7 +10,7 @@ public class SetInst extends Instruction {
 
   @Override
   void execute(Minterpreter env) {
-    this.ret.value = r1.value;
     env.counter.value++;
+    this.ret.value = r1.value;
   }
 }

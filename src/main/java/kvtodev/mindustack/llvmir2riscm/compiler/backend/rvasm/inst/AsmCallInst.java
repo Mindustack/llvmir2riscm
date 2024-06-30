@@ -4,7 +4,6 @@ import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmBlock
 import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmFunction;
 import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.operand.PhysicalReg;
 import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.operand.Register;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.Lang;
 
 import java.util.HashSet;
 
@@ -20,7 +19,7 @@ public class AsmCallInst extends AsmBaseInst {
     @Override
     public HashSet<Register> uses() {
         HashSet<Register> ret = new HashSet<>();
-        for (int i = 0; i < Integer.min(Lang.MaxArgRegNum, callFunc.arguments.size()); i++)
+        for (int i = 0; i < callFunc.arguments.size(); i++)
             ret.add(PhysicalReg.a(i));
         return ret;
     }
@@ -39,7 +38,7 @@ public class AsmCallInst extends AsmBaseInst {
     public String format() {
         return
 //String.format("op add ra @counter 1\njump %s always", callFunc.entryBlock.identifier)
-                String.format("call %s", callFunc.entryBlock.identifier);
+                String.format("jump %s always", callFunc.entryBlock.identifier);
 
     }
 }

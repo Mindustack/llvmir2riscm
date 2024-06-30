@@ -13,11 +13,11 @@ public class Memory {
     mem = new ArrayList<Double>(Collections.nCopies(Lang.defaultMemory, 0.0));
   }
 
-  public void read(Variable ret, Variable index) {
-    ret.value = mem.get((int) index.asInteger());
+  public void read(Variable ret, Variable index,int imm) {
+    ret.value = mem.get((int) index.asInteger()+imm);
   }
 
-  public void write(Variable source, Variable index) {
-    mem.set((int) index.asInteger(), source.value);
+  public void write(Variable source, Variable index,int imm) {
+    mem.set((int) index.asInteger()+imm, source.value);
   }
 }
