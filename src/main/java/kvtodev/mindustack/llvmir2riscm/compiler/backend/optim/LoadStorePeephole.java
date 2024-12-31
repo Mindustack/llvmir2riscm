@@ -1,10 +1,10 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.backend.optim;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmBlock;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmFunction;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.inst.*;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.operand.PhysicalReg;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.AsmFuncPass;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmBlock;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmFunction;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.inst.*;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.operand.PhysicalReg;
+import kvtodev.mindustack.llvmir2riscm.share.pass.AsmFuncPass;
 
 import java.util.HashMap;
 import java.util.HashSet;

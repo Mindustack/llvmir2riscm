@@ -3,35 +3,43 @@ package kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.constant;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.NumType;
 
 public class NumConst extends BaseConst {
-    public Number constData;
+    private final  String binaryData;
+    private final  Number numberData;
 
-    public NumConst() {
+
+    public NumConst(String value) {
         super("const", new NumType());
-        this.constData = 0;
+        this.binaryData = value;
+        this.numberData=0;
     }
-
-
-    public NumConst(Number constData) {
+    public NumConst(long value) {
         super("const", new NumType());
-        this.constData = constData;
+        this.binaryData = Long.toBinaryString(value);
+        this.numberData=value;
     }
-
-
-    public NumConst(boolean bool) {
-
+    public NumConst(double value) {
         super("const", new NumType());
-        this.constData = bool ? 1 : 0;
-
+        this.binaryData = Double.toHexString(value);
+        this.numberData=value;
     }
-
-
     @Override
     public boolean isNull() {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(constData);
+    public Number get() {
+       return numberData;
     }
+
+    @Override
+    public String toLiteral() {
+       return numberData.toString();
+    }
+
+    @Override
+    public String toBin() {
+        return binaryData;
+    }
+
+
 }

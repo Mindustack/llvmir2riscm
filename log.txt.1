@@ -1,0 +1,46 @@
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: source_filename="k.c"
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.IRBuilder log
+INFO: Build Module finish from .ll file.
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.llvmir2riscm compile
+INFO: 
+@_ZL1y:num*=const:num
+@llvm.global_ctors:[1 x [num, void*, void*]]*=const:[1 x [1 x [num, void*, void*]]]
+@main:->num
+	@main0:		
+		alloca		[%1:num*]		->%1
+		store		[const:num, %1:num*]
+		store		[const:num, @x:num*]
+		load		[@_ZL1y:num*]		->%2
+		op-add		[%2:num, const:num]		->%3
+		store		[%3:num, @_ZL1y:num*]
+		call		[@_Z3foov:void]
+		op-add		[const:num, const:num]		->%4
+		op-add		[%4:num, const:num]		->%5
+		load		[@_ZL1y:num*]		->%6
+		op-sub		[%6:num, %5:num]		->%7
+		store		[%7:num, @_ZL1y:num*]
+		load		[@x:num*]		->%8
+		ret			[%8:num]
+@_GLOBAL__sub_I_k.c:->void
+	@_GLOBAL__sub_I_k.c0:		
+		load		[@x:num*]		->%1
+		ic-sgt		[%1:num, const:num]		->%2
+		br			[%2:num, IRBlock:%3_1, IRBlock:%3_2]
+	@_GLOBAL__sub_I_k.c0:		
+		load		[@x:num*]		->%1
+		ic-sgt		[%1:num, const:num]		->%2
+		br			[%2:num, IRBlock:%3_1, IRBlock:%3_2]
+	%3_1:		
+		move		[%3:num, %2:num]
+		br			[IRBlock:@_GLOBAL__sub_I_k.c0_%3]
+	%3_2:		
+		move		[%3:num, const:num]
+		br			[IRBlock:@_GLOBAL__sub_I_k.c0_%3]
+	@_GLOBAL__sub_I_k.c_ret:		
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnModule
+INFO: K 28
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @main
+Oct 08, 2024 8:46:33 PM kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc.RegisterAllocator runOnFunc
+INFO: color func: @_GLOBAL__sub_I_k.c

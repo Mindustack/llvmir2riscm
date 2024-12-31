@@ -7,8 +7,9 @@ import java.util.List;
 
 public class IRModule {
 
-  public List<IRFunction> functions = new ArrayList<>();
-  public List<Value> globalVariables = new ArrayList<>();
-  public List<IRFunction> externFunctions = new ArrayList<>();
-  
-  }
+    public List<IRFunction> functions = new ArrayList<>();
+    public List<Value> globalVariables = new ArrayList<>();
+    public List<Value> globalExternVariables = new ArrayList<>();
+    public List<IRFunction> externFunctions = new ArrayList<>();
+    public List<Value> exposedGlobalVariables = new ArrayList<>();
+}

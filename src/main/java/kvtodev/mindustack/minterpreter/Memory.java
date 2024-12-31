@@ -1,23 +1,41 @@
 package kvtodev.mindustack.minterpreter;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.share.Lang;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Memory {
-  List<Double> mem;
+    Map<Long, Map<Long, Double>> mem = new HashMap<>();
 
-  protected Memory() {
-    mem = new ArrayList<Double>(Collections.nCopies(Lang.defaultMemory, 0.0));
-  }
+    protected Memory() {
+        mem.put(0L, new HashMap<>());
+    }
 
-  public void read(Variable ret, Variable index,int imm) {
-    ret.value = mem.get((int) index.asInteger()+imm);
-  }
+    @Override
+    public String toString() {
 
-  public void write(Variable source, Variable index,int imm) {
-    mem.set((int) index.asInteger()+imm, source.value);
-  }
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Long, Map<Long, Double>> entry : mem.entrySet()) {
+            sb.append("Page: ").append(entry.getKey()).append("\n");
+            for (Map.Entry<Long, Double> entry1 : entry.getValue().entrySet()) {
+                sb.append("Index: ").append(entry1.getKey()).append(" Value: ").append(entry1.getValue()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    public void read(Variable ret, Variable page, Variable index, int imm) {
+        long i = page.asInteger();
+        if (!mem.containsKey(i)) {
+            mem.put(i, new HashMap<>(512));
+        }
+        ret.value = mem.get(i).getOrDefault(index.asInteger() + imm, 0.0);
+    }
+
+    public void write(Variable source, Variable page, Variable index, int imm) {
+        long i = page.asInteger();
+        if (!mem.containsKey(i)) {
+            mem.put(i, new HashMap<>(512));
+        }
+        mem.get(i).put(index.asInteger() + imm, source.value);
+    }
 }

@@ -1,8 +1,8 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.backend.optim;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmFunction;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmModule;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.AsmModulePass;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmFunction;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmModule;
+import kvtodev.mindustack.llvmir2riscm.share.pass.AsmModulePass;
 
 public class BackEndOptimizer implements AsmModulePass {
     @Override

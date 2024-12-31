@@ -1,9 +1,9 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.backend.optim;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmBlock;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.hierarchy.AsmFunction;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.inst.AsmMoveInst;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.AsmFuncPass;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmBlock;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.hierarchy.AsmFunction;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.inst.AsmMoveInst;
+import kvtodev.mindustack.llvmir2riscm.share.pass.AsmFuncPass;
 
 public class CoalesceMoves implements AsmFuncPass {
     @Override

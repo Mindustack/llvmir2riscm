@@ -8,9 +8,12 @@ public class Minterpreter {
     public static Logger logger = Logger.getLogger("Minterpreter");
     public List<Instruction> instructions = new ArrayList<>();
     public Map<String, Instruction> labels = new HashMap<>();
-    public VariableFactory varFctr;
-   public Memory memory=new Memory();
+    public VariableFactory varFctr = new VariableFactory();
+    public Memory memory = new Memory();
     Variable counter;
+    private final String counterIdentifier;
+
+    private int count = 0;
 
     public static void main(String[] args) {
         Minterpreter minterpreter = new Minterpreter();
@@ -23,12 +26,15 @@ public class Minterpreter {
         minterpreter.run();
     }
 
+    /**
+     *
+     */
     public Minterpreter() {
-        this.varFctr = new VariableFactory();
+        this.counterIdentifier = "pc";
+    }
 
-        logger.info("minterpreter started");
-
-
+    public Minterpreter(String counterIdentifier) {
+        this.counterIdentifier = counterIdentifier;
     }
 
     /**
@@ -36,19 +42,17 @@ public class Minterpreter {
      * @return itself for continue use
      */
     public Minterpreter parse(String source) {
+
         String[] splitLines = source.split("\n");
         String[] split;
         List<String> labels = new ArrayList<>();
-        int count = 0;
         for (String line : splitLines) {
             line = line.trim();
             if (line.startsWith("#") || line.startsWith("//")) {
                 continue;
             } else if (line.endsWith(":")) {
                 labels.add(line.replaceAll("[:]", ""));
-
             } else if (line.equals("")) {
-
                 continue;
             } else {
                 Instruction instruction = null;
@@ -72,11 +76,14 @@ public class Minterpreter {
                         instruction = new JmpInst(count, split[1], split[2], this.varFctr.getVar(split.length < 4 ? null : split[3]), this.varFctr.getVar(split.length < 5 ? null : split[4]));
                     }
                     case "write" -> {
-                        instruction = new WriteInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]),  Integer.parseInt(split[3]));
+                        instruction = new WriteInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]), this.varFctr.getVar(split[3]), split.length == 4 ? 0 : Integer.parseInt(split[4]));
                     }
                     case "read" -> {
-                        instruction = new ReadInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]),  Integer.parseInt(split[3]));
+                        instruction = new ReadInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]), this.varFctr.getVar(split[3]), split.length == 4 ? 0 : Integer.parseInt(split[4]));
 
+                    }
+                    case "getlink" -> {
+                        instruction = new SetInst(count, this.varFctr.getVar(split[1]), this.varFctr.getVar(split[2]));
                     }
 //                    case "call" -> {
 //                        instruction = new CallInst(count, split[1]);
@@ -90,13 +97,13 @@ public class Minterpreter {
                     }
 
                 }
-
-                if (!labels.isEmpty()) {
-                    for (String l : labels) {
-                        this.labels.put(l, instruction);
-                    }
-                    labels.clear();
+                for (String l : labels) {
+                    this.labels.put(l, instruction);
                 }
+                labels.clear();
+//                if (!labels.isEmpty()) {
+//
+//                }
                 instructions.add(instruction);
                 count++;
                 logger.info("parsed: " + line + " as: " + instruction.toString());
@@ -105,6 +112,7 @@ public class Minterpreter {
 
         return this;
     }
+
 
     /**
      * run logic code for limited steps default 1024
@@ -124,10 +132,9 @@ public class Minterpreter {
     public Minterpreter run(int stepLimit) {
         Instruction inst;
         StringBuilder sb = new StringBuilder();
-        counter = this.varFctr.getVar("pc");
+        counter = this.varFctr.getVar(counterIdentifier);
         int step = 0;
         while (step < stepLimit) {
-
             inst = instructions.get((int) counter.asInteger());
             inst.execute(this);
             sb.append(inst).append("\n");
@@ -142,13 +149,28 @@ public class Minterpreter {
     /**
      * @return return the value in 'ret' variable to vertify
      */
-    public void dumpMem() {
-        for (int i = 0; i < memory.mem.size(); i++) {
-           System.out.printf("\t%d:\t%.2f",i,memory.mem.get(i));
-        }
+    public void dump() {
+//        for (int i = 0; i < memory.mem.size(); i++) {
+//            System.out.printf("\t%d:\t%.2f", i, memory.mem.get(0L).get((long) i));
+//        }
+        logger.info("result: " + getRet());
+        logger.info(memory.toString());
+    }
+
+    public Minterpreter setMem(int index, double value) {
+        memory.mem.computeIfAbsent(((long) (index >> 9)), k -> new HashMap<>());
+        memory.mem.get(((long) (index >> 9))).put((long) index%0x200, value);
+        return this;
+    }
+
+    public Minterpreter setMem(int page, int index, double value) {
+        memory.mem.computeIfAbsent(((long) page), k -> new HashMap<>());
+        memory.mem.get(((long) page)).put((long) index, value);
+        return this;
     }
 
     public double getRet() {
         return this.varFctr.getVar("a0").value;
     }
+
 }

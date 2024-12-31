@@ -3,10 +3,11 @@ package kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRBlock;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRFunction;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRModule;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRBlockPass;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRFuncPass;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRModulePass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRBlockPass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRFuncPass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRModulePass;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -18,6 +19,9 @@ public class IRPrinter implements IRModulePass, IRFuncPass, IRBlockPass {
 
     public IRPrinter(IRModule irModule) {
         this.runOnModule(irModule);
+    }
+    public IRPrinter(List<IRModule> modules){
+
     }
 
     StringBuilder content = new StringBuilder();

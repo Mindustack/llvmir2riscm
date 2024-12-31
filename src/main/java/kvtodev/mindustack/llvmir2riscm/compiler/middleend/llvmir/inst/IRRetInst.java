@@ -1,7 +1,7 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst;
 
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.Value;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRInstPass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRInstPass;
 
 public class IRRetInst extends IRBaseInst {
 

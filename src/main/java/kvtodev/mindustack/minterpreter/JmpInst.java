@@ -42,7 +42,7 @@ public class JmpInst extends Instruction {
                 jmp = (r1.value >= r2.value);
             }
             case "and" -> {
-                jmp = (r1.value * r2.value == 0);
+                jmp = (r1.value * r2.value != 0);
             }
             case "or" -> {
                 jmp = (!(r1.value + r2.value == 0));

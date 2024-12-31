@@ -3,7 +3,7 @@ package kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.User;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.hierarchy.IRBlock;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.IRBaseType;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRInstPass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRInstPass;
 
 public abstract class IRBaseInst extends User {
 

@@ -4,31 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VariableFactory {
-  static Variable nullVariable = new Variable("_null", 0);
+    static Variable nullVariable = new Variable("_null", 0);
 
-  public Map<String, Variable> variables = new HashMap<>();
-  VariableFactory() {
-  }
+    public Map<String, Variable> variables = new HashMap<>();
 
-  public Variable getVar(String name) {
-    try {
-      double d = Double.parseDouble(name);
-      return new Const(d);
-    } catch (Exception e) {
+    VariableFactory() {
     }
-    if (name == null)
-      //return nullVariable;
-      return null;
-    if (variables.containsKey(name)) {
-      return variables.get(name);
-    }
-    Variable v = new Variable(name, 0);
-    if (name.startsWith("memory")) {
 
-      v.value = Integer.parseInt(name.substring(6));
+    public Variable getVar(String name) {
+
+        try {
+            long l = Long.decode(name);
+            return new Const(l);
+        } catch (Exception e) {
+        }
+        try {
+            double d = Double.parseDouble(name);
+            return new Const(d);
+        } catch (Exception e) {
+        }
+        if (name == null)
+            //return nullVariable;
+            return null;
+        if (variables.containsKey(name)) {
+            return variables.get(name);
+        }
+        Variable v = new Variable(name, 0);
+        if (name.startsWith("memory")) {
+
+            v.value = Integer.parseInt(name.substring(6));
+        }
+        variables.put(name, v);
+        return v;
     }
-    variables.put(name, v);
-    return v;
-  }
 
 }

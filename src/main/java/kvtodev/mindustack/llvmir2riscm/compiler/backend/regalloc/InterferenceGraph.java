@@ -1,7 +1,7 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.backend.regalloc;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.inst.AsmMoveInst;
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.operand.Register;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.inst.AsmMoveInst;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.operand.Register;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;

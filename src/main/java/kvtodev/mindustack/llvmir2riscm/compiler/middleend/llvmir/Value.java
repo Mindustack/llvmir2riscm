@@ -1,6 +1,6 @@
 package kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir;
 
-import kvtodev.mindustack.llvmir2riscm.compiler.backend.rvasm.operand.BaseOperand;
+import kvtodev.mindustack.llvmir2riscm.compiler.backend.riscm.operand.BaseOperand;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.constant.BaseConst;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.type.IRBaseType;
 

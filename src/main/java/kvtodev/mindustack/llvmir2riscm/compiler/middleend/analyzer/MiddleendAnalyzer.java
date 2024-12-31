@@ -7,7 +7,7 @@ import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst.IRBaseInst
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst.IRBrInst;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst.IRMoveInst;
 import kvtodev.mindustack.llvmir2riscm.compiler.middleend.llvmir.inst.IRRetInst;
-import kvtodev.mindustack.llvmir2riscm.compiler.share.pass.IRFuncPass;
+import kvtodev.mindustack.llvmir2riscm.share.pass.IRFuncPass;
 
 import java.util.ArrayList;
 import java.util.Iterator;

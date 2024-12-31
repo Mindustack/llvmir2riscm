@@ -23,12 +23,28 @@ public class StructConst extends BaseConst {
         return constData.isEmpty();
     }
 
+    @Override
+    public String toLiteral() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('{');
+        for (BaseConst constDatum : this.constData) {
+            stringBuilder.append(constDatum.toLiteral()).append(',');
+        }
+        return stringBuilder.append('}').toString();
+    }
+
+    @Override
+    public String toBin() {
+         StringBuilder stringBuilder=new StringBuilder();
+        for (BaseConst constDatum : this.constData) {
+            stringBuilder.append(constDatum.toBin());
+        }
+        return stringBuilder.toString();
+    }
+
     public int size() {
         return this.type.size();
     }
 
-    @Override
-    public String toString() {
-        return constData.toString();
-    }
+
 }

@@ -11,6 +11,9 @@ public abstract class BaseConst extends User {
 
     public abstract boolean isNull();
 
+    public abstract String toLiteral();
+    public abstract String toBin();
+
 
     public int size() {
         return 1;
